@@ -29,7 +29,7 @@ public class User {
                 }
             }
         }
-        catch (ArrayOutOfBoundsException e) {
+        catch (ArrayIndexOutOfBoundsException e) {
             showText("Erro de parâmetros.");
         }
 
@@ -47,8 +47,7 @@ public class User {
                 }
                 client.send(commandP);
                 String responseP = client.receive();
-                String response = protocol.receiveProtocol(responseP);
-                showText(response);
+                protocol.receiveProtocol(responseP);
             }
         }
         catch (ExitCommandException e) {
