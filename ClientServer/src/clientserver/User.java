@@ -1,9 +1,5 @@
 package clientserver;
 
-import clientserver.ProtocolException;
-import clientserver.UnknownCommand;
-import clientserver.ExitCommand;
-
 public class User {
 
     /**
@@ -38,7 +34,7 @@ public class User {
                 try {
                     String commandP = protocol.sendProtocol(command);
                 }
-                catch (UnknownCommand e) {
+                catch (UnknownCommandException e) {
                     showText("oi user es cancr");
                 }
                 client.send(commandP);
@@ -47,11 +43,12 @@ public class User {
                 showText(response);
             }
         }
-        catch (ExitCommand e) {
+        catch (ExitCommandException e) {
             client.close();
         }
         catch (ProtocolException e) {
             // erro total e completamente F A T A L
+            //?????
         }
     }
 
