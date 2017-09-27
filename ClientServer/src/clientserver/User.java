@@ -5,6 +5,9 @@
  */
 package clientserver;
 
+import clientserver.exceptions.ExitCommandException;
+import clientserver.exceptions.UnknownCommandException;
+
 public class User {
 
     /**
@@ -50,10 +53,6 @@ public class User {
         }
         catch (ExitCommandException e) {
             client.close();
-        }
-        catch (ProtocolException e) {
-            // erro total e completamente F A T A L
-            //?????
         }
     }
 

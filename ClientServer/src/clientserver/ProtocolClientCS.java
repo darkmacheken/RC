@@ -5,11 +5,14 @@
  */
 package clientserver;
 
+import clientserver.exceptions.ExitCommandException;
+import clientserver.exceptions.UnknownCommandException;
+
 public class ProtocolClientCS{
     
     public ProtocolClientCS(){}
     
-    public String sendProtocol(String sentence){
+    public String sendProtocol(String sentence) throws UnknownCommandException, ExitCommandException{
         String[]splitedSentence = sentence.split(" ");
                 
         if(splitedSentence.length==0)
