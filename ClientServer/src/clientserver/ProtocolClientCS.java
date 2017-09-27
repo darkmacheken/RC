@@ -8,7 +8,7 @@ public class ProtocolClientCS{
         String[]splitedSentence = sentence.split(" ");
                 
         if(splitedSentence.length==0)
-            throw new CommandException("");
+            throw new UnknownCommandException("");
         
         switch (splitedSentence[0]){
             case "exit":
@@ -19,7 +19,7 @@ public class ProtocolClientCS{
                 
                 return "";
             default:
-                throw new CommandException(splitedSentence[0]);
+                throw new UnknownCommandException(splitedSentence[0]);
       
             
         }
