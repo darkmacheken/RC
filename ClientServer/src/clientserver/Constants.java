@@ -69,5 +69,13 @@ public final class Constants {
      */
     public static final String SOCK_IOERR = "Couldn't get I/O for the connection to ";
 
+    /**
+     *Message: Error reading from socket
+     */
+    public static final String SOCK_READERR = "Error reading from socket\n";
 
+    /**
+      *Message: Error reading from socket
+      */
+    public static final String SOCK_CLOSEERR = "Error closing socket\n";
 }

@@ -52,7 +52,7 @@ public class ClientTCP {
         _out.println(command);
     }
 
-    public String receive() {
+    public String receive() throws ClientException {
         String receivedStr = "";
         String tempStr;
         try {
@@ -61,10 +61,21 @@ public class ClientTCP {
             }
         }
         catch(IOException e) {
-            System.out.println("Error reading from socket");
+            throw new ClientException(Constants.SOCK_READERR);
         }
 
         return receivedStr;
+    }
+
+    public void close() throws ClientException {
+        try {
+            _out.close();
+            _in.close();
+            _socket.close();
+        }
+        catch(IOException e) {
+            throw new ClientException(Constants.SOCK_CLOSEERR);
+        }
     }
 
 }
