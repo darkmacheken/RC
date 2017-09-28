@@ -12,13 +12,13 @@ public class UnknownCommandException extends Exception {
 
     private static final long serialVersionUID = 270920172255L;
     private String _unknownCommand;
-    
+
     public UnknownCommandException(String unknownCommand){
         _unknownCommand=unknownCommand;
     }
-    
-    public String getUnknownCommand(){
+
+    @Override
+    public String toString(){
         return _unknownCommand;
     }
 }
-

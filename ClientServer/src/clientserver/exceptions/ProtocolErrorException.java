@@ -9,19 +9,19 @@ package clientserver.exceptions;
  *
  * @author Asus
  */
-public class ProtocolErrorException extends ErrorException{
+public class ProtocolErrorException extends ErrorException {
 
     private static final long serialVersionUID = 280920170031L;
-    
+
     private String _message;
-    
+
     public ProtocolErrorException(String errorDescription, String message) {
         super(errorDescription);
         _message=message;
     }
-    
+
     public String getMessage(){
         return _message;
     }
-    
+
 }

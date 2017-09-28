@@ -7,6 +7,7 @@ package clientserver;
 
 import clientserver.exceptions.ExitCommandException;
 import clientserver.exceptions.UnknownCommandException;
+import clientserver.exceptions.ProtocolErrorException;
 
 public class User {
 
@@ -14,8 +15,8 @@ public class User {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String cSName = null; // TODO
-        String cSPort = null; // TODO 58000+GN
+        String cSName = null;
+        Integer cSPort = null;
 
         try {
             for (int i = 0; i < args.length; i++) {
@@ -25,15 +26,18 @@ public class User {
                 }
                 else if (args[i].equals("-p")) {
                     i++;
-                    cSPort = args[i];
+                    cSPort = Integer.parseInt(args[i]);
                 }
             }
         }
         catch (ArrayIndexOutOfBoundsException e) {
             showText("Erro de parâmetros.");
         }
+        catch (NumberFormatException e) {
+            showText("Erro de parâmetros.");
+        }
 
-        ClientTCP client = new ClientTCP();
+        ClientTCP client = new ClientTCP(cSName, cSPort);
         ProtocolClientCS protocol = new ProtocolClientCS(); //THROWS ProtocolException -> UnknownCommand, ExitCommand
 
         try {
@@ -46,7 +50,7 @@ public class User {
                     protocol.receiveProtocol(responseP);
                 }
                 catch (UnknownCommandException e) {
-                    showText("oi user es cancr");
+                    showText(e.toString());
                 }
             }
         }

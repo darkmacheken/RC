@@ -11,28 +11,26 @@ import exceptions.ErrorException;
 
 public class ClientTCP {
     private String _csName = ""; //todo
-    private int _csPort = 58063;
+    private Integer _csPort = 58063;
     private Socket _socket;
     private PrintWriter _out;
     private BufferedReader _in;
 
-    public ClientTCP() {
-        this.createSocket();
-    }
+    public ClientTCP(String csName, Integer csPort) {
+        if (csName == NULL) {
+            ;
+        }
+        else {
+            _csName = csName;
+        }
 
-    public ClientTCP(String csName) {
-        _csName = csName;
-        this.createSocket();
-    }
+        if (csPort == NULL) {
+            ;
+        }
+        else {
+            _csPort = csPort;
+        }
 
-    public ClientTCP(int csPort) {
-        _csPort = csPort;
-        this.createSocket();
-    }
-
-    public ClientTCP(String csName, int csPort) {
-        _csName = csName;
-        _csPort = csPort;
         this.createSocket();
     }
 
