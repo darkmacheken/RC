@@ -10,8 +10,8 @@ import clientserver.exceptions.ClientException;
 
 
 public class ClientTCP {
-    private String _csName = ""; //todo
-    private Integer _csPort = 58063;
+    private String _csName; //todo
+    private Integer _csPort;
     private Socket _socket;
     private PrintWriter _out;
     private BufferedReader _in;
