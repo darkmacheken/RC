@@ -50,7 +50,9 @@ public class ClientTCP {
     }
 
     public void send(String command) {
-        _out.println(command);
+        _out.print(command);
+        _out.flush();
+        //System.out.print("\tMessage sent: " + command);
     }
 
     public String receive() throws ClientException {
@@ -62,9 +64,11 @@ public class ClientTCP {
             }
         }
         catch(IOException e) {
+            e.printStackTrace();
             throw new ClientException(Constants.SOCK_READERR);
         }
-
+        
+        //listSystem.out.println("\tMessage received: " + receivedStr);
         return receivedStr;
     }
 

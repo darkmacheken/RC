@@ -29,7 +29,7 @@ public class ProtocolClientCS{
     public ProtocolClientCS() {
         _descriptionPTC = new HashMap<String,String>();
 
-        _descriptionPTC.put("WTC","word count");
+        _descriptionPTC.put("WCT", "word count");
         _descriptionPTC.put("FLW", "find longest word");
         _descriptionPTC.put("UPP", "convert text to upper case");
         _descriptionPTC.put("LOW", "convert text to lower case");

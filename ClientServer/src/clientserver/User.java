@@ -61,9 +61,10 @@ public class User {
                 }
                 catch (ProtocolErrorException e) {
                     showText(e.getErrorDescription());
+                    showText(e.getMessage());
                 }
                 catch (UnknownCommandException e) {
-                    showText("Unknown Command:" + e.toString());
+                    showText("Unknown Command:" + e.toString() + "\n");
                 }
                 catch (ExitCommandException e) {
                     try {
