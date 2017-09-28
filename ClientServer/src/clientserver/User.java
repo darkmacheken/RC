@@ -64,7 +64,7 @@ public class User {
                     showText(e.getErrorDescription());
                 }
                 catch (UnknownCommandException e) {
-                    showText(e.toString());
+                    showText("Unknown Command:" + e.toString());
                 }
                 catch (ExitCommandException e) {
                     try {
