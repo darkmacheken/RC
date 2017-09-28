@@ -16,7 +16,7 @@ public class ClientTCP {
     private PrintWriter _out;
     private BufferedReader _in;
 
-    public ClientTCP(String csName, Integer csPort) {
+    public ClientTCP(String csName, Integer csPort) throws ClientException {
         if (csName == null) {
             _csName = Constants.DEFAULT_HOST;
         }

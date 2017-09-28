@@ -5,6 +5,8 @@
  */
 package clientserver;
 
+import java.io.IOException;
+import clientserver.exceptions.ClientException;
 import clientserver.exceptions.ExitCommandException;
 import clientserver.exceptions.UnknownCommandException;
 import clientserver.exceptions.ProtocolErrorException;
@@ -17,6 +19,8 @@ public class User {
     public static void main(String[] args) {
         String cSName = null;
         Integer cSPort = null;
+        ClientTCP client;
+        ProtocolClientCS protocol;
 
         try {
             for (int i = 0; i < args.length; i++) {
@@ -37,10 +41,17 @@ public class User {
             showText("Erro de parâmetros.");
         }
 
-        ClientTCP client = new ClientTCP(cSName, cSPort);
-        ProtocolClientCS protocol = new ProtocolClientCS(); //THROWS ProtocolException -> UnknownCommand, ExitCommand
 
         try {
+            client = new ClientTCP(cSName, cSPort);
+        }
+        catch (ClientException e) {
+            showText(e.getErrorDescription());
+            return;
+        }
+
+        protocol = new ProtocolClientCS(); //THROWS ProtocolException -> UnknownCommand, ExitCommand
+
             while (true) {
                 String command = getText();
                 try {
@@ -49,14 +60,26 @@ public class User {
                     String responseP = client.receive();
                     protocol.receiveProtocol(responseP);
                 }
+                catch (ProtocolErrorException e) {
+                    showText(e.getErrorDescription());
+                }
                 catch (UnknownCommandException e) {
                     showText(e.toString());
                 }
+                catch (ExitCommandException e) {
+                    try {
+                        client.close();
+                        return;
+                    }
+                    catch (ClientException ce) {
+                        showText(ce.getErrorDescription());
+                        return;
+                    }
+                }
+                catch (ClientException e) {
+                    showText(e.getErrorDescription());
+                }
             }
-        }
-        catch (ExitCommandException e) {
-            client.close();
-        }
     }
 
     public static void showText(String text) {

@@ -26,7 +26,7 @@ public class ProtocolClientCS{
     private String _fileName = null;
     private String _ptc=null;
 
-    public ProtocolClientCS(){
+    public ProtocolClientCS() {
         _descriptionPTC = new HashMap<String,String>();
 
         _descriptionPTC.put("WTC","word count");
@@ -55,7 +55,7 @@ public class ProtocolClientCS{
         }
     }
 
-    public void receiveProtocol(String sentence) throws ClientException, IOException{
+    public void receiveProtocol(String sentence) throws ClientException {
         String[] splitedSentence = sentence.split(" ");
 
         if(splitedSentence.length == 0)
@@ -114,11 +114,15 @@ public class ProtocolClientCS{
                         String[] fileName = _fileName.split(".");
 
                         String finalNameFile = fileName[0] + "_" + _ptc + "." + fileName[1];
-
+                        try {
                         PrintWriter out = new PrintWriter(
                                                     new BufferedWriter(
                                                             new FileWriter(finalNameFile)));
-                        out.print(data2);
+                        }
+                        catch (IOException e) {
+                            throw new ClientException("");
+                        }
+                        System.out.print(data2);
                         break;
                     default:
                         throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
