@@ -41,13 +41,13 @@ public class User {
                 String command = getText();
                 try {
                     String commandP = protocol.sendProtocol(command);
+                    client.send(commandP);
+                    String responseP = client.receive();
+                    protocol.receiveProtocol(responseP);
                 }
                 catch (UnknownCommandException e) {
                     showText("oi user es cancr");
                 }
-                client.send(commandP);
-                String responseP = client.receive();
-                protocol.receiveProtocol(responseP);
             }
         }
         catch (ExitCommandException e) {
