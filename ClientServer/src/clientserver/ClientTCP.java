@@ -1,12 +1,12 @@
 package clientserver;
 
-import java.net.Socket;
-import java.io.PrintWriter;
-import java.io.InputStreamReader;
+import clientserver.exceptions.ClientException;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.net.UnknownHostException;
-import clientserver.exceptions.ClientException;
 
 
 public class ClientTCP {
@@ -37,7 +37,7 @@ public class ClientTCP {
     private void createSocket() throws ClientException {
         try {
             _socket = new Socket(_csName, _csPort);
-            system.out.println("Socket created and connected to " + _csName + ":" + _csPort);
+            System.out.println("Socket created and connected to " + _csName + ":" + _csPort);
             _out = new PrintWriter(_socket.getOutputStream(), true);
             _in = new BufferedReader( new InputStreamReader(_socket.getInputStream()));
         }
@@ -51,7 +51,6 @@ public class ClientTCP {
 
     public void send(String command) {
         _out.println(command);
-        System.out.println("Sent:" + command);
     }
 
     public String receive() throws ClientException {

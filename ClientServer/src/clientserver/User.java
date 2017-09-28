@@ -5,14 +5,14 @@
  */
 package clientserver;
 
-import java.io.IOException;
 import clientserver.exceptions.ClientException;
 import clientserver.exceptions.ExitCommandException;
-import clientserver.exceptions.UnknownCommandException;
 import clientserver.exceptions.ProtocolErrorException;
+import clientserver.exceptions.UnknownCommandException;
+import java.util.Scanner;
 
 public class User {
-
+    private static Scanner _in = new Scanner(System.in);
     /**
      * @param args the command line arguments
      */
@@ -21,6 +21,7 @@ public class User {
         Integer cSPort = null;
         ClientTCP client;
         ProtocolClientCS protocol;
+        
 
         try {
             for (int i = 0; i < args.length; i++) {
@@ -34,10 +35,7 @@ public class User {
                 }
             }
         }
-        catch (ArrayIndexOutOfBoundsException e) {
-            showText("Erro de parâmetros.");
-        }
-        catch (NumberFormatException e) {
+        catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             showText("Erro de parâmetros.");
         }
 
@@ -53,6 +51,7 @@ public class User {
         protocol = new ProtocolClientCS(); //THROWS ProtocolException -> UnknownCommand, ExitCommand
 
             while (true) {
+                System.out.print("> ");
                 String command = getText();
                 try {
                     String commandP = protocol.sendProtocol(command);
@@ -83,11 +82,11 @@ public class User {
     }
 
     public static void showText(String text) {
-        System.out.println(text);
+        System.out.print(text);
     }
 
     public static String getText() {
-        return System.console().readLine();
+        return _in.nextLine();
     }
 
 }
