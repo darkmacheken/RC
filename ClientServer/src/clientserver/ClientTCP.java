@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import exceptions.ErrorException;
 
 
 public class ClientTCP {
@@ -35,17 +36,17 @@ public class ClientTCP {
         this.createSocket();
     }
 
-    private void createSocket() {
+    private void createSocket() throws ErrorException {
         try {
             _socket = new Socket(_csName, _csPort);
             _out = new PrintWriter(_socket.getOutputStream(), true);
             _in = new BufferedReader( new InputStreamReader(_socket.getInputStream()));
         }
         catch (UnknownHostException e) {
-            System.out.println("Don't know about host " + _csName);
+            throw new ErrorException(Constants.SOCK_UHOST + _csName + "\n");
         }
         catch (IOException e) {
-            System.out.println("Couldn't get I/O for the connection to " + _csName);
+            throw new ErrorException(Constants.SOCK_IOERR + _csName + "\n");
         }
     }
 

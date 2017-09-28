@@ -24,32 +24,45 @@ public final class Constants {
      *Message: Error request to the CS.
      */
     public static final String REQ_ERR = "Error request to the CS.\n";
-    
+
     //Argument Error Messages
     /**
      *Message: Too few arguments.
      */
     public static final String ARG_LESS = "Too few arguments.\n";
-    
+
     /**
      *Message: Too many arguments.
      */
     public static final String ARG_HIGH = "Too many arguments.";
-    
+
     /**
      *Message: PTC is not correct.
      */
     public static final String ARG_PTCERR = "PTC is not correct.\n";
-    
+
     //Files Error Messages
     /**
      *Message: File not founded.
      */
     public static final String FILE_NFOUND = "File not founded.\n";
-    
+
     //Protocol Error Messages
     /**
      *Message: Message received does't follow the protocol.
      */
     public static final String PT_NFOLLOW = "Message received does't follow the protocol.\n";
+
+    //Socket Error Messages
+    /**
+     *Message: Unknown host: [hostname]
+     */
+    public static final String SOCK_UHOST = "Unknown host: ";
+
+    /**
+     *Message: Couldn't get I/O for the connection to [hostname]
+     */
+    public static final String SOCK_IOERR = "Couldn't get I/O for the connection to ";
+
+
 }
