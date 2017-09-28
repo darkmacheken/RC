@@ -7,7 +7,7 @@ package clientserver;
 
 import clientserver.exceptions.ClientException;
 import clientserver.exceptions.ExitCommandException;
-import clientserver.exceptions.ProtocolClientException;
+import clientserver.exceptions.ProtocolErrorException;
 import clientserver.exceptions.UnknownCommandException;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -62,7 +62,7 @@ public class ProtocolClientCS{
             throw new ClientException(Constants.REQ_NULL);
 
         if(splitedSentence.length == 1)
-            throw new ProtocolClientException(Constants.PT_NFOLLOW,sentence);
+            throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
 
         switch (splitedSentence[0]){
             case "FPT":
@@ -74,7 +74,7 @@ public class ProtocolClientCS{
                     default:
                         int numberPTC = Integer.parseInt(splitedSentence[1]);
                         if(splitedSentence.length != numberPTC+2)
-                            throw new ProtocolClientException(Constants.PT_NFOLLOW,sentence);
+                            throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
                         for(int i = 0, count=1; i<numberPTC; i++){
                             String ptc = splitedSentence[i+2];
                             String description = _descriptionPTC.get(ptc);
@@ -93,7 +93,7 @@ public class ProtocolClientCS{
 
             case "REP":
                 if(splitedSentence.length < 3)
-                     throw new ProtocolClientException(Constants.PT_NFOLLOW,sentence);
+                     throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
 
                 switch (splitedSentence[1]){
                     case "EOF":
@@ -121,11 +121,11 @@ public class ProtocolClientCS{
                         out.print(data2);
                         break;
                     default:
-                        throw new ProtocolClientException(Constants.PT_NFOLLOW,sentence);
+                        throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
                 }
 
             default:
-                throw new ProtocolClientException(Constants.PT_NFOLLOW,sentence);
+                throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
         }
         _fileName=null;
         _ptc=null;

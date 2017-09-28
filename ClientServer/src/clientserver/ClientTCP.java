@@ -17,14 +17,14 @@ public class ClientTCP {
     private BufferedReader _in;
 
     public ClientTCP(String csName, Integer csPort) {
-        if (csName == NULL) {
+        if (csName == null) {
             _csName = Constants.DEFAULT_HOST;
         }
         else {
             _csName = csName;
         }
 
-        if (csPort == NULL) {
+        if (csPort == null) {
             _csPort = Constants.DEFAULT_PORT;
         }
         else {
