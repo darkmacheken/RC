@@ -8,17 +8,17 @@ package clientserver.exceptions;
 /**
  *Error Exception
  */
-public class ErrorException extends Exception {
+public class ClientException extends Exception {
 
     private static final long serialVersionUID = 270920172254L;
 
     private String _errorDescription;
 
-    public ErrorException(String errorDescription){
+    public ClientException(String errorDescription) {
         _errorDescription=errorDescription;
     }
 
-    public String getErrorDescription(){
+    public String getErrorDescription() {
         return _errorDescription;
     }
 

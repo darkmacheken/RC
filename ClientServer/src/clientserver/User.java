@@ -7,7 +7,7 @@ package clientserver;
 
 import clientserver.exceptions.ExitCommandException;
 import clientserver.exceptions.UnknownCommandException;
-import clientserver.exceptions.ProtocolErrorException;
+import clientserver.exceptions.ProtocolClientException;
 
 public class User {
 
