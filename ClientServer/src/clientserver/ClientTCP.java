@@ -18,14 +18,14 @@ public class ClientTCP {
 
     public ClientTCP(String csName, Integer csPort) {
         if (csName == NULL) {
-            ;
+            _csName = Constants.DEFAULT_HOST;
         }
         else {
             _csName = csName;
         }
 
         if (csPort == NULL) {
-            ;
+            _csPort = Constants.DEFAULT_PORT;
         }
         else {
             _csPort = csPort;

@@ -6,9 +6,14 @@
 package clientserver;
 
 /**
- * All constant messages
+ * All constant
  */
 public final class Constants {
+    //Constant values
+    public static final String DEFAULT_HOST = "hostname";
+
+    public static final int DEFAULT_PORT = 58063;
+
     //Request Error Messages
     /**
      *Message: Nothing received from CS.
