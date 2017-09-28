@@ -2,11 +2,14 @@ package clientserver;
 
 import java.net.Socket;
 import java.io.PrintWriter;
+import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.net.UnknownHostException;
+
 
 public class ClientTCP {
-    private String _csName = ""; //FIX
+    private String _csName = ""; //todo
     private int _csPort = 58063;
     private Socket _socket;
     private PrintWriter _out;
@@ -39,10 +42,10 @@ public class ClientTCP {
             _in = new BufferedReader( new InputStreamReader(_socket.getInputStream()));
         }
         catch (UnknownHostException e) {
-            showText("Don't know about host " + csName);
+            System.out.println("Don't know about host " + _csName);
         }
         catch (IOException e) {
-            showText("Couldn't get I/O for the connection to " + csName);
+            System.out.println("Couldn't get I/O for the connection to " + _csName);
         }
     }
 
@@ -53,9 +56,15 @@ public class ClientTCP {
     public String receive() {
         String receivedStr = "";
         String tempStr;
-        while ((tempStr = _in.readline()) != null) {
-            receivedStr += tempStr;
+        try {
+            while ((tempStr = _in.readLine()) != null) {
+                receivedStr += tempStr;
+            }
         }
+        catch(IOException e) {
+            System.out.println("Error reading from socket");
+        }
+
         return receivedStr;
     }
 
