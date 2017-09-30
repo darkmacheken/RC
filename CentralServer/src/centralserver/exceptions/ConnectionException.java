@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clientserver.exceptions;
+package centralserver.exceptions;
 
 /**
  *Error Exception
  */
-public class ClientException extends Exception {
+public class ConnectionException extends Exception {
 
     private static final long serialVersionUID = 270920172254L;
 
     private String _errorDescription;
 
-    public ClientException(String errorDescription) {
+    public ConnectionException(String errorDescription) {
         _errorDescription=errorDescription;
     }
 

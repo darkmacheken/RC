@@ -5,7 +5,7 @@
  */
 package clientserver;
 
-import clientserver.exceptions.ClientException;
+import clientserver.exceptions.ConnectionException;
 import clientserver.exceptions.ExitCommandException;
 import clientserver.exceptions.ProtocolErrorException;
 import clientserver.exceptions.UnknownCommandException;
@@ -19,7 +19,7 @@ public class User {
     public static void main(String[] args) {
         String cSName = null;
         Integer cSPort = null;
-        ClientTCP client;
+        ConnectionTCP client;
         ProtocolClientCS protocol;
         
 
@@ -41,9 +41,9 @@ public class User {
 
 
         try {
-            client = new ClientTCP(cSName, cSPort);
+            client = new ConnectionTCP(cSName, cSPort);
         }
-        catch (ClientException e) {
+        catch (ConnectionException e) {
             showText(e.getErrorDescription());
             return;
         }
@@ -71,12 +71,12 @@ public class User {
                         client.close();
                         return;
                     }
-                    catch (ClientException ce) {
+                    catch (ConnectionException ce) {
                         showText(ce.getErrorDescription());
                         return;
                     }
                 }
-                catch (ClientException e) {
+                catch (ConnectionException e) {
                     showText(e.getErrorDescription());
                 }
             }

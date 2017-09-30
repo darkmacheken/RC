@@ -9,7 +9,7 @@ package clientserver.exceptions;
  *
  * @author Asus
  */
-public class ProtocolErrorException extends ClientException {
+public class ProtocolErrorException extends ConnectionException {
 
     private static final long serialVersionUID = 280920170031L;
 

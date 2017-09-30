@@ -5,7 +5,7 @@
  */
 package clientserver;
 
-import clientserver.exceptions.ClientException;
+import clientserver.exceptions.ConnectionException;
 import clientserver.exceptions.ExitCommandException;
 import clientserver.exceptions.ProtocolErrorException;
 import clientserver.exceptions.UnknownCommandException;
@@ -37,7 +37,7 @@ public class ProtocolClientCS{
 
     public String sendProtocol(String sentence) throws UnknownCommandException,
                                                        ExitCommandException,
-                                                       ClientException{
+                                                       ConnectionException{
         String[] splitedSentence = sentence.split(" ");
 
         if(splitedSentence.length==0)
@@ -55,11 +55,11 @@ public class ProtocolClientCS{
         }
     }
 
-    public void receiveProtocol(String sentence) throws ClientException {
+    public void receiveProtocol(String sentence) throws ConnectionException {
         String[] splitedSentence = sentence.split(" ");
 
         if(splitedSentence.length == 0)
-            throw new ClientException(Constants.REQ_NULL);
+            throw new ConnectionException(Constants.REQ_NULL);
 
         if(splitedSentence.length == 1)
             throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
@@ -68,9 +68,9 @@ public class ProtocolClientCS{
             case "FPT":
                 switch (splitedSentence[1]) {
                     case "EOF":
-                        throw new ClientException(Constants.REQ_EOF);
+                        throw new ConnectionException(Constants.REQ_EOF);
                     case "ERR":
-                        throw new ClientException(Constants.REQ_ERR);
+                        throw new ConnectionException(Constants.REQ_ERR);
                     default:
                         int numberPTC = Integer.parseInt(splitedSentence[1]);
                         if(splitedSentence.length != numberPTC+2)
@@ -97,9 +97,9 @@ public class ProtocolClientCS{
 
                 switch (splitedSentence[1]){
                     case "EOF":
-                        throw new ClientException(Constants.REQ_EOF);
+                        throw new ConnectionException(Constants.REQ_EOF);
                     case "ERR":
-                        throw new ClientException(Constants.REQ_ERR);
+                        throw new ConnectionException(Constants.REQ_ERR);
                     case "R": //report of performed task
                         int size = Integer.parseInt(splitedSentence[2]);
                         String data = splitedSentence[2].substring(0, size);
@@ -120,7 +120,7 @@ public class ProtocolClientCS{
                                                             new FileWriter(finalNameFile)));
                         }
                         catch (IOException e) {
-                            throw new ClientException("");
+                            throw new ConnectionException("");
                         }
                         System.out.print(data2);
                         break;
@@ -135,14 +135,14 @@ public class ProtocolClientCS{
         _ptc=null;
     }
 
-    private String requestSendProtocol(String[] splitedSentence) throws ClientException{
+    private String requestSendProtocol(String[] splitedSentence) throws ConnectionException{
         if(splitedSentence.length < 3)
-            throw new ClientException(Constants.ARG_LESS);
+            throw new ConnectionException(Constants.ARG_LESS);
         else if (splitedSentence.length>3)
-            throw new ClientException(Constants.ARG_HIGH);
+            throw new ConnectionException(Constants.ARG_HIGH);
 
         if(splitedSentence[1].length()!=3)
-            throw new ClientException(Constants.ARG_PTCERR);
+            throw new ConnectionException(Constants.ARG_PTCERR);
 
         _ptc = splitedSentence[1];
         _fileName = splitedSentence[2];
@@ -154,7 +154,7 @@ public class ProtocolClientCS{
             fileText = new Scanner(new File(_fileName)).useDelimiter("\\A").next();
         }
         catch (FileNotFoundException ex) {
-            throw new ClientException(Constants.FILE_NFOUND);
+            throw new ConnectionException(Constants.FILE_NFOUND);
         }
 
         int size = fileText.length();
