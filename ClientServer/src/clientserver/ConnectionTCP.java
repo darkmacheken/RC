@@ -41,8 +41,13 @@ public class ConnectionTCP {
         _name = _socket.getInetAdress().getHostName();
         _ip = _socket.getInetAdress().getHostAddress();
         _port = _socket.getPort();
-        _out = new PrintWriter(_socket.getOutputStream(), true); // Duplicated code, new method: createIO()
-        _in = new BufferedReader( new InputStreamReader(_socket.getInputStream()));
+        try {
+            _out = new PrintWriter(_socket.getOutputStream(), true);     // Duplicated code, new method: createIO()
+            _in = new BufferedReader( new InputStreamReader(_socket.getInputStream()));
+        }
+        catch (IOException e) {
+            throw new ConnectionException(Constants.SOCK_IOERR + _name + "\n");
+        }
     }
 
     private void createSocket() throws ConnectionException {
