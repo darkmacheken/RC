@@ -33,32 +33,35 @@ public class ConnectionTCP {
             _port = port;
         }
 
-        this.createSocket();
+        createSocket();
+        createIO();
     }
 
-    public ConnectionTCP(Socket socket) {
+    public ConnectionTCP(Socket socket) throws ConnectionException {
         _socket = socket;
-        _name = _socket.getInetAdress().getHostName();
-        _ip = _socket.getInetAdress().getHostAddress();
+        _name = _socket.getInetAddress().getHostName();
+        _ip = _socket.getInetAddress().getHostAddress();
         _port = _socket.getPort();
-        try {
-            _out = new PrintWriter(_socket.getOutputStream(), true);     // Duplicated code, new method: createIO()
-            _in = new BufferedReader( new InputStreamReader(_socket.getInputStream()));
-        }
-        catch (IOException e) {
-            throw new ConnectionException(Constants.SOCK_IOERR + _name + "\n");
-        }
+        createIO();
     }
 
     private void createSocket() throws ConnectionException {
         try {
             _socket = new Socket(_name, _port);
             System.out.println("Socket created and connected to " + _name + ":" + _port);
-            _out = new PrintWriter(_socket.getOutputStream(), true);
-            _in = new BufferedReader( new InputStreamReader(_socket.getInputStream()));
         }
         catch (UnknownHostException e) {
             throw new ConnectionException(Constants.SOCK_UHOST + _name + "\n");
+        }
+        catch (IOException e) {
+            throw new ConnectionException(Constants.SOCK_IOERR + _name + "\n");
+        }
+    }
+
+    private void createIO() throws ConnectionException {
+        try {
+            _out = new PrintWriter(_socket.getOutputStream(), true);
+            _in = new BufferedReader( new InputStreamReader(_socket.getInputStream()));
         }
         catch (IOException e) {
             throw new ConnectionException(Constants.SOCK_IOERR + _name + "\n");
