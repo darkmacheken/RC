@@ -86,6 +86,17 @@ public class ConnectionTCP {
         return receivedStr;
     }
 
+    public String receiveLine() throws ConnectionException {
+        String receivedStr;
+        try {
+            return receivedStr;
+        }
+        catch(IOException e) {
+            //e.printStackTrace();
+            throw new ConnectionException(Constants.SOCK_READERR);
+        }
+    }
+
     public void close() throws ConnectionException {
         try {
             _out.close();
