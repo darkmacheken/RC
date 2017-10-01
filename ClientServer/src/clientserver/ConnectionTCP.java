@@ -89,6 +89,7 @@ public class ConnectionTCP {
     public String receiveLine() throws ConnectionException {
         String receivedStr;
         try {
+            receivedStr = _in.readLine() + "\n";
             return receivedStr;
         }
         catch(IOException e) {
