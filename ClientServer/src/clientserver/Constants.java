@@ -10,7 +10,7 @@ package clientserver;
  */
 public final class Constants {
     //Constant values
-    public static final String DEFAULT_HOST = "hostname";
+    public static final String DEFAULT_HOST = "localhostname";
 
     public static final int DEFAULT_PORT = 58063;
 
@@ -39,7 +39,7 @@ public final class Constants {
     /**
      *Message: Too many arguments.
      */
-    public static final String ARG_HIGH = "Too many arguments.";
+    public static final String ARG_HIGH = "Too many arguments.\n";
 
     /**
      *Message: PTC is not correct.

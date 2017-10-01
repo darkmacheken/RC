@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.max;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -56,6 +57,9 @@ public class ProtocolClientCS{
     }
 
     public void receiveProtocol(String sentence) throws ConnectionException {
+        //remove last char from sentence (it should be '\n' from protocol)
+        sentence = sentence.substring(0, max(0,sentence.length()-1));
+        
         String[] splitedSentence = sentence.split(" ");
 
         if(splitedSentence.length == 0)
@@ -63,7 +67,8 @@ public class ProtocolClientCS{
 
         if(splitedSentence.length == 1)
             throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
-
+       
+            
         switch (splitedSentence[0]){
             case "FPT":
                 switch (splitedSentence[1]) {
@@ -92,13 +97,13 @@ public class ProtocolClientCS{
                 break;
 
             case "REP":
-                if(splitedSentence.length < 3)
+                if(splitedSentence.length < 2)
                      throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
 
                 switch (splitedSentence[1]){
                     case "EOF":
                         throw new ConnectionException(Constants.REQ_EOF);
-                    case "ERR":
+                    case "ERR":       
                         throw new ConnectionException(Constants.REQ_ERR);
                     case "R": //report of performed task
                         int size = Integer.parseInt(splitedSentence[2]);
@@ -109,25 +114,28 @@ public class ProtocolClientCS{
 
                     case "F": //processed text file
                         int size2 = Integer.parseInt(splitedSentence[2]);
-                        String data2 = splitedSentence[2].substring(0, size2);
+                        String data2 = splitedSentence[3].substring(0, size2);
 
-                        String[] fileName = _fileName.split(".");
+                        String[] fileName = _fileName.split("\\.");
 
                         String finalNameFile = fileName[0] + "_" + _ptc + "." + fileName[1];
                         try {
                         PrintWriter out = new PrintWriter(
                                                     new BufferedWriter(
                                                             new FileWriter(finalNameFile)));
+                        out.print(data2);
+                        System.out.println("received file " + finalNameFile + "\n\t" + size2 + " Bytes");
+                        out.close();
                         }
                         catch (IOException e) {
                             throw new ConnectionException("");
-                        }
-                        System.out.print(data2);
+                        }                        
                         break;
                     default:
                         throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
                 }
-
+                break;
+                
             default:
                 throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
         }
@@ -151,7 +159,9 @@ public class ProtocolClientCS{
         //Trying to open file
         String fileText = new String();
         try{
-            fileText = new Scanner(new File(_fileName)).useDelimiter("\\A").next();
+            Scanner file = new Scanner(new File(_fileName));
+            fileText = file.useDelimiter("\\A").next();
+            file.close();
         }
         catch (FileNotFoundException ex) {
             throw new ConnectionException(Constants.FILE_NFOUND);

@@ -52,7 +52,6 @@ public class ConnectionTCP {
     public void send(String command) {
         _out.print(command);
         _out.flush();
-        //System.out.print("\tMessage sent: " + command);
     }
 
     public String receive() throws ConnectionException {
@@ -60,15 +59,14 @@ public class ConnectionTCP {
         String tempStr;
         try {
             while ((tempStr = _in.readLine()) != null) {
-                receivedStr += tempStr;
+                receivedStr += tempStr + "\n";
             }
         }
         catch(IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             throw new ConnectionException(Constants.SOCK_READERR);
         }
         
-        //listSystem.out.println("\tMessage received: " + receivedStr);
         return receivedStr;
     }
 

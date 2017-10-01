@@ -57,11 +57,11 @@ public class User {
                     String commandP = protocol.sendProtocol(command);
                     client.send(commandP);
                     String responseP = client.receive();
+                    //System.out.println("Received: " + responseP);
                     protocol.receiveProtocol(responseP);
                 }
                 catch (ProtocolErrorException e) {
                     showText(e.getErrorDescription());
-                    showText(e.getMessage());
                 }
                 catch (UnknownCommandException e) {
                     showText("Unknown Command:" + e.toString() + "\n");
