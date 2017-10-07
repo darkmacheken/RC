@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 
@@ -34,7 +33,6 @@ public class ConnectionTCP {
         }
 
         createSocket();
-        createIO();
     }
 
     public ConnectionTCP(Socket socket) throws ConnectionException {
@@ -48,12 +46,14 @@ public class ConnectionTCP {
     private void createSocket() throws ConnectionException {
         try {
             _socket = new Socket(_name, _port);
-            System.out.println("Socket created and connected to " + _name + ":" + _port);
+            //System.out.println("Socket created and connected to " + _name + ":" + _port);
+            createIO();
         }
         catch (UnknownHostException e) {
             throw new ConnectionException(Constants.SOCK_UHOST + _name + "\n");
         }
         catch (IOException e) {
+            //e.printStackTrace();
             throw new ConnectionException(Constants.SOCK_IOERR + _name + "\n");
         }
     }
@@ -74,25 +74,29 @@ public class ConnectionTCP {
     }
 
     public String receive() throws ConnectionException {
-        String receivedStr = "";
-        String tempStr;
         try {
-            while ((tempStr = _in.readLine()) != null) {
-                receivedStr += tempStr + "\n";
+            String receivedStr = "";  
+            String line = _in.readLine();
+            
+            while (line != null) {
+                receivedStr += line + "\n";
+                line = _in.readLine();
             }
+            close();
+            createSocket();
+            return receivedStr;
         }
         catch(IOException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
             throw new ConnectionException(Constants.SOCK_READERR);
-        }
-
-        return receivedStr;
+        }            
     }
 
     public String receiveLine() throws ConnectionException {
         String receivedStr;
         try {
-            receivedStr = _in.readLine() + "\n";
+            createIO();
+            receivedStr = _in.readLine() + "\n";      
             return receivedStr;
         }
         catch(IOException e) {

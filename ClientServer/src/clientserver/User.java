@@ -19,7 +19,7 @@ public class User {
     public static void main(String[] args) {
         String cSName = null;
         Integer cSPort = null;
-        ConnectionTCP client;
+        ConnectionTCP client = null;
         ProtocolClientCS protocol;
         
 
@@ -36,29 +36,26 @@ public class User {
             }
         }
         catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-            showText("Erro de parâmetros.");
-        }
-
-
-        try {
-            client = new ConnectionTCP(cSName, cSPort);
-        }
-        catch (ConnectionException e) {
-            showText(e.getErrorDescription());
+            showText("Erro de parâmetros.\n");
             return;
         }
 
-        protocol = new ProtocolClientCS(); //THROWS ProtocolException -> UnknownCommand, ExitCommand
+        protocol = new ProtocolClientCS();
 
             while (true) {
                 System.out.print("> ");
-                String command = getText();
+                String command = getText();               
                 try {
+                    //create connection tcp
+                    client = new ConnectionTCP(cSName, cSPort);
+                    //create protocol message and send
                     String commandP = protocol.sendProtocol(command);
                     client.send(commandP);
-                    String responseP = client.receive();
-                    //System.out.println("Received: " + responseP);
-                    protocol.receiveProtocol(responseP);
+                    //receive message and apply protocol
+                    String responseP = client.receiveLine();
+                    protocol.receiveProtocol(responseP);                 
+                    //close connection tcp
+                    client.close();
                 }
                 catch (ProtocolErrorException e) {
                     showText(e.getErrorDescription());
