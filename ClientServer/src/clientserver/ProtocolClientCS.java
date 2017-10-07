@@ -135,6 +135,8 @@ public class ProtocolClientCS{
                         throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
                 }
                 break;
+            case "ERR":
+                throw new ConnectionException(Constants.REQ_ERR);
                 
             default:
                 throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
