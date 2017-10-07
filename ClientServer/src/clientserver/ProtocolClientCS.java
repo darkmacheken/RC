@@ -85,8 +85,7 @@ public class ProtocolClientCS{
                             String description = _descriptionPTC.get(ptc);
                             Set<String> ptcShowed = new HashSet<String>();
 
-                            if(ptcShowed.contains(ptc));
-                            else{
+                            if(!ptcShowed.contains(ptc)){
                                 System.out.println(count + "- " + ptc + " - " + description);
                                 count++;
                                 ptcShowed.add(ptc);

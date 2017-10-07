@@ -14,10 +14,18 @@ public class ConnectionException extends Exception {
 
     private String _errorDescription;
 
+    /**
+     *
+     * @param errorDescription
+     */
     public ConnectionException(String errorDescription) {
         _errorDescription=errorDescription;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getErrorDescription() {
         return _errorDescription;
     }

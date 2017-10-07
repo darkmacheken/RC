@@ -8,7 +8,10 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-
+/**
+ *
+ * @author Asus
+ */
 public class ConnectionTCP {
     private String _name; //todo
     private String _ip;
@@ -17,6 +20,12 @@ public class ConnectionTCP {
     private PrintWriter _out;
     private BufferedReader _in;
 
+    /**
+     *
+     * @param name
+     * @param port
+     * @throws ConnectionException
+     */
     public ConnectionTCP(String name, Integer port) throws ConnectionException {
         if (name == null) {
             _name = Constants.DEFAULT_HOST;
@@ -35,6 +44,11 @@ public class ConnectionTCP {
         createSocket();
     }
 
+    /**
+     *
+     * @param socket
+     * @throws ConnectionException
+     */
     public ConnectionTCP(Socket socket) throws ConnectionException {
         _socket = socket;
         _name = _socket.getInetAddress().getHostName();
@@ -46,7 +60,6 @@ public class ConnectionTCP {
     private void createSocket() throws ConnectionException {
         try {
             _socket = new Socket(_name, _port);
-            //System.out.println("Socket created and connected to " + _name + ":" + _port);
             createIO();
         }
         catch (UnknownHostException e) {
@@ -68,11 +81,20 @@ public class ConnectionTCP {
         }
     }
 
+    /**
+     *
+     * @param command
+     */
     public void send(String command) {
         _out.print(command);
         _out.flush();
     }
 
+    /**
+     *
+     * @return
+     * @throws ConnectionException
+     */
     public String receive() throws ConnectionException {
         try {
             String receivedStr = "";  
@@ -87,11 +109,15 @@ public class ConnectionTCP {
             return receivedStr;
         }
         catch(IOException e) {
-            e.printStackTrace();
             throw new ConnectionException(Constants.SOCK_READERR);
         }            
     }
 
+    /**
+     *
+     * @return
+     * @throws ConnectionException
+     */
     public String receiveLine() throws ConnectionException {
         String receivedStr;
         try {
@@ -105,6 +131,10 @@ public class ConnectionTCP {
         }
     }
 
+    /**
+     *
+     * @throws ConnectionException
+     */
     public void close() throws ConnectionException {
         try {
             _out.close();

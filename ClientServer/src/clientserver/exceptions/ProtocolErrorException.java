@@ -15,6 +15,11 @@ public class ProtocolErrorException extends ConnectionException {
 
     private String _message;
 
+    /**
+     *
+     * @param errorDescription
+     * @param message
+     */
     public ProtocolErrorException(String errorDescription, String message) {
         super(errorDescription);
         _message=message;
