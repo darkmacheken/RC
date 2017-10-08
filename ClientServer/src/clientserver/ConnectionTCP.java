@@ -97,9 +97,9 @@ public class ConnectionTCP {
      */
     public String receive() throws ConnectionException {
         try {
-            String receivedStr = "";  
+            String receivedStr = "";
             String line = _in.readLine();
-            
+
             while (line != null) {
                 receivedStr += line + "\n";
                 line = _in.readLine();
@@ -110,26 +110,9 @@ public class ConnectionTCP {
         }
         catch(IOException e) {
             throw new ConnectionException(Constants.SOCK_READERR);
-        }            
+        }
     }
 
-    /**
-     *
-     * @return
-     * @throws ConnectionException
-     */
-    public String receiveLine() throws ConnectionException {
-        String receivedStr;
-        try {
-            createIO();
-            receivedStr = _in.readLine() + "\n";      
-            return receivedStr;
-        }
-        catch(IOException e) {
-            //e.printStackTrace();
-            throw new ConnectionException(Constants.SOCK_READERR);
-        }
-    }
 
     /**
      *
