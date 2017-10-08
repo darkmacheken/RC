@@ -21,7 +21,7 @@ public class User {
         Integer cSPort = null;
         ConnectionTCP client = null;
         ProtocolClientCS protocol;
-        
+
 
         try {
             for (int i = 0; i < args.length; i++) {
@@ -44,7 +44,7 @@ public class User {
 
             while (true) {
                 System.out.print("> ");
-                String command = getText();               
+                String command = getText();
                 try {
                     //create connection tcp
                     client = new ConnectionTCP(cSName, cSPort);
@@ -52,8 +52,8 @@ public class User {
                     String commandP = protocol.sendProtocol(command);
                     client.send(commandP);
                     //receive message and apply protocol
-                    String responseP = client.receiveLine();
-                    protocol.receiveProtocol(responseP);                 
+                    String responseP = client.receive();
+                    protocol.receiveProtocol(responseP);
                     //close connection tcp
                     client.close();
                 }
