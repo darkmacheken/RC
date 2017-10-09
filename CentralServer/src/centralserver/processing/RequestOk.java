@@ -1,7 +1,5 @@
 package centralserver.processing;
 
-import java.io.Reader;
-
 /**
  *
  * @author Asus
@@ -11,7 +9,7 @@ public class RequestOk extends Request{
     private final String _command;
     private final String[] _pTCs;
     private final int _size;
-    private final Reader _file; 
+    private final String _file; 
     private final String _fileName;
     
 
@@ -28,7 +26,7 @@ public class RequestOk extends Request{
      * @param port
      */
     public RequestOk(String nameAdress, String iP, int port, 
-                   String command, String[] pTCs, int size, Reader file, String fileName, 
+                   String command, String[] pTCs, int size, String file, String fileName, 
                    RequestProcessor processor) {
         super(nameAdress, iP, port, processor);
         
@@ -51,7 +49,7 @@ public class RequestOk extends Request{
      * @param processor
      */
     public RequestOk(String nameAdress, String iP, int port, 
-                   String command, String[] pTCs, int size, Reader file, 
+                   String command, String[] pTCs, int size, String file, 
                    RequestProcessor processor) {
         this(nameAdress, iP, port, command, pTCs, size, file, null, processor);
     }
@@ -110,7 +108,7 @@ public class RequestOk extends Request{
      *
      * @return
      */
-    public Reader getFile() {
+    public String getFile() {
         return _file;
     }
 

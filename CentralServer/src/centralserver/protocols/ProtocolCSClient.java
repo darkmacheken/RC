@@ -10,7 +10,6 @@ import centralserver.processing.ClientRequestProcessor;
 import centralserver.processing.Request;
 import centralserver.processing.RequestError;
 import centralserver.processing.RequestOk;
-import java.io.StringReader;
 import static java.lang.Integer.max;
 
 /**
@@ -67,9 +66,11 @@ public class ProtocolCSClient {
             }
             else{
                 return new RequestOk(_nameAdress, _iP, _port,
-                                   "REQ", new String[]{commandArguments[0]}, Integer.parseInt(commandArguments[1]),
-                                   new StringReader(commandArguments[2]),
-                                   new ClientRequestProcessor());
+                                     "REQ",
+                                     new String[]{commandArguments[0]}, 
+                                     Integer.parseInt(commandArguments[1]),                 
+                                     commandArguments[2],
+                                     new ClientRequestProcessor());
             }
         }
         else{
