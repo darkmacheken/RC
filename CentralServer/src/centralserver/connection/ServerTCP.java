@@ -1,15 +1,24 @@
-package centralserver;
+package centralserver.connection;
 
+import centralserver.Constants;
 import centralserver.exceptions.ConnectionException;
 import java.io.IOException;
-import java.net.Socket;
 import java.net.ServerSocket;
+import java.net.Socket;
 
+/**
+ *
+ * @author Asus
+ */
 public class ServerTCP {
     private Integer _port;
     private ServerSocket _serverSocket;
 
-    public ServerTCP(Integer port) {
+    /**
+     *
+     * @param port
+     */
+    public ServerTCP(Integer port) throws ConnectionException {
         if (port == null) {
             _port = Constants.DEFAULT_PORT;
         }
@@ -28,9 +37,15 @@ public class ServerTCP {
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws ConnectionException
+     */
     public ConnectionTCP acceptSocket() throws ConnectionException {
+        Socket clientSocket;
         try {
-            Socket clientSocket = serverSocket.accept();
+            clientSocket = _serverSocket.accept();
         }
         catch (IOException e) {
             throw new ConnectionException(Constants.SERVER_LISTENERR);
@@ -39,6 +54,10 @@ public class ServerTCP {
         return connection;
     }
 
+    /**
+     *
+     * @throws ConnectionException
+     */
     public void close() throws ConnectionException {
         try {
             _serverSocket.close();                                              //should I close the connection?
@@ -46,6 +65,10 @@ public class ServerTCP {
         catch(IOException e) {
             throw new ConnectionException(Constants.SERVER_CLOSEERR);
         }
+    }
+
+    private ConnectionTCP ConnectionTCP(Socket clientSocket) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

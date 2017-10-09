@@ -3,15 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clientserver;
+package centralserver;
 
 /**
  * All constant
  */
 public final class Constants {
     //Constant values
+
+    /**
+     * Default host 'localhostname'
+     */
     public static final String DEFAULT_HOST = "localhostname";
 
+    /**
+     * default port 58000+63
+     */
     public static final int DEFAULT_PORT = 58063;
 
     //Request Error Messages

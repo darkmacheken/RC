@@ -1,5 +1,6 @@
-package centralserver;
+package centralserver.connection;
 
+import centralserver.Constants;
 import centralserver.exceptions.ConnectionException;
 import java.io.BufferedReader;
 import java.io.IOException;

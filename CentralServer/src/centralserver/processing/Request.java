@@ -1,5 +1,9 @@
-package centralserver;
+package centralserver.processing;
 
+/**
+ *
+ * @author Asus
+ */
 public class Request {
     RequestProcessor _processor;
     String _command;
@@ -10,13 +14,24 @@ public class Request {
     String _iP;
     int _port;
 
-    public Request(Request processor, String command, String[] pTCs, String file, int size, String fileName, String iP, String port) {
+    /**
+     *
+     * @param processor
+     * @param command
+     * @param pTCs
+     * @param file
+     * @param size
+     * @param fileName
+     * @param iP
+     * @param port
+     */
+    public Request(RequestProcessor processor, String command, String[] pTCs, String file, int size, String fileName, String iP, int port) {
         _processor = processor;
         _command = command;
         _pTCs = pTCs;
         _file = file;
         _size = size;
-        _fileName = filename;
+        _fileName = fileName;
         _iP = iP;
         _port = port;
     }
