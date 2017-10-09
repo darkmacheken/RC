@@ -48,7 +48,7 @@ public abstract class Request {
      *
      * @return
      */
-    public String getiP() {
+    public String getIP() {
         return _iP;
     }
 

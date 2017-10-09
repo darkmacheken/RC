@@ -40,7 +40,10 @@ public class ClientRequestProcessor implements RequestProcessor {
             case "LST":
                 System.out.println("List request: " + _request.getNameAdress() + " " + _request.getPort());
                 String[] pTCs = _list.getPTCs();
-                return new ReportOk(_request.getCommand(), pTCs);
+                if (pTCs.length == 0)
+                    return new ReportError(_request.getNameAdress(), _request.getIP(), _request.getPort(), "FPT EOF");
+                else
+                    return new ReportOk(_request.getNameAdress(), _request.getIP(), _request.getPort(), _request.getCommand(), pTCs);
             case "REQ":
                 return requestCmd();
             case "ERR":
@@ -51,18 +54,27 @@ public class ClientRequestProcessor implements RequestProcessor {
     }
     
     private Report requestCmd() throws ConnectionException {
+        String fileName;
         try {
-            String fileName = intToString(_counter, 5);
+            fileName = "input_files/" + intToString(_counter, 5) + ".txt";
             PrintWriter out = new PrintWriter(
                     new BufferedWriter(
                             new FileWriter(fileName)));
             out.print(_request.getFile());
             out.close();
+            _counter++;
+            
         }
         catch (IOException e) {
             throw new ConnectionException("");
         }
-        _request.getPTCs();
+        
+        // Get IPs from list
+        String[] iPs = _list.getIPs();
+        if (iPs == null || iPs.length == 0)
+            return new ReportError(_request.getNameAdress(), _request.getIP(), _request.getPort(), "REP EOF");
+        
+        
     }
     
     private String intToString(int num, int digits) {

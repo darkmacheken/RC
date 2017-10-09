@@ -13,13 +13,15 @@ public class ReportOk extends Report {
   
     /**
      *
+     * @param nameAdress
+     * @param iP
      * @param command
      * @param pTCs
      * @param file
      * @param status
      * @param rT
      */
-    public ReportOk(String nameAdress, String iP, int port, String error,
+    public ReportOk(String nameAdress, String iP, int port,
                     String command, String[] pTCs, String file, int size, char rT) {
         super(nameAdress, iP, port);
         _command = command;
@@ -27,6 +29,10 @@ public class ReportOk extends Report {
         _file = file;
         _size = size;
         _rT = rT;
+    }
+    
+    public ReportOk(String nameAdress, String iP, int port, String command, String[] pTCs) {
+        this(nameAdress, iP, port, command, pTCs, null, 0, '\0');
     }
     
     /**

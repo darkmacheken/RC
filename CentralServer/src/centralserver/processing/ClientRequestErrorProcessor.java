@@ -25,7 +25,7 @@ public class ClientRequestErrorProcessor implements RequestProcessor {
         try{
             RequestError requestError = (RequestError) request;
             return new ReportError(requestError.getNameAdress(),
-                                   requestError.getiP(),
+                                   requestError.getIP(),
                                    requestError.getPort(),
                                    requestError.getError());
         }
