@@ -123,7 +123,7 @@ public class ProtocolCSClient {
             ReportOk reportOk = (ReportOk) report;
             
             switch(reportOk.getCommand()){
-                case "FPT":
+                case "LST":
                     String messageReturn = "FPT ";
                     
                     String[] pTCs = reportOk.getpTCs();
@@ -136,7 +136,7 @@ public class ProtocolCSClient {
                     
                     return messageReturn += "\n";
                     
-                case "REP":
+                case "REQ":
                     return "REP " + reportOk.getrT() + " " + 
                            reportOk.getSize() + " " + 
                            reportOk.getFile() + "\n";
