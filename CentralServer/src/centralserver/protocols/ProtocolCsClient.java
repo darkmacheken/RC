@@ -5,6 +5,7 @@
  */
 package centralserver.protocols;
 
+import centralserver.processing.ClientRequestProcessor;
 import centralserver.processing.Request;
 import static java.lang.Integer.max;
 
@@ -13,12 +14,12 @@ import static java.lang.Integer.max;
  * confirms the protocol.
  * @author Pedro Daniel
  */
-public class ProtocolCsClient {
+public class ProtocolCSClient {
 
     /**
      * Constructor default
      */
-    public ProtocolCsClient(){}
+    public ProtocolCSClient(){}
     
     /**
      * Receive the string from the connection 
@@ -32,7 +33,10 @@ public class ProtocolCsClient {
         //split sentence by space into array
         String[] splitedSentence = sentence.split(" ");
         
-        if()
+        if(splitedSentence.length == 0){
+            return new Request(new ClientRequestProcessor(), );
+        }      
+        else if(splitedSentence)
     }
     
 }
