@@ -1,5 +1,7 @@
 package centralserver.processing;
 
+import java.io.Reader;
+
 /**
  *
  * @author Asus
@@ -9,7 +11,7 @@ public class Request {
     RequestProcessor _processor;
     String _command;
     String[] _pTCs;
-    String _file;
+    Reader _file;
     int _size;
     String _fileName;
     String _iP;
@@ -26,7 +28,7 @@ public class Request {
      * @param iP
      * @param port
      */
-    public Request(RequestProcessor processor, String command, String[] pTCs, String file, int size, String fileName, String iP, int port) {
+    public Request(RequestProcessor processor, String command, String[] pTCs, Reader file, int size, String fileName, String iP, int port) {
         _processor = processor;
         _command = command;
         _pTCs = pTCs;
@@ -53,7 +55,7 @@ public class Request {
         return _pTCs;
     }
 
-    public String getFile() {
+    public Reader getFile() {
         return _file;
     }
 

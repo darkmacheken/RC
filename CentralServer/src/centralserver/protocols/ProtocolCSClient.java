@@ -35,7 +35,7 @@ public class ProtocolCSClient {
         
         if(splitedSentence.length == 0){
             return new Request(new ClientRequestProcessor(), );
-        }      
+        }
         else if(splitedSentence)
     }
     

@@ -1,15 +1,17 @@
 package centralserver.processing;
 
+import java.io.Reader;
+
 /**
  *
  * @author Asus
  */
 public class Report {
-    String _command;
-    String[] _pTCs;
-    String _file;
-    int _size;
-    Boolean _status;
+    private String _command;
+    private String[] _pTCs;
+    private Reader _file;
+    private int _size;
+    private Boolean _status;
   
     /**
      *
@@ -19,7 +21,7 @@ public class Report {
      * @param size
      * @param status
      */
-    public Report(String command, String[] pTCs, String file, int size, Boolean status) {
+    public Report(String command, String[] pTCs, Reader file, int size, Boolean status) {
         _command = command;
         _pTCs = pTCs;
         _file = file;
@@ -47,7 +49,7 @@ public class Report {
      *
      * @return file
      */
-    public String getFile() {
+    public Reader getFile() {
         return _file;
     }
 

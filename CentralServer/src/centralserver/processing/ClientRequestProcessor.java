@@ -13,7 +13,16 @@ public class ClientRequestProcessor implements RequestProcessor {
 
     @Override
     public Report process(Request request) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        switch (request.getCommand()) {
+            case "LST":
+                return new Report();
+            case "REQ":
+                return new Report();
+            case "ERR":
+                return new Report();
+            default:
+                ; // Should never happen
+        }
     }
     
 }

@@ -48,3 +48,8 @@ Temporary Items
 /Test/nbproject/private/
 /ClientServer/nbproject/private/
 /CentralServer/nbproject/private/
+/ClientServer/dist/
+
+# Compiled files
+*.class
+*.jar
