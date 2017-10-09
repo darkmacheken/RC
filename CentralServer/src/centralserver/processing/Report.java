@@ -12,6 +12,7 @@ public class Report {
     private Reader _file;
     private int _size;
     private Boolean _status;
+    private char _rT;
   
     /**
      *
@@ -21,12 +22,23 @@ public class Report {
      * @param size
      * @param status
      */
-    public Report(String command, String[] pTCs, Reader file, int size, Boolean status) {
+    public Report(String command, String[] pTCs, Reader file, int size, Boolean status, char rT) {
         _command = command;
         _pTCs = pTCs;
         _file = file;
         _size = size;
         _status = status;
+        _rT = rT;
+    }
+    
+    /**
+     *
+     * @param command
+     * @param pTCs
+     */
+    public Report(String command, String[] pTCs) {
+        _command = command;
+        _pTCs = pTCs;
     }
     
     /**

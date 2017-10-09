@@ -31,7 +31,7 @@ public class ServerTCPConnectionThread extends Thread {
         try {
             String received = _connection.receive();
             Request request = protocol.receive(received);
-            Report report = request.process();
+            Report report = request.process(_list);
             String toSend = protocol.send(report);
             _connection.send(toSend);
             _connection.close();

@@ -1,5 +1,6 @@
 package centralserver.processing;
 
+import centralserver.WSList;
 import java.io.Reader;
 
 /**
@@ -39,11 +40,11 @@ public class Request {
         _port = port;
     }
 
-    Report process() {
-        return _processor.process(this);
+    public Report process(WSList list) {
+        return _processor.process(this, list);
     }
     
-     public RequestProcessor getProcessor() {
+    public RequestProcessor getProcessor() {
         return _processor;
     }
 
