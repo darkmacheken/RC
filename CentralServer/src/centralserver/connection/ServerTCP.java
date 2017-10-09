@@ -17,6 +17,7 @@ public class ServerTCP {
     /**
      *
      * @param port
+     * @throws centralserver.exceptions.ConnectionException
      */
     public ServerTCP(Integer port) throws ConnectionException {
         if (port == null) {

@@ -128,5 +128,31 @@ public class ConnectionTCP {
             throw new ConnectionException(Constants.SOCK_CLOSEERR);
         }
     }
+    
+    //getters
+
+    /**
+     *
+     * @return
+     */
+     public String getName() {
+        return _name;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getIp() {
+        return _ip;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Integer getPort() {
+        return _port;
+    }
 
 }

@@ -20,6 +20,11 @@ public class ServerTCPConnectionThread extends Thread {
     ConnectionTCP _connection;
     WSList _list;
     
+    /**
+     *
+     * @param connection
+     * @param list
+     */
     public ServerTCPConnectionThread(ConnectionTCP connection, WSList list) {
         _connection = connection;
         _list = list;
@@ -27,7 +32,9 @@ public class ServerTCPConnectionThread extends Thread {
     
     @Override
     public void run() {
-        ProtocolCSClient protocol = new ProtocolCSClient();
+        ProtocolCSClient protocol = new ProtocolCSClient(_connection.getName(),
+                                                         _connection.getIp(),
+                                                         _connection.getPort());
         try {
             String received = _connection.receive();
             Request request = protocol.receive(received);

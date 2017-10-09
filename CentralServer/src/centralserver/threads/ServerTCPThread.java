@@ -18,6 +18,11 @@ public class ServerTCPThread extends Thread {
     WSList _list;
     ServerTCP _server;
     
+    /**
+     *
+     * @param list
+     * @param server
+     */
     public ServerTCPThread(WSList list, ServerTCP server) {
         _list = list;
         _server = server;

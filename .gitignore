@@ -53,3 +53,4 @@ Temporary Items
 # Compiled files
 *.class
 *.jar
+/CentralServer/dist/

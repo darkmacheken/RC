@@ -5,8 +5,11 @@
  */
 package centralserver.protocols;
 
+import centralserver.processing.ClientRequestErrorProcessor;
 import centralserver.processing.ClientRequestProcessor;
 import centralserver.processing.Request;
+import centralserver.processing.RequestError;
+import java.io.StringReader;
 import static java.lang.Integer.max;
 
 /**
@@ -15,11 +18,24 @@ import static java.lang.Integer.max;
  * @author Pedro Daniel
  */
 public class ProtocolCSClient {
+    //Client Request identifier
+    private final String _nameAdress;
+    private final String _iP;
+    private final int _port;
 
     /**
-     * Constructor default
+     *
+     * @param nameAdress
+     * @param iP
+     * @param port
      */
-    public ProtocolCSClient(){}
+    public ProtocolCSClient(String nameAdress, String iP, int port) {
+        _nameAdress = nameAdress;
+        _iP = iP;
+        _port = port;
+    }
+    
+
     
     /**
      * Receive the string from the connection 
@@ -31,12 +47,33 @@ public class ProtocolCSClient {
         sentence = sentence.substring(0, max(0,sentence.length()-1));
         
         //split sentence by space into array
-        String[] splitedSentence = sentence.split(" ");
+        String[] splitedCommand = sentence.split(" ",1);
         
-        if(splitedSentence.length == 0){
-            return new Request(new ClientRequestProcessor(), );
+        if(splitedCommand.length == 0){
+            return new RequestError(_nameAdress, _iP, _port, "ERR", new ClientRequestErrorProcessor());
         }
-        else if(splitedSentence)
+        else if(splitedCommand[0] == "LST"){
+            if( splitedCommand.length == 1)
+                return new Request(_nameAdress, _iP, _port, "LST", new ClientRequestProcessor());
+            else
+                return new RequestError(_nameAdress, _iP, _port, "FPT ERR", new ClientRequestErrorProcessor());
+        }
+        else if(splitedCommand[0] == "REQ" && splitedCommand.length == 2){
+            String[] commandArguments = splitedCommand[1].split(" ", 2);
+            
+            if(commandArguments.length != 3){
+                return new RequestError(_nameAdress, _iP, _port, "REP ERR", new ClientRequestErrorProcessor());
+            }
+            else{
+                return new Request(_nameAdress, _iP, _port,
+                                   "REQ", new String[]{commandArguments[0]}, Integer.parseInt(commandArguments[1]),
+                                   new StringReader(commandArguments[2]),
+                                   new ClientRequestProcessor());
+            }
+        }
+        else{
+            return new RequestError(_nameAdress, _iP, _port, "ERR", new ClientRequestErrorProcessor());
+        }
     }
     
 }

@@ -21,6 +21,7 @@ public class Report {
      * @param file
      * @param size
      * @param status
+     * @param rT
      */
     public Report(String command, String[] pTCs, Reader file, int size, Boolean status, char rT) {
         _command = command;
