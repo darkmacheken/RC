@@ -5,6 +5,9 @@
  */
 package centralserver.processing;
 
+import centralserver.WSList;
+import centralserver.exceptions.ConnectionException;
+
 /**
  *
  * @author Pedro Daniel
@@ -63,6 +66,16 @@ public abstract class Request {
      */
     public RequestProcessor getProcessor() {
         return _processor;
+    }
+    
+    /**
+     *
+     * @param list
+     * @return
+     * @throws centralserver.exceptions.ConnectionException
+     */
+    public Report process(WSList list) throws ConnectionException {
+        return _processor.process(this, list);
     }
      
 }

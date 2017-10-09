@@ -57,13 +57,13 @@ public final class Constants {
     /**
      *Message: File not founded.
      */
-    public static final String FILE_NFOUND = "File not founded.\n";
+    public static final String FILE_NFOUND = "File not found.\n";
 
     //Protocol Error Messages
     /**
      *Message: Message received does't follow the protocol.
      */
-    public static final String PT_NFOLLOW = "Message received does't follow the protocol.\n";
+    public static final String PT_NFOLLOW = "Message received doesn't follow the protocol.\n";
 
     //Socket Error Messages
     /**

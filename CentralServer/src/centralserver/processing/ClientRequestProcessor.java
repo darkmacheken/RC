@@ -17,27 +17,34 @@ import java.io.PrintWriter;
  * @author Asus
  */
 public class ClientRequestProcessor implements RequestProcessor {
-    private Request _request;
+    private RequestOk _request;
     private WSList _list;
     private static int _counter = 0;
 
     @Override
-    public Report process(Request request, WSList list) {
-        _request = request;
-        _list = list;
-        
+    public Report process(Request request, WSList list) throws ConnectionException {
+        try {
+            _request = (RequestOk) request;
+            _list = list;
+            return process();
+        }
+        catch (ClassCastException e) {
+            // should never happen
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    private Report process() throws ConnectionException {
         switch (_request.getCommand()) {
             case "LST":
                 System.out.println("List request: " + _request.getNameAdress() + " " + _request.getPort());
                 String[] pTCs = _list.getPTCs();
-                return new Report(_request.getCommand(), pTCs);
+                return new ReportOk(_request.getCommand(), pTCs);
             case "REQ":
-                try {
-                    ;
-                }
-                return new Report(_request.getCommand(), null, );
+                return requestCmd();
             case "ERR":
-                return new Report(_request.getCommand(), null, null, 0, null);
+                return new ReportOk(_request.getCommand(), null, null, 0, null);
             default:
                 ; // Should never happen
         }
