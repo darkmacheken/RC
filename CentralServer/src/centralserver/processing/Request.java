@@ -5,6 +5,7 @@ package centralserver.processing;
  * @author Asus
  */
 public class Request {
+
     RequestProcessor _processor;
     String _command;
     String[] _pTCs;
@@ -38,5 +39,37 @@ public class Request {
 
     Report process() {
         return _processor.process(this);
+    }
+    
+     public RequestProcessor getProcessor() {
+        return _processor;
+    }
+
+    public String getCommand() {
+        return _command;
+    }
+
+    public String[] getpTCs() {
+        return _pTCs;
+    }
+
+    public String getFile() {
+        return _file;
+    }
+
+    public int getSize() {
+        return _size;
+    }
+
+    public String getFileName() {
+        return _fileName;
+    }
+
+    public String getiP() {
+        return _iP;
+    }
+
+    public int getPort() {
+        return _port;
     }
 }
