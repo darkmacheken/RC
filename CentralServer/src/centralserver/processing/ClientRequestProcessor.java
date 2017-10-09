@@ -16,11 +16,11 @@ import java.io.PrintWriter;
  * @author Asus
  */
 public class ClientRequestProcessor implements RequestProcessor {
-    private Request _request;
+    private RequestOk _request;
     private WSList _list;
 
     @Override
-    public Report process(Request request, WSList list) {
+    public Report process(RequestOk request, WSList list) {
         _request = request;
         _list = list;
         

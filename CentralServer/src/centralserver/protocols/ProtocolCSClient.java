@@ -9,6 +9,7 @@ import centralserver.processing.ClientRequestErrorProcessor;
 import centralserver.processing.ClientRequestProcessor;
 import centralserver.processing.Request;
 import centralserver.processing.RequestError;
+import centralserver.processing.RequestOk;
 import java.io.StringReader;
 import static java.lang.Integer.max;
 
@@ -18,7 +19,7 @@ import static java.lang.Integer.max;
  * @author Pedro Daniel
  */
 public class ProtocolCSClient {
-    //Client Request identifier
+    //Client RequestOk identifier
     private final String _nameAdress;
     private final String _iP;
     private final int _port;
@@ -40,7 +41,7 @@ public class ProtocolCSClient {
     /**
      * Receive the string from the connection 
      * @param sentence
-     * @return Request
+     * @return RequestOk
      */
     public Request receive(String sentence){
         //remove last char from sentence (it should be '\n' from protocol)
@@ -54,7 +55,7 @@ public class ProtocolCSClient {
         }
         else if(splitedCommand[0] == "LST"){
             if( splitedCommand.length == 1)
-                return new Request(_nameAdress, _iP, _port, "LST", new ClientRequestProcessor());
+                return new RequestOk(_nameAdress, _iP, _port, "LST", new ClientRequestProcessor());
             else
                 return new RequestError(_nameAdress, _iP, _port, "FPT ERR", new ClientRequestErrorProcessor());
         }
@@ -65,7 +66,7 @@ public class ProtocolCSClient {
                 return new RequestError(_nameAdress, _iP, _port, "REP ERR", new ClientRequestErrorProcessor());
             }
             else{
-                return new Request(_nameAdress, _iP, _port,
+                return new RequestOk(_nameAdress, _iP, _port,
                                    "REQ", new String[]{commandArguments[0]}, Integer.parseInt(commandArguments[1]),
                                    new StringReader(commandArguments[2]),
                                    new ClientRequestProcessor());

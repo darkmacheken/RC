@@ -1,99 +1,36 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package centralserver.processing;
-
-import centralserver.WSList;
-import java.io.Reader;
 
 /**
  *
- * @author Asus
+ * @author Pedro Daniel
  */
-public class Request {  
+public abstract class Request {
     //Client Request identifier
     private final String _nameAdress;
     private final String _iP;
     private final int _port;
     
-    //Request arguments
-    private final String _command;
-    private final String[] _pTCs;
-    private final int _size;
-    private final Reader _file; 
-    private final String _fileName;
-    
-    //Processor class of the request
+     //Processor class of the request
     private final RequestProcessor _processor;
-    
 
     /**
      *
-     * @param nameAdress
-     * @param processor
-     * @param command
-     * @param pTCs
-     * @param file
-     * @param size
-     * @param fileName
-     * @param iP
-     * @param port
+     * @param _nameAdress
+     * @param _iP
+     * @param _port
      */
-    public Request(String nameAdress, String iP, int port, 
-                   String command, String[] pTCs, int size, Reader file, String fileName, 
-                   RequestProcessor processor) {
-        _nameAdress = nameAdress;
-        _iP = iP;
-        _port = port;
+    public Request(String _nameAdress, String _iP, int _port, RequestProcessor _processor) {
+        this._nameAdress = _nameAdress;
+        this._iP = _iP;
+        this._port = _port;
         
-        _command = command;
-        _pTCs = pTCs;
-        _size = size;
-        _file = file;
-        _fileName = fileName;
-        
-        _processor = processor;
+        this._processor = _processor;
     }
-    
-    public Request(String nameAdress, String iP, int port, 
-                   String command, String[] pTCs, int size, Reader file, 
-                   RequestProcessor processor) {
-        this(nameAdress, iP, port, command, pTCs, size, file, null, processor);
-    }
-    
-    /**
-     *
-     * @param nameAdress
-     * @param iP
-     * @param port
-     * @param command
-     * @param processor
-     */
-    public Request(String nameAdress, String iP, int port, 
-                   String command, RequestProcessor processor){
-        this(nameAdress, iP, port, command, null, 0, null, null,processor);
-    }
-    
-    /**
-     *
-     * @param nameAdress
-     * @param iP
-     * @param port
-     * @param command
-     * @param processor
-     */
-    public Request(String nameAdress, String iP, int port, 
-                   RequestProcessor processor){
-        this(nameAdress, iP, port, null, null, 0, null, null,processor);
-    }
-
-    /**
-     *
-     * @param list
-     * @return
-     */
-    public Report process(WSList list) {
-        return _processor.process(this, list);
-    }
-    
-    //getters
 
     /**
      *
@@ -123,41 +60,8 @@ public class Request {
      *
      * @return
      */
-    public String getCommand() {
-        return _command;
+    public RequestProcessor getProcessor() {
+        return _processor;
     }
-
-    /**
-     *
-     * @return
-     */
-    public String[] getpTCs() {
-        return _pTCs;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getSize() {
-        return _size;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Reader getFile() {
-        return _file;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getFileName() {
-        return _fileName;
-    }
-
-    
+     
 }

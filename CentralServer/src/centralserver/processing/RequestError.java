@@ -19,7 +19,7 @@ public class RequestError extends Request {
      * @param port
      * @param processor
      */
-    public RequestError(String nameAdress, String iP, int port, String error,RequestProcessor processor) {
+    public RequestError(String nameAdress, String iP, int port, String error, RequestProcessor processor) {
         super(nameAdress, iP, port, processor);
         _error = error;
     }

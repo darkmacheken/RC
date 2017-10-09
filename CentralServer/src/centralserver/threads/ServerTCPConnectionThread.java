@@ -9,7 +9,7 @@ import centralserver.WSList;
 import centralserver.connection.ConnectionTCP;
 import centralserver.exceptions.ConnectionException;
 import centralserver.processing.Report;
-import centralserver.processing.Request;
+import centralserver.processing.RequestOk;
 import centralserver.protocols.ProtocolCSClient;
 
 /**
@@ -37,7 +37,7 @@ public class ServerTCPConnectionThread extends Thread {
                                                          _connection.getPort());
         try {
             String received = _connection.receive();
-            Request request = protocol.receive(received);
+            RequestOk request = protocol.receive(received);
             Report report = request.process(_list);
             String toSend = protocol.send(report);
             _connection.send(toSend);
