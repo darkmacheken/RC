@@ -6,32 +6,51 @@
 package centralserver.processing;
 
 import centralserver.WSList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  *
  * @author Asus
  */
 public class ClientRequestProcessor implements RequestProcessor {
+    private Request _request;
     private WSList _list;
 
     @Override
     public Report process(Request request, WSList list) {
+        _request = request;
         _list = list;
         
-        switch (request.getCommand()) {
+        switch (_request.getCommand()) {
             case "LST":
                 String[] ptc = _list.getPTC();
-                return new Report(request.getCommand(), ptc);
+                return new Report(_request.getCommand(), ptc);
             case "REQ":
                 
-                return new Report(request.getCommand(), null, );
+                return new Report(_request.getCommand(), null, );
             case "ERR":
-                return new Report(request.getCommand(), null, null, 0, null);
+                return new Report(_request.getCommand(), null, null, 0, null);
             default:
                 ; // Should never happen
         }
     }
     
-    private Report
+    private Report requestCmd() {
+        try {
+            PrintWriter out = new PrintWriter(
+                    new BufferedWriter(
+                            new FileWriter(finalNameFile)));
+            out.print(data2);
+            System.out.println("received file " + finalNameFile + "\n\t" + size2 + " Bytes");
+            out.close();
+        }
+        catch (IOException e) {
+            throw new ConnectionException("");
+        }
+        _request.getPTCs();
+    }
     
 }

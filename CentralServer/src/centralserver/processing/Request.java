@@ -9,14 +9,14 @@ import java.io.Reader;
  */
 public class Request {
 
-    RequestProcessor _processor;
-    String _command;
-    String[] _pTCs;
-    Reader _file;
-    int _size;
-    String _fileName;
-    String _iP;
-    int _port;
+    private final RequestProcessor _processor;
+    private final String _command;
+    private final String[] _pTCs;
+    private final Reader _file;
+    private final int _size;
+    private final String _fileName;
+    private final String _iP;
+    private final int _port;
 
     /**
      *
@@ -52,10 +52,10 @@ public class Request {
         return _command;
     }
 
-    public String[] getpTCs() {
+    public String[] getPTCs() {
         return _pTCs;
     }
-
+    
     public Reader getFile() {
         return _file;
     }
