@@ -1,83 +1,49 @@
 package centralserver.processing;
 
-import java.io.Reader;
-
 /**
  *
  * @author Asus
  */
 public abstract class Report {
-    private String _command;
-    private String[] _pTCs;
-    private Reader _file;
-    private int _size;
-    private Boolean _status;
-    private char _rT;
-  
+     //Client Request identifier
+    private final String _nameAdress;
+    private final String _iP;
+    private final int _port;
+
     /**
      *
-     * @param command
-     * @param pTCs
-     * @param file
-     * @param size
-     * @param status
+     * @param _nameAdress
+     * @param _iP
+     * @param _port
+     * @param _processor
      */
-    public Report(String command, String[] pTCs, Reader file, int size, Boolean status, char rT) {
-        _command = command;
-        _pTCs = pTCs;
-        _file = file;
-        _size = size;
-        _status = status;
-        _rT = rT;
-    }
-    
-    /**
-     *
-     * @param command
-     * @param pTCs
-     */
-    public Report(String command, String[] pTCs) {
-        _command = command;
-        _pTCs = pTCs;
-    }
-    
-    /**
-     *
-     * @return command
-     */
-    public String getCommand() {
-        return _command;
+    public Report(String _nameAdress, String _iP, int _port) {
+        this._nameAdress = _nameAdress;
+        this._iP = _iP;
+        this._port = _port;
     }
 
     /**
      *
-     * @return pTCs
+     * @return
      */
-    public String[] getpTCs() {
-        return _pTCs;
+    public String getNameAdress() {
+        return _nameAdress;
     }
 
     /**
      *
-     * @return file
+     * @return
      */
-    public Reader getFile() {
-        return _file;
+    public String getiP() {
+        return _iP;
     }
 
     /**
      *
-     * @return size
+     * @return
      */
-    public int getSize() {
-        return _size;
-    }
-
-    /**
-     *
-     * @return status
-     */
-    public Boolean getStatus() {
-        return _status;
+    public int getPort() {
+        return _port;
     }
 }

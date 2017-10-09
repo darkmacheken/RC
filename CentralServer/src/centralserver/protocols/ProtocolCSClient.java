@@ -7,6 +7,9 @@ package centralserver.protocols;
 
 import centralserver.processing.ClientRequestErrorProcessor;
 import centralserver.processing.ClientRequestProcessor;
+import centralserver.processing.Report;
+import centralserver.processing.ReportError;
+import centralserver.processing.ReportOk;
 import centralserver.processing.Request;
 import centralserver.processing.RequestError;
 import centralserver.processing.RequestOk;
@@ -62,15 +65,23 @@ public class ProtocolCSClient {
             String[] commandArguments = splitedCommand[1].split(" ", 2);
             
             if(commandArguments.length != 3){
+                //different lenght
                 return new RequestError(_nameAdress, _iP, _port, "REP ERR", new ClientRequestErrorProcessor());
             }
             else{
-                return new RequestOk(_nameAdress, _iP, _port,
-                                     "REQ",
-                                     new String[]{commandArguments[0]}, 
-                                     Integer.parseInt(commandArguments[1]),                 
-                                     commandArguments[2],
-                                     new ClientRequestProcessor());
+                int size = Integer.parseInt(commandArguments[1]);
+                String file = commandArguments[2];
+                
+                if(size == file.length())
+                    return new RequestOk(_nameAdress, _iP, _port,
+                                         "REQ",
+                                         new String[]{commandArguments[0]}, 
+                                         size,                 
+                                         file,
+                                         new ClientRequestProcessor());
+                else
+                    //file doesnt have size bytes
+                    return new RequestError(_nameAdress, _iP, _port, "REP ERR", new ClientRequestErrorProcessor());
             }
         }
         else{
@@ -78,4 +89,59 @@ public class ProtocolCSClient {
         }
     }
     
+    /**
+     *
+     * @param report
+     * @return
+     */
+    public String send(Report report){
+        if(report instanceof ReportError){
+            ReportError reportError = (ReportError) report;
+     
+            switch(reportError.getError()){
+                case "FPT EOF":
+                    return "FPT EOF\n";
+
+                case "FPT ERR":
+                    return "FPT ERR\n";
+
+                case "REP EOF":
+                    return "REP EOF\n";
+
+                case "REP ERR":
+                    return "REP ERR\n";
+
+                case "ERR":
+                    return "ERR\n";
+
+                default:
+                    //should not happen
+                    break;
+            }
+        }
+        else if(report instanceof ReportOk){
+            ReportOk reportOk = (ReportOk) report;
+            
+            switch(reportOk.getCommand()){
+                case "FPT":
+                    String messageReturn = "FPT ";
+                    
+                    String[] pTCs = reportOk.getpTCs();
+                    int numberPTC = pTCs.length;
+                    
+                    messageReturn += numberPTC;
+                    
+                    for(int i=0; i < numberPTC; i++)
+                        messageReturn += " " + pTCs[i];
+                    
+                    return messageReturn += "\n";
+                    
+                case "REP":
+                    return "REP " + reportOk.getrT() + " " + 
+                           reportOk.getSize() + " " + 
+                           reportOk.getFile() + "\n";
+            }
+        }
+        return "";
+    }    
 }

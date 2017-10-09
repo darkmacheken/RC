@@ -1,7 +1,5 @@
 package centralserver.processing;
 
-import java.io.Reader;
-
 /**
  *
  * @author Asus
@@ -9,9 +7,8 @@ import java.io.Reader;
 public class ReportOk extends Report {
     private String _command;
     private String[] _pTCs;
-    private Reader _file;
+    private String _file;
     private int _size;
-    private Boolean _status;
     private char _rT;
   
     /**
@@ -19,27 +16,17 @@ public class ReportOk extends Report {
      * @param command
      * @param pTCs
      * @param file
-     * @param size
      * @param status
      * @param rT
      */
-    public ReportOk(String command, String[] pTCs, Reader file, int size, Boolean status, char rT) {
+    public ReportOk(String nameAdress, String iP, int port, String error,
+                    String command, String[] pTCs, String file, int size, char rT) {
+        super(nameAdress, iP, port);
         _command = command;
         _pTCs = pTCs;
         _file = file;
         _size = size;
-        _status = status;
         _rT = rT;
-    }
-    
-    /**
-     *
-     * @param command
-     * @param pTCs
-     */
-    public ReportOk(String command, String[] pTCs) {
-        _command = command;
-        _pTCs = pTCs;
     }
     
     /**
@@ -62,7 +49,7 @@ public class ReportOk extends Report {
      *
      * @return file
      */
-    public Reader getFile() {
+    public String getFile() {
         return _file;
     }
 
@@ -76,9 +63,11 @@ public class ReportOk extends Report {
 
     /**
      *
-     * @return status
+     * @return
      */
-    public Boolean getStatus() {
-        return _status;
+    public char getrT() {
+        return _rT;
     }
+    
+    
 }

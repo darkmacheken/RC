@@ -14,7 +14,7 @@ import centralserver.WSList;
 public class ClientRequestErrorProcessor implements RequestProcessor {
 
     @Override
-    public Report process(RequestOk request, WSList list) {
+    public Report process(Request request, WSList list) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
