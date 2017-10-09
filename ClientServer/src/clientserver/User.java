@@ -11,6 +11,10 @@ import clientserver.exceptions.ProtocolErrorException;
 import clientserver.exceptions.UnknownCommandException;
 import java.util.Scanner;
 
+/**
+ *
+ * @author Asus
+ */
 public class User {
     private static Scanner _in = new Scanner(System.in);
     /**
@@ -79,10 +83,18 @@ public class User {
             }
     }
 
+    /**
+     *
+     * @param text
+     */
     public static void showText(String text) {
         System.out.print(text);
     }
 
+    /**
+     *
+     * @return
+     */
     public static String getText() {
         return _in.nextLine();
     }

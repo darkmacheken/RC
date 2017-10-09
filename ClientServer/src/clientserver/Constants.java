@@ -10,8 +10,15 @@ package clientserver;
  */
 public final class Constants {
     //Constant values
+
+    /**
+     *
+     */
     public static final String DEFAULT_HOST = "localhostname";
 
+    /**
+     *
+     */
     public static final int DEFAULT_PORT = 58063;
 
     //Request Error Messages

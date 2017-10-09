@@ -22,11 +22,17 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * Class Protocol Client-Cs
+ */
 public class ProtocolClientCS{
     private Map<String,String> _descriptionPTC;
     private String _fileName = null;
     private String _ptc=null;
 
+    /**
+     * Constructor
+     */
     public ProtocolClientCS() {
         _descriptionPTC = new HashMap<String,String>();
 
@@ -36,6 +42,14 @@ public class ProtocolClientCS{
         _descriptionPTC.put("LOW", "convert text to lower case");
     }
 
+    /**
+     *
+     * @param sentence
+     * @return
+     * @throws UnknownCommandException
+     * @throws ExitCommandException
+     * @throws ConnectionException
+     */
     public String sendProtocol(String sentence) throws UnknownCommandException,
                                                        ExitCommandException,
                                                        ConnectionException{
@@ -56,6 +70,11 @@ public class ProtocolClientCS{
         }
     }
 
+    /**
+     *
+     * @param sentence
+     * @throws ConnectionException
+     */
     public void receiveProtocol(String sentence) throws ConnectionException {
         //remove last char from sentence (it should be '\n' from protocol)
         sentence = sentence.substring(0, max(0,sentence.length()-1));
