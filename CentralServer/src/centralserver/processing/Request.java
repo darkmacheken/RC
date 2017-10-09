@@ -23,6 +23,7 @@ public abstract class Request {
      * @param _nameAdress
      * @param _iP
      * @param _port
+     * @param _processor
      */
     public Request(String _nameAdress, String _iP, int _port, RequestProcessor _processor) {
         this._nameAdress = _nameAdress;

@@ -10,5 +10,10 @@ package centralserver;
  * @author duartegalvao
  */
 public class WSList {
+    private String[] _pTCs;
+
+    public String[] getPTCs() {
+        return _pTCs;
+    }
     
 }

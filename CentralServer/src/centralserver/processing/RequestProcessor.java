@@ -14,5 +14,5 @@ public interface RequestProcessor {
      * @param list
      * @return
      */
-    Report process(RequestOk request, WSList list);
+    Report process(Request request, WSList list);
 }

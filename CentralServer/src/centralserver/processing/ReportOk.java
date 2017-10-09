@@ -6,7 +6,7 @@ import java.io.Reader;
  *
  * @author Asus
  */
-public abstract class Report {
+public class ReportOk extends Report {
     private String _command;
     private String[] _pTCs;
     private Reader _file;
@@ -21,8 +21,9 @@ public abstract class Report {
      * @param file
      * @param size
      * @param status
+     * @param rT
      */
-    public Report(String command, String[] pTCs, Reader file, int size, Boolean status, char rT) {
+    public ReportOk(String command, String[] pTCs, Reader file, int size, Boolean status, char rT) {
         _command = command;
         _pTCs = pTCs;
         _file = file;
@@ -36,7 +37,7 @@ public abstract class Report {
      * @param command
      * @param pTCs
      */
-    public Report(String command, String[] pTCs) {
+    public ReportOk(String command, String[] pTCs) {
         _command = command;
         _pTCs = pTCs;
     }
