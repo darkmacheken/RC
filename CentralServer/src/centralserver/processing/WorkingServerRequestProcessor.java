@@ -6,14 +6,36 @@
 package centralserver.processing;
 
 import centralserver.WSList;
+import centralserver.connection.ConnectionTCP;
 import centralserver.exceptions.ConnectionException;
+import centralserver.protocols.ProtocolCSWS;
 
 
 public class WorkingServerRequestProcessor implements RequestProcessor {
-
+    private RequestToWS _request;
+    private ConnectionTCP _connection;
+    
     @Override
     public Report process(Request request, WSList list) throws ConnectionException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            _request = (RequestToWS) request;
+            _connection = new ConnectionTCP(request.getIP(), request.getPort());
+            process();
+            return null;
+        }
+        catch (ClassCastException e) {
+            // should never reach here
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    private void process() throws ConnectionException {
+        ProtocolCSWS protocol = new ProtocolCSWS();
+        String toSend = protocol.send(_request);
+        _connection.send(toSend);
+        String received = _connection.receive();
+        
     }
     
 }
