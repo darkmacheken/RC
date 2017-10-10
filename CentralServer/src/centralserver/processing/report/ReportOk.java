@@ -87,7 +87,7 @@ public class ReportOk extends Report {
      *
      * @return
      */
-    public char getrT() {
+    public char getRT() {
         return _rT;
     }
 

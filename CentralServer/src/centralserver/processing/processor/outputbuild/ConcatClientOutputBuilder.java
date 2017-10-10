@@ -8,10 +8,10 @@ package centralserver.processing.processor.outputbuild;
 import centralserver.processing.report.ReportOk;
 
 
-public class JoinClientOutputBuilder extends ClientOutputBuilder {
+public class ConcatClientOutputBuilder extends ClientOutputBuilder {
 
-    public JoinClientOutputBuilder(String fileName, ReportOk[] reports) {
-        super(fileName, reports);
+    public ConcatClientOutputBuilder(String fileName, ReportOk[] reports) {
+        super(fileName, reports, 'F');
     }
 
     @Override

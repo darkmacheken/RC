@@ -6,11 +6,12 @@
 package centralserver.processing.processor;
 
 import centralserver.ConnectAddress;
+import centralserver.Constants;
 import centralserver.WSList;
 import centralserver.exceptions.ConnectionException;
 import centralserver.processing.processor.outputbuild.AddClientOutputBuilder;
 import centralserver.processing.processor.outputbuild.ClientOutputBuilder;
-import centralserver.processing.processor.outputbuild.JoinClientOutputBuilder;
+import centralserver.processing.processor.outputbuild.ConcatClientOutputBuilder;
 import centralserver.processing.processor.outputbuild.LongestClientOutputBuilder;
 import centralserver.processing.report.Report;
 import centralserver.processing.report.ReportError;
@@ -54,17 +55,17 @@ public class ClientRequestProcessor implements RequestProcessor {
                 System.out.println("List request: " + _request.getNameAdress() + " " + _request.getPort());
                 List<String> pTCs = _list.getPTCs();
                 if (pTCs.isEmpty())
-                    return new ReportError(_request.getNameAdress(), _request.getIP(), _request.getPort(), "FPT EOF");
+                    return reportError("FPT EOF");
                 else
                     return new ReportOk(_request.getNameAdress(), _request.getIP(), _request.getPort(), _request.getCommand(), (String[]) pTCs.toArray());
             case "REQ":
                 return requestCmd();
             case "ERR":
-                return new ReportError(_request.getNameAdress(), _request.getIP(), _request.getPort(), "ERR");
+                return reportError("ERR");
             default:
                 ; // Should never happen
         }
-        return new ReportError(_request.getNameAdress(), _request.getIP(), _request.getPort(), "ERR");
+        return reportError("ERR");
     }
         
     private Report requestCmd() throws ConnectionException {
@@ -80,13 +81,13 @@ public class ClientRequestProcessor implements RequestProcessor {
             
         }
         catch (IOException e) {
-            throw new ConnectionException(""); // TODO mensagem
+            throw new ConnectionException(Constants.FILE_CNTWRT);
         }
         
         // Get IPs from list
         ConnectAddress[] iPs = _list.getIPs(_request.getPTC());
         if (iPs == null || iPs.length == 0)
-            return new ReportError(_request.getNameAdress(), _request.getIP(), _request.getPort(), "REP EOF");
+            return reportError("REP EOF");
 
         String[] fileLines = file.split("\r\n|\r|\n");
         int numLines = fileLines.length;
@@ -117,12 +118,11 @@ public class ClientRequestProcessor implements RequestProcessor {
                 receivedReports[i] = (ReportOk) requests[i].processReceive();
             }
             catch (ClassCastException e) {
-                return new ReportError(_request.getNameAdress(), _request.getIP(), _request.getPort(), "REP EOF");
+                return reportError("REP EOF");
             }
         }
         
         ClientOutputBuilder cob;
-        char rt = '\0';
         
         switch (_request.getPTC()) {
             case "WCT":
@@ -134,22 +134,27 @@ public class ClientRequestProcessor implements RequestProcessor {
                 rt = 'R';
                 break;
             case "UPP":
-                cob = new JoinClientOutputBuilder(fileName, receivedReports);
+                cob = new ConcatClientOutputBuilder(fileName, receivedReports);
                 rt = 'F';
                 break;
             case "LOW":
-                cob = new JoinClientOutputBuilder(fileName, receivedReports);
-                rt = 'F';
+                cob = new ConcatClientOutputBuilder(fileName, receivedReports);
                 break;
             default:
-                return null; // should not happen
+                return reportError("ERR"); // should not happen
         }
         
         cob.saveFile();
+        if (!cob.checkRT())
+            return reportError("ERR");
         
         return new ReportOk(_request.getNameAdress(), _request.getIP(), _request.getPort(),
                 _request.getCommand(), new String[]{_request.getPTC()},
-                cob.getFile(), cob.getFile().length(), rt);
+                cob.getFile(), cob.getFile().length(), cob.getRT());
+    }
+    
+    private ReportError reportError(String error) {
+        return new ReportError(_request.getNameAdress(), _request.getIP(), _request.getPort(), error);
     }
     
     private String intToString(int num, int digits) {

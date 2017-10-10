@@ -5,6 +5,7 @@
  */
 package centralserver.processing.processor.outputbuild;
 
+import centralserver.Constants;
 import centralserver.exceptions.ConnectionException;
 import centralserver.processing.report.ReportOk;
 import java.io.BufferedWriter;
@@ -20,10 +21,12 @@ public abstract class ClientOutputBuilder {
     private final String _fileName;
     private String _file;
     private final ReportOk[] _reports;
+    private final char _rT;
     
-    public ClientOutputBuilder(String fileName, ReportOk[] reports) {
+    public ClientOutputBuilder(String fileName, ReportOk[] reports, char rT) {
         _fileName = fileName;
         _reports = reports;
+        _rT = rT;
     }
     
     public abstract void build();
@@ -38,8 +41,15 @@ public abstract class ClientOutputBuilder {
             out.close();
         }
         catch (IOException ex) {
-            throw new ConnectionException(""); // TODO mensagem
+            throw new ConnectionException(Constants.FILE_CNTWRT); // TODO mensagem
         }
+    }
+    
+    public Boolean checkRT() {
+        for (ReportOk report : _reports)
+            if (report.getRT() != _rT)
+                return false;
+        return true;
     }
 
     protected ReportOk[] getReports() {
@@ -53,4 +63,9 @@ public abstract class ClientOutputBuilder {
     public String getFile() {
         return _file;
     }
+
+    public char getRT() {
+        return _rT;
+    }
+    
 }

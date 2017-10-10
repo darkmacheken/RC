@@ -11,7 +11,7 @@ import centralserver.processing.report.ReportOk;
 public class AddClientOutputBuilder extends ClientOutputBuilder {
 
     public AddClientOutputBuilder(String fileName, ReportOk[] reports) {
-        super(fileName, reports);
+        super(fileName, reports, 'R');
     }
 
     @Override

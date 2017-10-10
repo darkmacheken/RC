@@ -137,7 +137,7 @@ public class ProtocolCSClient {
                     return messageReturn += "\n";
                     
                 case "REQ":
-                    return "REP " + reportOk.getrT() + " " + 
+                    return "REP " + reportOk.getRT() + " " + 
                            reportOk.getSize() + " " + 
                            reportOk.getFile() + "\n";
             }

@@ -55,9 +55,14 @@ public final class Constants {
 
     //Files Error Messages
     /**
-     *Message: File not founded.
+     *Message: File not found.
      */
-    public static final String FILE_NFOUND = "File not founded.\n";
+    public static final String FILE_NFOUND = "File not found.\n";
+    
+    /**
+     *Message: Can't write to file.
+     */
+    public static final String FILE_CNTWRT = "Can't write to file.\n";
 
     //Protocol Error Messages
     /**

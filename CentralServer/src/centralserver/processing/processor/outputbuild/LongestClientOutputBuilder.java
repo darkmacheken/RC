@@ -11,7 +11,7 @@ import centralserver.processing.report.ReportOk;
 public class LongestClientOutputBuilder extends ClientOutputBuilder {
 
     public LongestClientOutputBuilder(String fileName, ReportOk[] reports) {
-        super(fileName, reports);
+        super(fileName, reports, 'R');
     }
 
     @Override
