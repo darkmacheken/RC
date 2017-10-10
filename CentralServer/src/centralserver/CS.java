@@ -8,8 +8,6 @@ package centralserver;
 import centralserver.connection.ServerTCP;
 import centralserver.exceptions.ConnectionException;
 import centralserver.threads.ServerTCPThread;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
