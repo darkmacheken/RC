@@ -5,13 +5,15 @@
  */
 package centralserver;
 
+import java.util.Objects;
+
 /**
  *
  * @author Pedro Daniel
  */
 public class ConnectAddress {
     private final String _ip;
-    private final int port;
+    private final int _port;
 
     /**
      *
@@ -20,7 +22,7 @@ public class ConnectAddress {
      */
     public ConnectAddress(String _ip, int port) {
         this._ip = _ip;
-        this.port = port;
+        this._port = port;
     }
 
     /**
@@ -36,9 +38,24 @@ public class ConnectAddress {
      * @return
      */
     public int getPort() {
-        return port;
+        return _port;
     }
     
-    
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof ConnectAddress){
+            ConnectAddress connectAddress = (ConnectAddress) o;
+            return connectAddress.getIp().equals(_ip) && connectAddress.getPort() == _port;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this._ip);
+        hash = 41 * hash + this._port;
+        return hash;
+    }
     
 }
