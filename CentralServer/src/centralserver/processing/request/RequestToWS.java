@@ -5,6 +5,7 @@
  */
 package centralserver.processing.request;
 
+import centralserver.exceptions.ConnectionException;
 import centralserver.processing.processor.WorkingServerRequestProcessor;
 import centralserver.processing.report.Report;
 
@@ -39,14 +40,15 @@ public class RequestToWS extends Request {
     /**
      * Process request and send only the message
      */
-    public void processSend(){
+    public void processSend() throws ConnectionException{
+        this.process(null);
         _workingProcessor.processSend();
     }
     
     /**
      * Receive from WS and process
      */
-    public Report processReceive(){
+    public Report processReceive() throws ConnectionException{
         return _workingProcessor.processReceive();
     }
     

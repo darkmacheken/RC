@@ -6,36 +6,49 @@
 package centralserver.processing.processor;
 
 import centralserver.WSList;
+import centralserver.connection.ConnectionTCP;
 import centralserver.exceptions.ConnectionException;
 import centralserver.processing.report.Report;
 import centralserver.processing.request.Request;
 import centralserver.processing.request.RequestToWS;
+import centralserver.protocols.ProtocolCSWS;
 
 /**
  *
  * @author Asus
  */
 public class WorkingServerRequestProcessor implements RequestProcessor {
-    private RequestToWS _request;
+   private ConnectionTCP _connection;
+   private ProtocolCSWS _protocol;
+   private RequestToWS _request;
 
     @Override
     public Report process(Request request, WSList list) throws ConnectionException {
+        _request = (RequestToWS) request;
+        _protocol = new ProtocolCSWS(_request.getNameAdress(), _request.getIP(), _request.getPort());
+        _connection = new ConnectionTCP(_request.getIP(), _request.getPort());
         return null;
     }
     
     /**
      * Process and send only
      */
-    public void processSend(){
-        
+    public void processSend() throws ConnectionException{
+        String toSend = _protocol.send(_request);
+        _connection.send(toSend);
     }
     
     /**
      *  Process received. BLOCKING FUNCTION
      * @return
      */
-    public Report processReceive(){
-        return null;
+    public Report processReceive() throws ConnectionException{
+       String received = _connection.receive();
+       Report report = _protocol.receive(received);
+       
+       _connection.close();
+       
+       return report;
     }
     
 }

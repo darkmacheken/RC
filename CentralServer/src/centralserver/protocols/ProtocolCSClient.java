@@ -50,7 +50,7 @@ public class ProtocolCSClient {
         sentence = sentence.substring(0, max(0,sentence.length()-1));
         
         //split sentence by space into array
-        String[] splitedCommand = sentence.split(" ",1);
+        String[] splitedCommand = sentence.split(" ",2);
         
         if(splitedCommand.length == 0){
             return new RequestError(_nameAdress, _iP, _port, "ERR", new ClientRequestErrorProcessor());
@@ -62,7 +62,7 @@ public class ProtocolCSClient {
                 return new RequestError(_nameAdress, _iP, _port, "FPT ERR", new ClientRequestErrorProcessor());
         }
         else if(splitedCommand[0] == "REQ" && splitedCommand.length == 2){
-            String[] commandArguments = splitedCommand[1].split(" ", 2);
+            String[] commandArguments = splitedCommand[1].split(" ");
             
             if(commandArguments.length != 3){
                 //different lenght
