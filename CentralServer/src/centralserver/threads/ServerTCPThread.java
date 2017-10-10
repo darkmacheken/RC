@@ -33,7 +33,7 @@ public class ServerTCPThread extends Thread {
         while (true) {
             try {
                 ConnectionTCP connection = _server.acceptSocket();
-                
+                new ServerTCPConnectionThread(connection, _list).start();
             }
             catch (ConnectionException e) {
                 System.err.println(e.getErrorDescription());

@@ -5,14 +5,18 @@
  */
 package centralserver.processing.processor;
 
-import centralserver.processing.request.Request;
-import centralserver.processing.report.Report;
 import centralserver.WSList;
 import centralserver.connection.ConnectionTCP;
 import centralserver.exceptions.ConnectionException;
+import centralserver.processing.report.Report;
+import centralserver.processing.request.Request;
+import centralserver.processing.request.RequestToWS;
 import centralserver.protocols.ProtocolCSWS;
 
-
+/**
+ *
+ * @author Asus
+ */
 public class WorkingServerRequestProcessor implements RequestProcessor {
     private RequestToWS _request;
     private ConnectionTCP _connection;

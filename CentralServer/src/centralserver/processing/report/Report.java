@@ -15,7 +15,6 @@ public abstract class Report {
      * @param _nameAdress
      * @param _iP
      * @param _port
-     * @param _processor
      */
     public Report(String _nameAdress, String _iP, int _port) {
         this._nameAdress = _nameAdress;

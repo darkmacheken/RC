@@ -15,8 +15,12 @@ import centralserver.processing.request.RequestToWS;
 public class ClientTCPConnectionThread extends Thread {
     private RequestToWS _request;
     
+    /**
+     *
+     * @param request
+     */
     public ClientTCPConnectionThread(RequestToWS request) {
-        
+        _request = request;
     }
     
     @Override
