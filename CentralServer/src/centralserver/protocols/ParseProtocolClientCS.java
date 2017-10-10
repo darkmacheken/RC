@@ -49,7 +49,6 @@ public class ParseProtocolClientCS {
                 return line;
             }
         }
-        else
-            return line;
+        return line;
     }
 }
