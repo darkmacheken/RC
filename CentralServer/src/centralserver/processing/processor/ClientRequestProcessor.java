@@ -103,11 +103,14 @@ public class ClientRequestProcessor implements RequestProcessor {
             if (i == iPs.length - 1 && numLines % iPs.length != 0)
                 reqLines += numLines % iPs.length;
             
+            String[] wSFragment = Arrays.copyOfRange(fileLines, curLine, curLine + reqLines);
+            
             requests[i] = new RequestToWS(iPs[i].getIp(), iPs[i].getPort(),
                     fileName + intToString(i, 3) + ".txt",
                     _request.getPTC(),
-                    Arrays.copyOfRange(fileLines, curLine, curLine + reqLines),
+                    String.join("\n",wSFragment),
                     new WorkingServerRequestProcessor());
+            curLine += reqLines;
             requests[i].processSend();
         }
         

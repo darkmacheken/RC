@@ -5,6 +5,10 @@
  */
 package centralserver;
 
+import centralserver.connection.ServerTCP;
+import centralserver.exceptions.ConnectionException;
+import centralserver.threads.ServerTCPThread;
+
 /**
  *
  * @author Asus
@@ -15,7 +19,31 @@ public class CS {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Integer cSPort = null;
+        
+        try {
+            for (int i = 0; i < args.length; i++) {
+                if (args[i].equals("-p")) {
+                    i++;
+                    cSPort = Integer.parseInt(args[i]);
+                }
+            }
+        }
+        catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+            System.out.println("Erro de parâmetros.\n");
+            return;
+        }
+        
+        try {
+            WSList list = new WSList();
+            ServerTCP server = new ServerTCP(cSPort);
+            ServerTCPThread thread = new ServerTCPThread(list, server);
+        }
+        catch (ConnectionException e) {
+            System.out.println(e.getErrorDescription());
+        }
+        
+        while (true);
     }
     
 }
