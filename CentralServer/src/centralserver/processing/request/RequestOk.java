@@ -9,7 +9,7 @@ import centralserver.processing.processor.RequestProcessor;
 public class RequestOk extends Request{      
     //Request arguments
     private final String _command;
-    private final String[] _pTCs;
+    private final String _pTC;
     private final int _size;
     private final String _file; 
     private final String _fileName;
@@ -28,12 +28,12 @@ public class RequestOk extends Request{
      * @param port
      */
     public RequestOk(String nameAdress, String iP, int port, 
-                   String command, String[] pTCs, int size, String file, String fileName, 
+                   String command, String pTCs, int size, String file, String fileName, 
                    RequestProcessor processor) {
         super(nameAdress, iP, port, processor);
         
         _command = command;
-        _pTCs = pTCs;
+        _pTC = pTCs;
         _size = size;
         _file = file;
         _fileName = fileName;
@@ -51,7 +51,7 @@ public class RequestOk extends Request{
      * @param processor
      */
     public RequestOk(String nameAdress, String iP, int port, 
-                   String command, String[] pTCs, int size, String file, 
+                   String command, String pTCs, int size, String file, 
                    RequestProcessor processor) {
         this(nameAdress, iP, port, command, pTCs, size, file, null, processor);
     }
@@ -94,8 +94,8 @@ public class RequestOk extends Request{
      *
      * @return
      */
-    public String[] getpTCs() {
-        return _pTCs;
+    public String getpTC() {
+        return _pTC;
     }
 
     /**

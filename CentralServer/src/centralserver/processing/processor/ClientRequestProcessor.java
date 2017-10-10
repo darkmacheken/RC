@@ -5,13 +5,13 @@
  */
 package centralserver.processing.processor;
 
-import centralserver.processing.request.Request;
-import centralserver.processing.request.RequestOk;
-import centralserver.processing.report.ReportError;
-import centralserver.processing.report.Report;
-import centralserver.processing.report.ReportOk;
 import centralserver.WSList;
 import centralserver.exceptions.ConnectionException;
+import centralserver.processing.report.Report;
+import centralserver.processing.report.ReportError;
+import centralserver.processing.report.ReportOk;
+import centralserver.processing.request.Request;
+import centralserver.processing.request.RequestOk;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,9 +22,9 @@ import java.io.PrintWriter;
  * @author Asus
  */
 public class ClientRequestProcessor implements RequestProcessor {
+    private static int _counter = 0;
     private RequestOk _request;
     private WSList _list;
-    private static int _counter = 0;
 
     @Override
     public Report process(Request request, WSList list) throws ConnectionException {
@@ -56,8 +56,9 @@ public class ClientRequestProcessor implements RequestProcessor {
             default:
                 ; // Should never happen
         }
+        return new ReportError(_request.getNameAdress(), _request.getIP(), _request.getPort(), "ERR");
     }
-    
+        
     private Report requestCmd() throws ConnectionException {
         String fileName;
         try {
@@ -79,8 +80,8 @@ public class ClientRequestProcessor implements RequestProcessor {
         if (iPs == null || iPs.length == 0)
             return new ReportError(_request.getNameAdress(), _request.getIP(), _request.getPort(), "REP EOF");
         
-        
     }
+    
     
     private String intToString(int num, int digits) {
         StringBuilder s = new StringBuilder(digits);
