@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package centralserver.processing;
+package centralserver.processing.request;
+
+import centralserver.processing.processor.RequestProcessor;
 
 /**
  *

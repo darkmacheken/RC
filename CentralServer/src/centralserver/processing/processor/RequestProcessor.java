@@ -1,5 +1,7 @@
-package centralserver.processing;
+package centralserver.processing.processor;
 
+import centralserver.processing.request.Request;
+import centralserver.processing.report.Report;
 import centralserver.WSList;
 import centralserver.exceptions.ConnectionException;
 

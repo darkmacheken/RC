@@ -5,7 +5,7 @@
  */
 package centralserver.threads;
 
-import centralserver.processing.RequestToWS;
+import centralserver.processing.request.RequestToWS;
 
 /**
  *

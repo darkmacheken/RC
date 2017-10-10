@@ -5,14 +5,14 @@
  */
 package centralserver.protocols;
 
-import centralserver.processing.ClientRequestErrorProcessor;
-import centralserver.processing.ClientRequestProcessor;
-import centralserver.processing.Report;
-import centralserver.processing.ReportError;
-import centralserver.processing.ReportOk;
-import centralserver.processing.Request;
-import centralserver.processing.RequestError;
-import centralserver.processing.RequestOk;
+import centralserver.processing.processor.ClientRequestErrorProcessor;
+import centralserver.processing.processor.ClientRequestProcessor;
+import centralserver.processing.report.Report;
+import centralserver.processing.report.ReportError;
+import centralserver.processing.report.ReportOk;
+import centralserver.processing.request.Request;
+import centralserver.processing.request.RequestError;
+import centralserver.processing.request.RequestOk;
 import static java.lang.Integer.max;
 
 /**

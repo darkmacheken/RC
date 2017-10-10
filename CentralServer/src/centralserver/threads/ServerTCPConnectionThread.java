@@ -8,8 +8,8 @@ package centralserver.threads;
 import centralserver.WSList;
 import centralserver.connection.ConnectionTCP;
 import centralserver.exceptions.ConnectionException;
-import centralserver.processing.Report;
-import centralserver.processing.Request;
+import centralserver.processing.report.Report;
+import centralserver.processing.request.Request;
 import centralserver.protocols.ProtocolCSClient;
 
 /**

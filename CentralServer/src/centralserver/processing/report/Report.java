@@ -1,4 +1,4 @@
-package centralserver.processing;
+package centralserver.processing.report;
 
 /**
  *

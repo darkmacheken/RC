@@ -3,8 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package centralserver.processing;
+package centralserver.processing.processor;
 
+import centralserver.processing.request.Request;
+import centralserver.processing.request.RequestOk;
+import centralserver.processing.report.ReportError;
+import centralserver.processing.report.Report;
+import centralserver.processing.report.ReportOk;
 import centralserver.WSList;
 import centralserver.exceptions.ConnectionException;
 import java.io.BufferedWriter;

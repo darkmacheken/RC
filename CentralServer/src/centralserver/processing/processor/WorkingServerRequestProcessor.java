@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package centralserver.processing;
+package centralserver.processing.processor;
 
+import centralserver.processing.request.Request;
+import centralserver.processing.report.Report;
 import centralserver.WSList;
 import centralserver.exceptions.ConnectionException;
 

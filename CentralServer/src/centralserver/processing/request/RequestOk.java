@@ -1,4 +1,6 @@
-package centralserver.processing;
+package centralserver.processing.request;
+
+import centralserver.processing.processor.RequestProcessor;
 
 /**
  *
