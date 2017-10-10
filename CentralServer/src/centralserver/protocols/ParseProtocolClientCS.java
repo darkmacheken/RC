@@ -19,7 +19,7 @@ public class ParseProtocolClientCS {
         _connection = connection;
     }
     
-    public String parse() throws ConnectionException{
+    public String parse() throws ConnectionException {
         String received = "";
         String line;
         int size, sizeCount;
@@ -27,32 +27,29 @@ public class ParseProtocolClientCS {
         line = _connection.receiveLine();
         String[] lineSplit = line.split(" ");
         
-        switch(lineSplit[0]){
-            case "LST":
+        if (lineSplit[0].equals("LST"))
+            return line;
+        else if (lineSplit[0].equals("REQ")) {
+            if(lineSplit.length != 4)
                 return line;
                 
-            case "REQ":
-                if(lineSplit.length != 4)
-                    return line;
-                
-                try{
-                    size = Integer.parseInt(lineSplit[2]);
+            try {
+                size = Integer.parseInt(lineSplit[2]);
                     
-                    received = line;
+                received = line;
                     
-                    sizeCount = lineSplit[3].length();
-                    while(sizeCount < size){
-                        line = _connection.receiveLine();
-                        received+= line;
-                        sizeCount+= line.length();
-                    }
+                sizeCount = lineSplit[3].length();
+                while(sizeCount < size){
+                    line = _connection.receiveLine();
+                    received+= line;
+                    sizeCount+= line.length();
                 }
-                catch(NumberFormatException e){
-                    return line;
-                }
-                
-            default:
+            }
+            catch(NumberFormatException e){
                 return line;
+            }
         }
+        else
+            return line;
     }
 }

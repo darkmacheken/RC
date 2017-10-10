@@ -61,7 +61,7 @@ public class ProtocolCSClient {
                 return new RequestError(_nameAdress, _iP, _port, "FPT ERR", new ClientRequestErrorProcessor());
             }
         }
-        else if(splitedCommand[0] == "REQ" && splitedCommand.length == 2){
+        else if("REQ".equals(splitedCommand[0]) && splitedCommand.length == 2){
             String[] commandArguments = splitedCommand[1].split(" ");
             
             if(commandArguments.length != 3){
@@ -99,46 +99,36 @@ public class ProtocolCSClient {
         if(report instanceof ReportError){
             ReportError reportError = (ReportError) report;
      
-            switch(reportError.getError()){
-                case "FPT EOF":
-                    return "FPT EOF\n";
-
-                case "FPT ERR":
-                    return "FPT ERR\n";
-
-                case "REP EOF":
-                    return "REP EOF\n";
-
-                case "REP ERR":
-                    return "REP ERR\n";
-
-                case "ERR":
-                    return "ERR\n";
-
-                default:
-                    //should not happen
-                    break;
-            }
+            if (reportError.getError().equals("FPT EOF"))
+                return "FPT EOF\n";
+            else if (reportError.getError().equals("FPT ERR"))
+                return "FPT ERR\n";
+            else if (reportError.getError().equals("REP EOF"))
+                return "REP EOF\n";
+            else if (reportError.getError().equals("REP ERR"))
+                return "REP ERR\n";
+            else if (reportError.getError().equals("ERR"))
+                return "ERR\n";
+            // else should not happen
         }
         else if(report instanceof ReportOk){
             ReportOk reportOk = (ReportOk) report;
             
-            switch(reportOk.getCommand()){
-                case "LST":
-                    String messageReturn = "FPT ";
+            if (reportOk.getCommand().equals("LST")) {
+                String messageReturn = "FPT ";
+                
+                String[] pTCs = reportOk.getpTCs();
+                int numberPTC = pTCs.length;
+                
+                messageReturn += numberPTC;
                     
-                    String[] pTCs = reportOk.getpTCs();
-                    int numberPTC = pTCs.length;
+                for(int i=0; i < numberPTC; i++)
+                    messageReturn += " " + pTCs[i];
                     
-                    messageReturn += numberPTC;
-                    
-                    for(int i=0; i < numberPTC; i++)
-                        messageReturn += " " + pTCs[i];
-                    
-                    return messageReturn += "\n";
-                    
-                case "REQ":
-                    return "REP " + reportOk.getRT() + " " + 
+                return messageReturn += "\n";
+            }
+            else if (reportOk.getCommand().equals("REQ")) {
+                return "REP " + reportOk.getRT() + " " + 
                            reportOk.getSize() + " " + 
                            reportOk.getFile() + "\n";
             }

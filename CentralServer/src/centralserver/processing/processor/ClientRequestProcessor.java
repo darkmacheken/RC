@@ -50,22 +50,23 @@ public class ClientRequestProcessor implements RequestProcessor {
     }
     
     private Report process() throws ConnectionException {
-        switch (_request.getCommand()) {
-            case "LST":
+        if (_request.getCommand().equals("LST")) {
                 System.out.println("List request: " + _request.getNameAdress() + " " + _request.getPort());
                 List<String> pTCs = _list.getPTCs();
                 if (pTCs.isEmpty())
                     return reportError("FPT EOF");
                 else
                     return new ReportOk(_request.getNameAdress(), _request.getIP(), _request.getPort(), _request.getCommand(), (String[]) pTCs.toArray());
-            case "REQ":
-                return requestCmd();
-            case "ERR":
-                return reportError("ERR");
-            default:
-                ; // Should never happen
         }
-        return reportError("ERR");
+        else if (_request.getCommand().equals("REQ")) {
+            return requestCmd();
+        }
+        else if (_request.getCommand().equals("ERR")) {
+            return reportError("ERR");
+        }
+        else {
+            return reportError("ERR");
+        }
     }
         
     private Report requestCmd() throws ConnectionException {
@@ -127,22 +128,16 @@ public class ClientRequestProcessor implements RequestProcessor {
         
         ClientOutputBuilder cob;
         
-        switch (_request.getPTC()) {
-            case "WCT":
-                cob = new AddClientOutputBuilder(fileName, receivedReports);
-                break;
-            case "FLW":
-                cob = new LongestClientOutputBuilder(fileName, receivedReports);
-                break;
-            case "UPP":
-                cob = new ConcatClientOutputBuilder(fileName, receivedReports);
-                break;
-            case "LOW":
-                cob = new ConcatClientOutputBuilder(fileName, receivedReports);
-                break;
-            default:
-                return reportError("ERR"); // should not happen
-        }
+        if (_request.getPTC().equals("WCT"))
+            cob = new AddClientOutputBuilder(fileName, receivedReports);
+        else if (_request.getPTC().equals("FLW"))
+            cob = new LongestClientOutputBuilder(fileName, receivedReports);
+        else if (_request.getPTC().equals("UPP"))
+            cob = new ConcatClientOutputBuilder(fileName, receivedReports);
+        else if (_request.getPTC().equals("LOW"))
+            cob = new ConcatClientOutputBuilder(fileName, receivedReports);
+        else
+            return reportError("ERR"); // should not happen
         
         cob.saveFile();
         if (!cob.checkRT())

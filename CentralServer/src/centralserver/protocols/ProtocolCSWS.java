@@ -16,16 +16,17 @@ import static java.lang.Integer.max;
  * @author duartegalvao
  */
 public class ProtocolCSWS {
+
     private final String _nameAdress;
     private final String _iP;
     private final int _port;
 
     /**
-    *
-    * @param nameAdress
-    * @param iP
-    * @param port
-    */
+     *
+     * @param nameAdress
+     * @param iP
+     * @param port
+     */
     public ProtocolCSWS(String nameAdress, String iP, int port) {
         _nameAdress = nameAdress;
         _iP = iP;
@@ -33,48 +34,49 @@ public class ProtocolCSWS {
     }
 
     public Report receive(String sentence) {
-      //remove last char from sentence (it should be '\n' from protocol)
-      sentence = sentence.substring(0, max(0,sentence.length()-1));
+        //remove last char from sentence (it should be '\n' from protocol)
+        sentence = sentence.substring(0, max(0, sentence.length() - 1));
 
-      //split sentence by space into array
-      String[] splitedCommand = sentence.split(" ", 2);
+        //split sentence by space into array
+        String[] splitedCommand = sentence.split(" ", 2);
 
-      if (splitedCommand.length != 0) {
-          return new ReportError(_nameAdress, _iP, _port, "ERR");
-      }
-      switch (splitedCommand[0]) {
-          case "ERR":
-              return new ReportError(_nameAdress, _iP, _port, "ERR");
-          case "REP":
-              String[] commandArguments = splitedCommand[1].split(" ");
-              switch(commandArguments[0]) {
-                  case "EOF":
-                      return new ReportError(_nameAdress, _iP, _port, "REP EOF");
-                  case "ERR":
-                      System.out.println("received rep err");
-                      return new ReportError(_nameAdress, _iP, _port, "REP ERR");
-                  case "F":
-                  case "R":
-                      if (commandArguments.length != 3) {
-                          return new ReportError(_nameAdress, _iP, _port, "ERR");
-                      }
-                      else {
-                          char type = commandArguments[0].charAt(0);
-                          int size = Integer.parseInt(commandArguments[1]);
-                          String file = commandArguments[2];
+        if (splitedCommand.length != 0) {
+            return new ReportError(_nameAdress, _iP, _port, "ERR");
+        }
+        if (splitedCommand[0].equals("ERR")) {
+            return new ReportError(_nameAdress, _iP, _port, "ERR");
+        }
+        else if (splitedCommand[0].equals("REP")) {
+            String[] commandArguments = splitedCommand[1].split(" ");
+            if (commandArguments[0].equals("EOF")) {
+                return new ReportError(_nameAdress, _iP, _port, "REP EOF");
+            }
+            else if (commandArguments[0].equals("ERR")) {
+                System.out.println("received rep err");
+                return new ReportError(_nameAdress, _iP, _port, "REP ERR");
+            }
+            else if (commandArguments[0].equals("F")) {
 
-                          if (size == file.length()) {
-                              return new ReportOk(_nameAdress, _iP, _port, file, size, type);
-                          }
-                      }
+            }
+            else if (commandArguments[0].equals("R")) {
+                if (commandArguments.length != 3) {
+                    return new ReportError(_nameAdress, _iP, _port, "ERR");
+                }
+                else {
+                    char type = commandArguments[0].charAt(0);
+                    int size = Integer.parseInt(commandArguments[1]);
+                    String file = commandArguments[2];
 
-                  default:
-                      return new ReportError(_nameAdress, _iP, _port, "ERR");
-              }
-          default:
-              return new ReportError(_nameAdress, _iP, _port, "ERR");
-
-      }
+                    if (size == file.length()) {
+                        return new ReportOk(_nameAdress, _iP, _port, file, size, type);
+                    }
+                }
+            }
+            else {
+                return new ReportError(_nameAdress, _iP, _port, "ERR");
+            }
+        }
+        return new ReportError(_nameAdress, _iP, _port, "ERR");
     }
 
     /**
