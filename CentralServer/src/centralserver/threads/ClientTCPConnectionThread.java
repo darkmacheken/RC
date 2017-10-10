@@ -5,6 +5,7 @@
  */
 package centralserver.threads;
 
+import centralserver.exceptions.ConnectionException;
 import centralserver.processing.request.RequestToWS;
 
 /**
@@ -12,7 +13,18 @@ import centralserver.processing.request.RequestToWS;
  * @author duartegalvao
  */
 public class ClientTCPConnectionThread extends Thread {
+    private RequestToWS _request;
+    
     public ClientTCPConnectionThread(RequestToWS request) {
-        ;
+        
+    }
+    
+    @Override
+    public void run() {
+        try {
+            _request.process(null);
+        } catch (ConnectionException e) {
+            // never reaches here
+        }
     }
 }

@@ -9,15 +9,21 @@ import centralserver.processing.processor.WorkingServerRequestProcessor;
 
 
 public class RequestToWS extends Request {
-    private String _fileName;
+    private final String _fileName;
+    private final String _pTC;
     
-    public RequestToWS(String nameAdress, String iP, int port, String fileName, WorkingServerRequestProcessor processor) {
+    public RequestToWS(String nameAdress, String iP, int port, String fileName, String pTC, WorkingServerRequestProcessor processor) {
         super(nameAdress, iP, port, processor);
         _fileName = fileName;
+        _pTC = pTC;
     }
     
     public String getFileName() {
         return _fileName;
+    }
+
+    public String getpTC() {
+        return _pTC;
     }
     
 }

@@ -52,7 +52,7 @@ public class ClientRequestProcessor implements RequestProcessor {
             case "REQ":
                 return requestCmd();
             case "ERR":
-                return new ReportOk(_request.getCommand(), null, null, 0, null);
+                return new ReportError(_request.getNameAdress(), _request.getIP(), _request.getPort(), "ERR");
             default:
                 ; // Should never happen
         }
