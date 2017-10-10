@@ -75,7 +75,7 @@ public class ProtocolCSClient {
                 if(size == file.length())
                     return new RequestOk(_nameAdress, _iP, _port,
                                          "REQ",
-                                         new String[]{commandArguments[0]}, 
+                                         commandArguments[0], 
                                          size,                 
                                          file,
                                          new ClientRequestProcessor());

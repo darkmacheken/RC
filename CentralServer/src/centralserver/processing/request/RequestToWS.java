@@ -6,6 +6,7 @@
 package centralserver.processing.request;
 
 import centralserver.processing.processor.WorkingServerRequestProcessor;
+import centralserver.processing.report.Report;
 
 /**
  *
@@ -14,7 +15,9 @@ import centralserver.processing.processor.WorkingServerRequestProcessor;
 public class RequestToWS extends Request {
     private final String _fileName;
     private final String _pTC;
-    
+    private final String _file;
+    private final WorkingServerRequestProcessor _workingProcessor;
+      
     /**
      *
      * @param nameAdress
@@ -24,10 +27,27 @@ public class RequestToWS extends Request {
      * @param pTC
      * @param processor
      */
-    public RequestToWS(String nameAdress, String iP, int port, String fileName, String pTC, WorkingServerRequestProcessor processor) {
-        super(nameAdress, iP, port, processor);
+    public RequestToWS(String nameAdress, String iP, int port,
+                       String fileName, String pTC, String file, WorkingServerRequestProcessor processor) {
+        super(nameAdress, iP, port, null);
         _fileName = fileName;
         _pTC = pTC;
+        _file = file;
+        _workingProcessor = processor;
+    }
+    
+    /**
+     * Process request and send only the message
+     */
+    public void processSend(){
+        _workingProcessor.processSend();
+    }
+    
+    /**
+     * Receive from WS and process
+     */
+    public Report processReceive(){
+        return _workingProcessor.processReceive();
     }
     
     /**
@@ -44,6 +64,14 @@ public class RequestToWS extends Request {
      */
     public String getpTC() {
         return _pTC;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getFile() {
+        return _file;
     }
     
 }

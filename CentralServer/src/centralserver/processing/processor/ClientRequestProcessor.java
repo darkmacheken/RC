@@ -56,10 +56,10 @@ public class ClientRequestProcessor implements RequestProcessor {
             default:
                 ; // Should never happen
         }
+        return new ReportError(_request.getNameAdress(), _request.getIP(), _request.getPort(), "ERR");
     }
-    
+        
     private Report requestCmd() throws ConnectionException {
-        //Process REQ command
         String fileName;
         try {
             fileName = "input_files/" + intToString(_counter, 5) + ".txt";
@@ -82,6 +82,7 @@ public class ClientRequestProcessor implements RequestProcessor {
         
         
     }
+    
     
     private String intToString(int num, int digits) {
         StringBuilder s = new StringBuilder(digits);
