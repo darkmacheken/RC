@@ -15,10 +15,11 @@ public class ReportOk extends Report {
      *
      * @param nameAdress
      * @param iP
+     * @param port
      * @param command
      * @param pTCs
      * @param file
-     * @param status
+     * @param size
      * @param rT
      */
     public ReportOk(String nameAdress, String iP, int port,

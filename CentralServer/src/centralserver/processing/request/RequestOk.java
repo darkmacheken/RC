@@ -20,7 +20,7 @@ public class RequestOk extends Request{
      * @param nameAdress
      * @param processor
      * @param command
-     * @param pTCs
+     * @param pTC
      * @param file
      * @param size
      * @param fileName
@@ -28,12 +28,12 @@ public class RequestOk extends Request{
      * @param port
      */
     public RequestOk(String nameAdress, String iP, int port, 
-                   String command, String pTCs, int size, String file, String fileName, 
+                   String command, String pTC, int size, String file, String fileName, 
                    RequestProcessor processor) {
         super(nameAdress, iP, port, processor);
         
         _command = command;
-        _pTC = pTCs;
+        _pTC = pTC;
         _size = size;
         _file = file;
         _fileName = fileName;
@@ -45,15 +45,15 @@ public class RequestOk extends Request{
      * @param iP
      * @param port
      * @param command
-     * @param pTCs
+     * @param pTC
      * @param size
      * @param file
      * @param processor
      */
     public RequestOk(String nameAdress, String iP, int port, 
-                   String command, String pTCs, int size, String file, 
+                   String command, String pTC, int size, String file, 
                    RequestProcessor processor) {
-        this(nameAdress, iP, port, command, pTCs, size, file, null, processor);
+        this(nameAdress, iP, port, command, pTC, size, file, null, processor);
     }
     
     /**

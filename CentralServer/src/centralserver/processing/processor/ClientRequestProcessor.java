@@ -8,6 +8,10 @@ package centralserver.processing.processor;
 import centralserver.ConnectAddress;
 import centralserver.WSList;
 import centralserver.exceptions.ConnectionException;
+import centralserver.processing.processor.outputbuild.AddClientOutputBuilder;
+import centralserver.processing.processor.outputbuild.ClientOutputBuilder;
+import centralserver.processing.processor.outputbuild.JoinClientOutputBuilder;
+import centralserver.processing.processor.outputbuild.LongestClientOutputBuilder;
 import centralserver.processing.report.Report;
 import centralserver.processing.report.ReportError;
 import centralserver.processing.report.ReportOk;
@@ -19,6 +23,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -47,11 +52,11 @@ public class ClientRequestProcessor implements RequestProcessor {
         switch (_request.getCommand()) {
             case "LST":
                 System.out.println("List request: " + _request.getNameAdress() + " " + _request.getPort());
-                String[] pTCs = _list.getPTCs();
-                if (pTCs.length == 0)
+                List<String> pTCs = _list.getPTCs();
+                if (pTCs.isEmpty())
                     return new ReportError(_request.getNameAdress(), _request.getIP(), _request.getPort(), "FPT EOF");
                 else
-                    return new ReportOk(_request.getNameAdress(), _request.getIP(), _request.getPort(), _request.getCommand(), pTCs);
+                    return new ReportOk(_request.getNameAdress(), _request.getIP(), _request.getPort(), _request.getCommand(), (String[]) pTCs.toArray());
             case "REQ":
                 return requestCmd();
             case "ERR":
@@ -102,9 +107,50 @@ public class ClientRequestProcessor implements RequestProcessor {
                     _request.getPTC(),
                     Arrays.copyOfRange(fileLines, curLine, curLine + reqLines),
                     new WorkingServerRequestProcessor());
+            requests[i].processSend();
         }
+        
+        ReportOk[] receivedReports = new ReportOk[numRequests];
+        
+        for (int i = 0; i < requests.length; i++) {
+            try {
+                receivedReports[i] = (ReportOk) requests[i].processReceive();
+            }
+            catch (ClassCastException e) {
+                return new ReportError(_request.getNameAdress(), _request.getIP(), _request.getPort(), "REP EOF");
+            }
+        }
+        
+        ClientOutputBuilder cob;
+        char rt = '\0';
+        
+        switch (_request.getPTC()) {
+            case "WCT":
+                cob = new AddClientOutputBuilder(fileName, receivedReports);
+                rt = 'R';
+                break;
+            case "FLW":
+                cob = new LongestClientOutputBuilder(fileName, receivedReports);
+                rt = 'R';
+                break;
+            case "UPP":
+                cob = new JoinClientOutputBuilder(fileName, receivedReports);
+                rt = 'F';
+                break;
+            case "LOW":
+                cob = new JoinClientOutputBuilder(fileName, receivedReports);
+                rt = 'F';
+                break;
+            default:
+                return null; // should not happen
+        }
+        
+        cob.saveFile();
+        
+        return new ReportOk(_request.getNameAdress(), _request.getIP(), _request.getPort(),
+                _request.getCommand(), new String[]{_request.getPTC()},
+                cob.getFile(), cob.getFile().length(), rt);
     }
-    
     
     private String intToString(int num, int digits) {
         StringBuilder s = new StringBuilder(digits);
