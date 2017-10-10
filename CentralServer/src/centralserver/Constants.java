@@ -14,7 +14,7 @@ public final class Constants {
     /**
      * Default host 'localhostname'
      */
-    public static final String DEFAULT_HOST = "localhostname";
+    public static final String DEFAULT_HOST = "127.0.0.1";
 
     /**
      * default port 58000+63

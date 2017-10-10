@@ -39,6 +39,7 @@ public class CS {
         try {
             WSList list = new WSList();
             ServerTCP server = new ServerTCP(cSPort);
+            System.out.println("Server created.");
             ServerTCPThread thread = new ServerTCPThread(list, server);
             thread.join();
         }
