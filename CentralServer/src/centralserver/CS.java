@@ -8,6 +8,8 @@ package centralserver;
 import centralserver.connection.ServerTCP;
 import centralserver.exceptions.ConnectionException;
 import centralserver.threads.ServerTCPThread;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -38,12 +40,14 @@ public class CS {
             WSList list = new WSList();
             ServerTCP server = new ServerTCP(cSPort);
             ServerTCPThread thread = new ServerTCPThread(list, server);
+            thread.join();
         }
         catch (ConnectionException e) {
             System.out.println(e.getErrorDescription());
         }
-        
-        while (true);
+        catch (InterruptedException e) {
+            ;
+        }
     }
     
 }
