@@ -127,15 +127,12 @@ public class ClientRequestProcessor implements RequestProcessor {
         switch (_request.getPTC()) {
             case "WCT":
                 cob = new AddClientOutputBuilder(fileName, receivedReports);
-                rt = 'R';
                 break;
             case "FLW":
                 cob = new LongestClientOutputBuilder(fileName, receivedReports);
-                rt = 'R';
                 break;
             case "UPP":
                 cob = new ConcatClientOutputBuilder(fileName, receivedReports);
-                rt = 'F';
                 break;
             case "LOW":
                 cob = new ConcatClientOutputBuilder(fileName, receivedReports);
