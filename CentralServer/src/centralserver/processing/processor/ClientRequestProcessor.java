@@ -5,13 +5,13 @@
  */
 package centralserver.processing.processor;
 
-import centralserver.processing.request.Request;
-import centralserver.processing.request.RequestOk;
-import centralserver.processing.report.ReportError;
-import centralserver.processing.report.Report;
-import centralserver.processing.report.ReportOk;
 import centralserver.WSList;
 import centralserver.exceptions.ConnectionException;
+import centralserver.processing.report.Report;
+import centralserver.processing.report.ReportError;
+import centralserver.processing.report.ReportOk;
+import centralserver.processing.request.Request;
+import centralserver.processing.request.RequestOk;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,9 +22,9 @@ import java.io.PrintWriter;
  * @author Asus
  */
 public class ClientRequestProcessor implements RequestProcessor {
+    private static int _counter = 0;
     private RequestOk _request;
     private WSList _list;
-    private static int _counter = 0;
 
     @Override
     public Report process(Request request, WSList list) throws ConnectionException {
@@ -59,6 +59,7 @@ public class ClientRequestProcessor implements RequestProcessor {
     }
     
     private Report requestCmd() throws ConnectionException {
+        //Process REQ command
         String fileName;
         try {
             fileName = "input_files/" + intToString(_counter, 5) + ".txt";

@@ -50,10 +50,11 @@ public class User {
                 System.out.print("> ");
                 String command = getText();
                 try {
+                    //create protocol message
+                    String commandP = protocol.sendProtocol(command);             
                     //create connection tcp
                     client = new ConnectionTCP(cSName, cSPort);
-                    //create protocol message and send
-                    String commandP = protocol.sendProtocol(command);
+                    //send command to server
                     client.send(commandP);
                     //receive message and apply protocol
                     String responseP = client.receive();
@@ -69,7 +70,8 @@ public class User {
                 }
                 catch (ExitCommandException e) {
                     try {
-                        client.close();
+                        if(client != null)
+                            client.close();
                         return;
                     }
                     catch (ConnectionException ce) {
