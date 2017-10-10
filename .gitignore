@@ -54,3 +54,5 @@ Temporary Items
 *.class
 *.jar
 /CentralServer/dist/
+*.properties
+*.class
