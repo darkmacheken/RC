@@ -114,6 +114,23 @@ public class ConnectionTCP {
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws ConnectionException
+     */
+    public String receiveLine() throws ConnectionException {
+        String receivedStr;
+        try {
+            createIO();
+            receivedStr = _in.readLine() + "\n";      
+            return receivedStr;
+        }
+        catch(IOException e) {
+            //e.printStackTrace();
+            throw new ConnectionException(Constants.SOCK_READERR);
+        }
+    }
 
     /**
      *

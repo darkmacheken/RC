@@ -48,18 +48,18 @@ public class ProtocolCSClient {
     public Request receive(String sentence){
         //remove last char from sentence (it should be '\n' from protocol)
         sentence = sentence.substring(0, max(0,sentence.length()-1));
-        
         //split sentence by space into array
         String[] splitedCommand = sentence.split(" ",2);
-        
+
         if(splitedCommand.length == 0){
             return new RequestError(_nameAdress, _iP, _port, "ERR", new ClientRequestErrorProcessor());
         }
-        else if(splitedCommand[0] == "LST"){
+        else if(splitedCommand[0].equals("LST")){
             if( splitedCommand.length == 1)
                 return new RequestOk(_nameAdress, _iP, _port, "LST", new ClientRequestProcessor());
-            else
+            else{
                 return new RequestError(_nameAdress, _iP, _port, "FPT ERR", new ClientRequestErrorProcessor());
+            }
         }
         else if(splitedCommand[0] == "REQ" && splitedCommand.length == 2){
             String[] commandArguments = splitedCommand[1].split(" ");
@@ -79,9 +79,10 @@ public class ProtocolCSClient {
                                          size,                 
                                          file,
                                          new ClientRequestProcessor());
-                else
+                else{
                     //file doesnt have size bytes
                     return new RequestError(_nameAdress, _iP, _port, "REP ERR", new ClientRequestErrorProcessor());
+                }
             }
         }
         else{

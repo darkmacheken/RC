@@ -39,6 +39,7 @@ public class CS {
             ServerTCP server = new ServerTCP(cSPort);
             System.out.println("Server created.");
             ServerTCPThread thread = new ServerTCPThread(list, server);
+            thread.start();
             thread.join();
         }
         catch (ConnectionException e) {

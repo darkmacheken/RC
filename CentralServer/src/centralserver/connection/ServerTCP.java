@@ -51,7 +51,7 @@ public class ServerTCP {
         catch (IOException e) {
             throw new ConnectionException(Constants.SERVER_LISTENERR);
         }
-        ConnectionTCP connection = ConnectionTCP(clientSocket);                 //should this be an attribute?
+        ConnectionTCP connection = new ConnectionTCP(clientSocket);                 //should this be an attribute?
         return connection;
     }
 
@@ -67,9 +67,4 @@ public class ServerTCP {
             throw new ConnectionException(Constants.SERVER_CLOSEERR);
         }
     }
-
-    private ConnectionTCP ConnectionTCP(Socket clientSocket) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

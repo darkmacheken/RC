@@ -58,6 +58,7 @@ public class User {
                     client.send(commandP);
                     //receive message and apply protocol
                     String responseP = client.receive();
+                    System.out.print(responseP);
                     protocol.receiveProtocol(responseP);
                     //close connection tcp
                     client.close();

@@ -122,5 +122,9 @@ public class RequestOk extends Request{
         return _fileName;
     }
 
-    
+    @Override
+    public String toString(){
+        return _command;
+               
+    }
 }
