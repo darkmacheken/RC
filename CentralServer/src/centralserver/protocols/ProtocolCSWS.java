@@ -6,7 +6,10 @@
 package centralserver.protocols;
 
 import centralserver.processing.report.Report;
+import centralserver.processing.report.ReportError;
+import centralserver.processing.report.ReportOk;
 import centralserver.processing.request.RequestToWS;
+import static java.lang.Integer.max;
 
 /**
  *
@@ -37,7 +40,7 @@ public class ProtocolCSWS {
       String[] splitedCommand = sentence.split(" ", 2);
 
       if (splitedCommand.length != 0) {
-          return new ReportError(_nameAdress, _iP, _port, "ERR"));
+          return new ReportError(_nameAdress, _iP, _port, "ERR");
       }
       switch (splitedCommand[0]) {
           case "ERR":
@@ -59,7 +62,10 @@ public class ProtocolCSWS {
                           char type = commandArguments[0].charAt(0);
                           int size = Integer.parseInt(commandArguments[1]);
                           String file = commandArguments[2];
-                          
+
+                          if (size == file.length()) {
+                              return new ReportOk(_nameAdress, _iP, _port, file, size, type);
+                          }
                       }
 
                   default:

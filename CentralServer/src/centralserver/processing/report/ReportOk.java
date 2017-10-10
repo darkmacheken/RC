@@ -10,7 +10,7 @@ public class ReportOk extends Report {
     private String _file;
     private int _size;
     private char _rT;
-  
+
     /**
      *
      * @param nameAdress
@@ -31,7 +31,14 @@ public class ReportOk extends Report {
         _size = size;
         _rT = rT;
     }
-    
+
+    public ReportOk(String nameAdress, String iP, int port, String file, int size, char rT) {
+        super(nameAdress, iP, port);
+        _file = file;
+        _size = size;
+        _rT = rT;
+    }
+
     /**
      *
      * @param nameAdress
@@ -43,7 +50,7 @@ public class ReportOk extends Report {
     public ReportOk(String nameAdress, String iP, int port, String command, String[] pTCs) {
         this(nameAdress, iP, port, command, pTCs, null, 0, '\0');
     }
-    
+
     /**
      *
      * @return command
@@ -83,6 +90,6 @@ public class ReportOk extends Report {
     public char getrT() {
         return _rT;
     }
-    
-    
+
+
 }
