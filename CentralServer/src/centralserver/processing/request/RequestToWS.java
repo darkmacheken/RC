@@ -27,9 +27,9 @@ public class RequestToWS extends Request {
      * @param pTC
      * @param processor
      */
-    public RequestToWS(String nameAdress, String iP, int port,
+    public RequestToWS(String iP, int port,
                        String fileName, String pTC, String file, WorkingServerRequestProcessor processor) {
-        super(nameAdress, iP, port, null);
+        super(iP, iP, port, null);
         _fileName = fileName;
         _pTC = pTC;
         _file = file;

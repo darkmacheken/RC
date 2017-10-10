@@ -5,6 +5,7 @@
  */
 package centralserver.processing.processor;
 
+import centralserver.ConnectAddress;
 import centralserver.WSList;
 import centralserver.exceptions.ConnectionException;
 import centralserver.processing.report.Report;
@@ -12,10 +13,12 @@ import centralserver.processing.report.ReportError;
 import centralserver.processing.report.ReportOk;
 import centralserver.processing.request.Request;
 import centralserver.processing.request.RequestOk;
+import centralserver.processing.request.RequestToWS;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 
 /**
  *
@@ -60,26 +63,46 @@ public class ClientRequestProcessor implements RequestProcessor {
     }
         
     private Report requestCmd() throws ConnectionException {
-        String fileName;
+        String fileName = intToString(_counter, 5); // nnnnn.txt
+        String file = _request.getFile();
         try {
-            fileName = "input_files/" + intToString(_counter, 5) + ".txt";
             PrintWriter out = new PrintWriter(
                     new BufferedWriter(
-                            new FileWriter(fileName)));
-            out.print(_request.getFile());
+                            new FileWriter("input_files/" + fileName + ".txt")));
+            out.print(file);
             out.close();
             _counter++;
             
         }
         catch (IOException e) {
-            throw new ConnectionException("");
+            throw new ConnectionException(""); // TODO mensagem
         }
         
         // Get IPs from list
-        String[] iPs = _list.getIPs();
+        ConnectAddress[] iPs = _list.getIPs(_request.getPTC());
         if (iPs == null || iPs.length == 0)
             return new ReportError(_request.getNameAdress(), _request.getIP(), _request.getPort(), "REP EOF");
+
+        String[] fileLines = file.split("\r\n|\r|\n");
+        int numLines = fileLines.length;
+        int numRequests = iPs.length < numLines ? iPs.length : numLines;
+        RequestToWS[] requests = new RequestToWS[numRequests];
+        int curLine = 0;
         
+        for (int i = 0; i < numRequests; i++) {
+            // Divide work equally between servers
+            int reqLines = numLines / numRequests;
+
+            // Last server gets remainder
+            if (i == iPs.length - 1 && numLines % iPs.length != 0)
+                reqLines += numLines % iPs.length;
+            
+            requests[i] = new RequestToWS(iPs[i].getIp(), iPs[i].getPort(),
+                    fileName + intToString(i, 3) + ".txt",
+                    _request.getPTC(),
+                    Arrays.copyOfRange(fileLines, curLine, curLine + reqLines),
+                    new WorkingServerRequestProcessor());
+        }
     }
     
     

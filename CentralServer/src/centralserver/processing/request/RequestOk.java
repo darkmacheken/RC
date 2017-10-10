@@ -94,7 +94,7 @@ public class RequestOk extends Request{
      *
      * @return
      */
-    public String getpTC() {
+    public String getPTC() {
         return _pTC;
     }
 
