@@ -80,7 +80,6 @@ public class ClientRequestProcessor implements RequestProcessor {
         if (iPs == null || iPs.length == 0)
             return new ReportError(_request.getNameAdress(), _request.getIP(), _request.getPort(), "REP EOF");
         
-        
     }
     
     

@@ -12,8 +12,40 @@ package centralserver;
 public class WSList {
     private String[] _pTCs;
 
-    public String[] getPTCs() {
+    /**
+     *
+     * @return
+     */
+    public synchronized String[] getPTCs() {
         return _pTCs;
+    }
+    
+    /**
+     *
+     * @param pTC
+     * @return
+     */
+    public synchronized ConnectAddress[] getIPs(String pTC){
+        
+    }
+    
+    /**
+     *
+     * @param pTC
+     * @param ip
+     * @return
+     */
+    public synchronized boolean addIP(String[] pTC, String ip){
+        
+    }
+    
+    /**
+     *
+     * @param ip
+     * @return
+     */
+    public synchronized boolean removeIP(String ip){
+        
     }
     
 }
