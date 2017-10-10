@@ -31,6 +31,14 @@ public class ReportOk extends Report {
         _rT = rT;
     }
     
+    /**
+     *
+     * @param nameAdress
+     * @param iP
+     * @param port
+     * @param command
+     * @param pTCs
+     */
     public ReportOk(String nameAdress, String iP, int port, String command, String[] pTCs) {
         this(nameAdress, iP, port, command, pTCs, null, 0, '\0');
     }

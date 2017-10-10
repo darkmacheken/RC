@@ -31,7 +31,7 @@ public class WorkingServerRequestProcessor implements RequestProcessor {
     }
     
     /**
-     *  Process received
+     *  Process received. BLOCKING FUNCTION
      * @return
      */
     public Report processReceive(){

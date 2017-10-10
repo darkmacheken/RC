@@ -5,19 +5,37 @@
  */
 package centralserver;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.LinkedBlockingDeque;
+
 /**
  *
  * @author duartegalvao
  */
 public class WSList {
-    private String[] _pTCs;
+    ConcurrentHashMap<String, LinkedBlockingDeque<ConnectAddress>> _struct;
+
+    
+    /**
+     * Create class
+     */
+    public WSList() {
+        _struct = new ConcurrentHashMap<String, LinkedBlockingDeque<ConnectAddress>>();
+    }
 
     /**
      *
      * @return
      */
-    public synchronized String[] getPTCs() {
-        return _pTCs;
+    public synchronized List<String> getPTCs() {
+        ArrayList<String> pTCs = new ArrayList<String>();
+               
+        for(String ptc: _struct.keySet()){
+            pTCs.add(ptc);
+        }
+        return pTCs;
     }
     
     /**
@@ -25,8 +43,13 @@ public class WSList {
      * @param pTC
      * @return
      */
-    public synchronized ConnectAddress[] getIPs(String pTC){
+    public synchronized ConnectAddress[] getIPs(String pTC){  
+        LinkedBlockingDeque<ConnectAddress> ips = _struct.get(pTC);
         
+        if(ips == null)
+            return null;
+        else
+            return (ConnectAddress[]) ips.toArray();
     }
     
     /**
@@ -35,8 +58,15 @@ public class WSList {
      * @param ip
      * @return
      */
-    public synchronized boolean addIP(String[] pTC, String ip){
-        
+    public synchronized void addIP(String[] pTCs, ConnectAddress connectAddress){
+        for (String ptc : pTCs) {
+            if (!_struct.contains(ptc)) {
+                _struct.put(ptc, new LinkedBlockingDeque<ConnectAddress>());
+            }
+            LinkedBlockingDeque<ConnectAddress> deque = _struct.get(ptc);
+            if(!deque.contains(connectAddress))
+                deque.add(connectAddress);
+        }
     }
     
     /**
@@ -44,8 +74,10 @@ public class WSList {
      * @param ip
      * @return
      */
-    public synchronized boolean removeIP(String ip){
-        
+    public synchronized void removeIP(ConnectAddress connectAddress){
+        for(String ptc: _struct.keySet()){
+            _struct.get(ptc).remove(connectAddress);
+        }
     }
     
 }
