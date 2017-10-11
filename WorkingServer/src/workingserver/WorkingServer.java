@@ -89,13 +89,20 @@ public class WorkingServer {
             return;
         }
 
-        ConnectionUDP connectionUDP = new ConnectionUDP(csName, csPort);
+        ConnectionUDP connectionUDP;
+        try {
+            connectionUDP = new ConnectionUDP(cSName, cSPort);
+        }
+        catch (ConnectionException ex) {
+            System.out.println(ex.getErrorDescription());
+            return;
+        }
 
         String registerMessage = "REG ";
         for (Task task : tasks) {
             registerMessage = registerMessage + task.getPTC() + " ";
         }
-        registerMessage = registerMessage + InetAddress.getLocalHost().getHostAddress() + " " + wsPort + "\n";
+        registerMessage = registerMessage + InetAddress.getLocalHost().getHostAddress() + " " + wSPort + "\n";
 
         int counter = 0;
         while(counter < 3){
@@ -108,6 +115,9 @@ public class WorkingServer {
             }
             catch(SocketTimeoutException e){
                 counter++;
+            }
+            catch (ConnectionException ex) {
+                System.out.println(ex.getErrorDescription());
             }
         }
 
