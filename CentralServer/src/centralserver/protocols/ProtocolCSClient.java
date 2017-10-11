@@ -66,6 +66,7 @@ public class ProtocolCSClient {
             
             if(commandArguments.length != 3){
                 //different lenght
+                System.out.println("Length arguments different of 3.");
                 return new RequestError(_nameAdress, _iP, _port, "REP ERR", new ClientRequestErrorProcessor());
             }
             else{
@@ -81,6 +82,7 @@ public class ProtocolCSClient {
                                          new ClientRequestProcessor());
                 else{
                     //file doesnt have size bytes
+                    System.out.print("File doesnt have all bytes. File length: " + file.length() + "\n" + file);
                     return new RequestError(_nameAdress, _iP, _port, "REP ERR", new ClientRequestErrorProcessor());
                 }
             }

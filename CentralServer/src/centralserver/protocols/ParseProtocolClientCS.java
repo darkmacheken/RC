@@ -25,6 +25,7 @@ public class ParseProtocolClientCS {
         int size, sizeCount;
         
         line = _connection.receiveLine();
+
         String[] lineSplit = line.split(" ");
         
         if (lineSplit[0].equals("LST"))
@@ -36,10 +37,10 @@ public class ParseProtocolClientCS {
             try {
                 size = Integer.parseInt(lineSplit[2]);
                     
-                received = line;
-                    
+                received = line;                
+                
                 sizeCount = lineSplit[3].length();
-                while(sizeCount < size){
+                while(sizeCount <= size){
                     line = _connection.receiveLine();
                     received+= line;
                     sizeCount+= line.length();
@@ -49,6 +50,6 @@ public class ParseProtocolClientCS {
                 return line;
             }
         }
-        return line;
+        return received;
     }
 }

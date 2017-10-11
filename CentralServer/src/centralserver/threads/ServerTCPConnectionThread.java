@@ -46,6 +46,8 @@ public class ServerTCPConnectionThread extends Thread {
             _connection.close();
         } catch (ConnectionException e) {
             System.err.println(e.getErrorDescription());
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 }

@@ -43,7 +43,7 @@ public class ServerTCP {
      * @return
      * @throws ConnectionException
      */
-    public ConnectionTCP acceptSocket() throws ConnectionException {
+    public ConnectionTCP acceptSocket() throws ConnectionException, IOException {
         Socket clientSocket;
         try {
             clientSocket = _serverSocket.accept();

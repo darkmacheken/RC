@@ -131,7 +131,6 @@ public class ConnectionTCP {
     public String receiveLine() throws ConnectionException {
         String receivedStr;
         try {
-            createIO();
             receivedStr = _in.readLine() + "\n";
             return receivedStr;
         }
