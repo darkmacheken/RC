@@ -24,16 +24,16 @@ public class WorkingServerRequestProcessor implements RequestProcessor {
 
     @Override
     public Report process(Request request, WSList list) throws ConnectionException {
-        _request = (RequestToWS) request;
-        _protocol = new ProtocolCSWS(_request.getNameAdress(), _request.getIP(), _request.getPort());
-        _connection = new ConnectionTCP(_request.getIP(), _request.getPort());
         return null;
     }
     
     /**
      * Process and send only
      */
-    public void processSend() throws ConnectionException{
+    public void processSend(RequestToWS request) throws ConnectionException{
+        _request = request;
+        _protocol = new ProtocolCSWS(_request.getNameAdress(), _request.getIP(), _request.getPort());
+        _connection = new ConnectionTCP(_request.getIP(), _request.getPort());
         String toSend = _protocol.send(_request);
         _connection.send(toSend);
     }

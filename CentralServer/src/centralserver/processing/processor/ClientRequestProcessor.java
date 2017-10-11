@@ -51,8 +51,11 @@ public class ClientRequestProcessor implements RequestProcessor {
                 List<String> pTCs = _list.getPTCs();
                 if (pTCs.isEmpty())
                     return reportError("FPT EOF");
-                else
-                    return new ReportOk(_request.getNameAdress(), _request.getIP(), _request.getPort(), _request.getCommand(), (String[]) pTCs.toArray());
+                else{
+                    String[] ptcs = new String[pTCs.size()];
+                    pTCs.toArray(ptcs);
+                    return new ReportOk(_request.getNameAdress(), _request.getIP(), _request.getPort(), _request.getCommand(), ptcs);
+                }
         }
         else if (_request.getCommand().equals("REQ")) {
             System.out.println(_request.getPTC() + " request: " + _request.getNameAdress() + " " + _request.getPort());

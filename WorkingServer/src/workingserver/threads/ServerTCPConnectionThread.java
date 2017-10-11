@@ -36,6 +36,7 @@ public class ServerTCPConnectionThread extends Thread {
         try {
             ParseProtocolCSWS parser = new ParseProtocolCSWS(_connection);
             String received = parser.parse();
+            System.out.println(received);
             Request request = protocol.receive(received);
             Report report = request.process(_tasks);
             String toSend = protocol.send(report);

@@ -41,8 +41,7 @@ public class RequestToWS extends Request {
      * Process request and send only the message
      */
     public void processSend() throws ConnectionException{
-        this.process(null);
-        _workingProcessor.processSend();
+        _workingProcessor.processSend(this);
     }
     
     /**

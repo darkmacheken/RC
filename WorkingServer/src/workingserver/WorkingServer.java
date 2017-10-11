@@ -9,8 +9,6 @@ import java.net.InetAddress;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import workingserver.connection.ConnectionTCP;
 import workingserver.connection.ConnectionUDP;
 import workingserver.connection.ServerTCP;
@@ -104,16 +102,33 @@ public class WorkingServer {
                 counter++;
             }
             catch(SocketTimeoutException e){
-                counter++;
+                if(counter < 3)
+                    counter++;
+                else
+                    return;
             }
             catch(ConnectionException e) {
-                System.err.println(e.getErrorDescription());
+                 if(counter < 3){
+                     counter++;
+                     System.err.println(e.getErrorDescription());
+                 }
+                else
+                    return;     
             }
         }
+        
+        System.out.println("Server registered succesfully in CS: " + connectionUDP.getNameToSend() + " " + connectionUDP.getPortToSend());
 
+        ServerTCP server;
+        try {
+            server = new ServerTCP(wSPort);
+        }
+        catch (ConnectionException ex) {
+            System.out.println(ex.getErrorDescription());
+            return;
+        }
         while (true) {
             try {
-                ServerTCP server = new ServerTCP(wSPort);
                 ConnectionTCP connectionTCP = server.acceptSocket();
                 ServerTCPConnectionThread connectionThread = new ServerTCPConnectionThread(connectionTCP, allTasks);
                 connectionThread.start();

@@ -7,8 +7,6 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import workingserver.Constants;
 import workingserver.exceptions.ConnectionException;
 
@@ -82,4 +80,22 @@ public class ConnectionUDP {
     public void close() {
         _clientSocket.close();
     }
+
+    public String getNameToSend() {
+        return _nameToSend;
+    }
+
+    public InetAddress getIpToSend() {
+        return _ipToSend;
+    }
+
+    public Integer getPortToSend() {
+        return _portToSend;
+    }
+
+    public DatagramSocket getClientSocket() {
+        return _clientSocket;
+    }
+    
+    
 }

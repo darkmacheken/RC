@@ -39,6 +39,7 @@ public class ServerTCPConnectionThread extends Thread {
         try {
             ParseProtocolClientCS parser = new ParseProtocolClientCS(_connection);
             String received = parser.parse();
+            System.out.print(received);
             Request request = protocol.receive(received);
             Report report = request.process(_list);
             String toSend = protocol.send(report);

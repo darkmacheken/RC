@@ -59,7 +59,8 @@ public class ProtocolWSCS {
             }
             
             //Transform list ptcs do array
-            String[] ptcsArray = (String[]) ptcs.toArray();
+            String[] ptcsArray = new String[ptcs.size()];
+            ptcs.toArray(ptcsArray);
             
             //create ConnectAddress
             ConnectAddress addressWS = new ConnectAddress(ipWS, portWS);

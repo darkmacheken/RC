@@ -48,8 +48,11 @@ public class WSList {
         
         if(ips == null)
             return null;
-        else
-            return (ConnectAddress[]) ips.toArray();
+        else{
+            ConnectAddress[] servers = new ConnectAddress[ips.size()];
+            ips.toArray(servers);
+            return servers;
+        }
     }
     
     /**

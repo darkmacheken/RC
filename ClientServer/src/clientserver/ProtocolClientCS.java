@@ -79,7 +79,7 @@ public class ProtocolClientCS{
         //remove last char from sentence (it should be '\n' from protocol)
         sentence = sentence.substring(0, max(0,sentence.length()-1));
         
-        String[] splitedSentence = sentence.split(" ", 4);
+        String[] splitedSentence = sentence.split(" ", 2);
 
         if(splitedSentence.length == 0)
             throw new ConnectionException(Constants.REQ_NULL);
@@ -90,17 +90,18 @@ public class ProtocolClientCS{
             
         switch (splitedSentence[0]){
             case "FPT":
-                switch (splitedSentence[1]) {
+                String[] arguments = splitedSentence[1].split(" ");
+                switch (arguments[0]) {
                     case "EOF":
                         throw new ConnectionException(Constants.REQ_EOF);
                     case "ERR":
                         throw new ConnectionException(Constants.REQ_ERR);
                     default:
-                        int numberPTC = Integer.parseInt(splitedSentence[1]);
-                        if(splitedSentence.length != numberPTC+2)
+                        int numberPTC = Integer.parseInt(arguments[0]);
+                        if(arguments.length != numberPTC+1)
                             throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
-                        for(int i = 0, count=1; i<numberPTC; i++){
-                            String ptc = splitedSentence[i+2];
+                        for(int i = 1, count=1; i<=numberPTC; i++){
+                            String ptc = arguments[i];
                             String description = _descriptionPTC.get(ptc);
                             Set<String> ptcShowed = new HashSet<String>();
 
@@ -115,24 +116,23 @@ public class ProtocolClientCS{
                 break;
 
             case "REP":
-                if(splitedSentence.length < 2)
+                arguments = splitedSentence[1].split(" ");
+                if(arguments.length < 2)
                      throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
 
-                switch (splitedSentence[1]){
+                switch (arguments[0]){
                     case "EOF":
                         throw new ConnectionException(Constants.REQ_EOF);
                     case "ERR":       
                         throw new ConnectionException(Constants.REQ_ERR);
                     case "R": //report of performed task
-                        int size = Integer.parseInt(splitedSentence[2]);
-                        String data = splitedSentence[2].substring(0, size);
-
-                        System.out.println(data);
+                        int size = Integer.parseInt(arguments[1]);
+                        String data = arguments[2].substring(0, size);
                         break;
 
                     case "F": //processed text file
-                        int size2 = Integer.parseInt(splitedSentence[2]);
-                        String data2 = splitedSentence[3].substring(0, size2);
+                        int size2 = Integer.parseInt(arguments[1]);
+                        String data2 = arguments[2].substring(0, size2);
 
                         String[] fileName = _fileName.split("\\.");
 
