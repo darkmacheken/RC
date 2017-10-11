@@ -57,3 +57,4 @@ Temporary Items
 *.properties
 *.class
 /CentralServer/build/
+/WorkingServer/nbproject/private/
