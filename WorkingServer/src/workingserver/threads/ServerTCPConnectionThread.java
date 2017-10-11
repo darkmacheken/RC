@@ -9,33 +9,35 @@ import workingserver.connection.ConnectionTCP;
 import workingserver.exceptions.ConnectionException;
 import workingserver.processing.report.Report;
 import workingserver.processing.request.Request;
-import workingserver.protocols.ProtocolWSCS;
+import workingserver.protocols.ParseProtocolCSWS;
+import workingserver.protocols.ProtocolCSWS;
+import workingserver.tasks.Task;
 
 /**
  *
  * @author leonardinho
  */
 public class ServerTCPConnectionThread extends Thread {
-    ConnectionTCP _connection;
+    private ConnectionTCP _connection;
+    private Task[] _tasks;
 
     /**
      *
      * @param connection
      */
-    public ServerTCPConnectionThread(ConnectionTCP connection) {
+    public ServerTCPConnectionThread(ConnectionTCP connection, Task[] tasks) {
         _connection = connection;
+        _tasks = tasks;
     }
 
     @Override
     public void run() {
-        ProtocolCSWS protocol = new ProtocolCSWS(_connection.getName(),
-                                                         _connection.getIp(),
-                                                         _connection.getPort());
+        ProtocolCSWS protocol = new ProtocolCSWS();
         try {
             ParseProtocolCSWS parser = new ParseProtocolCSWS(_connection);
             String received = parser.parse();
             Request request = protocol.receive(received);
-            Report report = request.process();
+            Report report = request.process(_tasks);
             String toSend = protocol.send(report);
             _connection.send(toSend);
             _connection.close();

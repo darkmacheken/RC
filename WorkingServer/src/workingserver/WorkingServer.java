@@ -81,7 +81,7 @@ public class WorkingServer {
             System.err.println(e.getErrorDescription());
             return;
         }
-        
+
         Runtime.getRuntime().addShutdownHook(new ShutdownThread(connectionUDP, wSPort));
 
         String registerMessage = "REG ";
@@ -115,7 +115,7 @@ public class WorkingServer {
             try {
                 ServerTCP server = new ServerTCP(wSPort);
                 ConnectionTCP connectionTCP = server.acceptSocket();
-                ServerTCPConnectionThread connectionThread = new ServerTCPConnectionThread(connectionTCP);
+                ServerTCPConnectionThread connectionThread = new ServerTCPConnectionThread(connectionTCP, allTasks);
                 connectionThread.start();
             }
             catch (ConnectionException e) {
