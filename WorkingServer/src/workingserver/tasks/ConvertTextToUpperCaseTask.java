@@ -15,7 +15,7 @@ public class ConvertTextToUpperCaseTask extends Task {
     }
 
     @Override
-    Report run(String file) {
+    public Report run(String file) {
         return createReportOk(file.toUpperCase());
     }
     

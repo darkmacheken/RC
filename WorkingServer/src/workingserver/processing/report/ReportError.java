@@ -31,5 +31,9 @@ public class ReportError extends Report {
         return _error;
     }
     
+    @Override
+    public String toString() {
+        return "";
+    }
     
 }

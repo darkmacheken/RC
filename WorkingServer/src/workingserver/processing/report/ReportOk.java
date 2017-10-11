@@ -45,5 +45,9 @@ public class ReportOk extends Report {
         return _rT;
     }
 
+    @Override
+    public String toString() {
+        return "";
+    }
 
 }

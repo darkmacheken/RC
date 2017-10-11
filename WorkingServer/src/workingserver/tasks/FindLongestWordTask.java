@@ -15,7 +15,7 @@ public class FindLongestWordTask extends Task {
     }
 
     @Override
-    Report run(String file) {
+    public Report run(String file) {
         String[] words = file.split(" |\n");
         String longestWord = "";
         

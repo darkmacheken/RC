@@ -29,7 +29,7 @@ public abstract class Task {
         return _rT;
     }
 
-    boolean isPTC(String pTC) {
+    public boolean isPTC(String pTC) {
         return _pTC.equals(pTC);
     }
 
