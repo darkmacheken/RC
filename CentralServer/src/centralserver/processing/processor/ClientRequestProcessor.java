@@ -69,29 +69,10 @@ public class ClientRequestProcessor implements RequestProcessor {
     private Report requestCmd() throws ConnectionException {
         String fileName = intToString(_counter, 5); // nnnnn.txt
         String file = _request.getFile();
-<<<<<<< Updated upstream
-        try {
-            File filepath = new File("input_files/" + fileName + ".txt");
-            filepath.getParentFile().mkdirs();
-            
-            PrintWriter out = new PrintWriter(
-                    new BufferedWriter(
-                            new FileWriter(filepath)));
-            out.print(file);
-            out.close();
-            _counter++;
-            
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            throw new ConnectionException(Constants.FILE_CNTWRT);
-        }
-  
-=======
+        
         GlobalFunctions.writeToFile("input_files/" + fileName + ".txt", file);
         _counter++;
         
->>>>>>> Stashed changes
         // Get IPs from list
         ConnectAddress[] iPs = _list.getIPs(_request.getPTC());
         if (iPs == null || iPs.length == 0)
