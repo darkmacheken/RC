@@ -13,29 +13,29 @@ import workingserver.protocols.ProtocolWSCS;
 
 /**
  *
- * @author duartegalvao
+ * @author leonardinho
  */
 public class ServerTCPConnectionThread extends Thread {
     ConnectionTCP _connection;
-    
+
     /**
      *
      * @param connection
      */
-    public ServerTCPConnectionThread(ConnectionTCP connection) {
+    public ServerTCPConnectionThread(ConnectionTCP connection, Task[] tasks) {
         _connection = connection;
     }
-    
+
     @Override
     public void run() {
-        ProtocolCSClient protocol = new ProtocolCSClient(_connection.getName(),
+        ProtocolCSWS protocol = new ProtocolCSWS(_connection.getName(),
                                                          _connection.getIp(),
                                                          _connection.getPort());
         try {
-            ParseProtocolClientCS parser = new ParseProtocolClientCS(_connection);
+            ParseProtocolCSWS parser = new ParseProtocolCSWS(_connection);
             String received = parser.parse();
             Request request = protocol.receive(received);
-            Report report = request.process(_list);
+            Report report = request.process();
             String toSend = protocol.send(report);
             _connection.send(toSend);
             _connection.close();
