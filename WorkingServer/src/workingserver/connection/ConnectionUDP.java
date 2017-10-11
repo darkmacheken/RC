@@ -5,6 +5,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,11 +30,17 @@ public class ConnectionUDP {
         }
         try {
             _ipToSend = InetAddress.getByName(_nameToSend);
-        } 
-        catch (UnknownHostException ex) {
+        }
+        catch (UnknownHostException e) {
             throw new ConnectionException(Constants.SOCK_UHOST + _nameToSend + "\n");
         }
         createSocket();
+        try {
+            _clientSocket.setSoTimeout(Constants.TIMEOUT);
+        }
+        catch (SocketException e) {
+            throw new ConnectionException(Constants.SOCK_TIMEOUTERR);
+        }
     }
 
     private void createSocket() throws ConnectionException {
@@ -45,7 +52,7 @@ public class ConnectionUDP {
         }
     }
 
-    public String receive() throws ConnectionException {
+    public String receive() throws ConnectionException, SocketTimeoutException {
         byte[] buf = new byte[20];
         DatagramPacket packet;
         packet = new DatagramPacket(buf, buf.length);

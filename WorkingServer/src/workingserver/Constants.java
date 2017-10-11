@@ -21,6 +21,11 @@ public final class Constants {
      */
     public static final int DEFAULT_PORT = 58063;
 
+    /**
+     * UDP timeout miliseconds
+     */
+    public static final int TIMEOUT = 5000;
+
     //Request Error Messages
     /**
      *Message: Nothing received from CS.
@@ -110,5 +115,7 @@ public final class Constants {
       *Message: Error closing server socket
       */
     public static final String SOCKET_SENDERR = "Error sending to socket\n";
+
+    public static final String SOCKET_TIMEOUTERR = "Error setting timeout of socket\n";
 
 }

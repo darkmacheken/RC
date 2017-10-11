@@ -5,8 +5,11 @@
  */
 package workingserver;
 
+import java.net.InetAddress;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import workingserver.connection.ConnectionTCP;
+import workingserver.connection.ConnectionUDP;
 import workingserver.connection.ServerTCP;
 import workingserver.exceptions.ConnectionException;
 import workingserver.tasks.ConvertTextToLowerCaseTask;
@@ -38,6 +41,25 @@ public class WorkingServer {
             new ConvertTextToLowerCaseTask()
         };
 
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+                String unregMessage = "UNR " + InetAddress.getLocalHost().getHostAddress() + " " + wsPort + "\n";
+                int counter = 0;
+                while(counter < 3){
+                    try{
+                        connectionUDP.send(unregMessage);
+                        String received = connectionUDP.receive();
+                        if(received.equals("UAK OK\n"))
+                            break;
+                        counter++;
+                    }
+                    catch(SocketTimeoutException e){
+                        counter++;
+                    }
+                }
+            }
+        });
+
         try {
             for (int i = 0; i < args.length; i++) {
                 if (args[i].equals("-p")) {
@@ -68,9 +90,26 @@ public class WorkingServer {
         }
 
         ConnectionUDP connectionUDP = new ConnectionUDP(csName, csPort);
-        String creationMessage = "REG ";
-        n_tasks = tasks.length;
 
+        String registerMessage = "REG ";
+        for (Task task : tasks) {
+            registerMessage = registerMessage + task.getPTC() + " ";
+        }
+        registerMessage = registerMessage + InetAddress.getLocalHost().getHostAddress() + " " + wsPort + "\n";
+
+        int counter = 0;
+        while(counter < 3){
+            try{
+                connectionUDP.send(registerMessage);
+                String received = connectionUDP.receive();
+                if(received.equals("RAK OK\n"))
+                    break;
+                counter++;
+            }
+            catch(SocketTimeoutException e){
+                counter++;
+            }
+        }
 
         while (true) {
             try {
