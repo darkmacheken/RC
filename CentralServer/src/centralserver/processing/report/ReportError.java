@@ -32,6 +32,10 @@ public class ReportError extends Report {
     public String getError() {
         return _error;
     }
-    
+
+    @Override
+    public String toString() {
+        return _error + "\n";
+    }
     
 }

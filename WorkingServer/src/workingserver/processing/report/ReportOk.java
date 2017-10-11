@@ -47,7 +47,7 @@ public class ReportOk extends Report {
 
     @Override
     public String toString() {
-        return "";
+        return "REP " + _rT + " " + _size + " " + _file + "\n";
     }
 
 }

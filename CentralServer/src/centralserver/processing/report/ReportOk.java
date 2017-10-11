@@ -91,5 +91,9 @@ public class ReportOk extends Report {
         return _rT;
     }
 
+    @Override
+    public String toString() {
+        return "REP " + _rT + " " + _size + " " + _file + "\n";
+    }
 
 }

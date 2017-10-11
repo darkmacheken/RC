@@ -33,7 +33,7 @@ public class ReportError extends Report {
     
     @Override
     public String toString() {
-        return "";
+        return _error + "\n";
     }
     
 }
