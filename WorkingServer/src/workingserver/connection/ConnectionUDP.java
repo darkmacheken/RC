@@ -1,25 +1,26 @@
-package centralserver.connection;
+package workingserver.connection;
 
-import centralserver.Constants;
-import centralserver.exceptions.ConnectionException;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 
-public class ServerUDP {
+public class ConnectionUDP {
+    private String _nameToSend;
     private InetAddress _ipToSend;
     private Integer _portToSend;
-    private final Integer _portLocal;
-    private DatagramSocket _serverSocket;
+    private DatagramSocket _clientSocket;
 
-    public ServerUDP(Integer portLocal) throws ConnectionException {
-        if (portLocal == null) {
-            _portLocal = Constants.DEFAULT_PORT;
+    public ConnectionUDP(String nameToSend, Integer portToSend) throws ConnectionException {
+        if (port == null) {
+            _portToSend = Constants.DEFAULT_PORT;
         }
         else {
-            _portLocal = portLocal;
+            _portToSend = port;
+        }
+        if (nameToSend == null) {
+            _nameToSend = Constants.DEFAULT_HOST;
         }
         createServerSocket();
     }

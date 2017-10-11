@@ -1,12 +1,17 @@
-package clientserver;
+package centralserver.connection;
 
-import clientserver.exceptions.ConnectionException;
+import centralserver.Constants;
+import centralserver.exceptions.ConnectionException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetAddress;
+import static java.net.InetAddress.getByName;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,8 +19,8 @@ import java.net.UnknownHostException;
  */
 public class ConnectionTCP {
     private String _name; //todo
-    private String _ip;
     private Integer _port;
+    private InetAddress _address;
     private Socket _socket;
     private PrintWriter _out;
     private BufferedReader _in;
@@ -40,7 +45,12 @@ public class ConnectionTCP {
         else {
             _port = port;
         }
-
+        try {
+            _address = getByName(_name);
+        }
+        catch (UnknownHostException ex) {
+            throw new ConnectionException(Constants.SOCK_UHOST + _name + "\n");
+        }
         createSocket();
     }
 
@@ -51,15 +61,14 @@ public class ConnectionTCP {
      */
     public ConnectionTCP(Socket socket) throws ConnectionException {
         _socket = socket;
-        _name = _socket.getInetAddress().getHostName();
-        _ip = _socket.getInetAddress().getHostAddress();
+        _address = _socket.getInetAddress();
         _port = _socket.getPort();
         createIO();
     }
 
     private void createSocket() throws ConnectionException {
         try {
-            _socket = new Socket(_name, _port);
+            _socket = new Socket(_address, _port);
             createIO();
         }
         catch (UnknownHostException e) {
@@ -113,6 +122,23 @@ public class ConnectionTCP {
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws ConnectionException
+     */
+    public String receiveLine() throws ConnectionException {
+        String receivedStr;
+        try {
+            createIO();
+            receivedStr = _in.readLine() + "\n";
+            return receivedStr;
+        }
+        catch(IOException e) {
+            //e.printStackTrace();
+            throw new ConnectionException(Constants.SOCK_READERR);
+        }
+    }
 
     /**
      *
@@ -127,32 +153,6 @@ public class ConnectionTCP {
         catch(IOException e) {
             throw new ConnectionException(Constants.SOCK_CLOSEERR);
         }
-    }
-    
-    //getters
-
-    /**
-     *
-     * @return
-     */
-     public String getName() {
-        return _name;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getIp() {
-        return _ip;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getPort() {
-        return _port;
     }
 
 }
