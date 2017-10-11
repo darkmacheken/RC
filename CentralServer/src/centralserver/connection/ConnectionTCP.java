@@ -64,6 +64,7 @@ public class ConnectionTCP {
     public ConnectionTCP(Socket socket) throws ConnectionException {
         _socket = socket;
         _address = _socket.getInetAddress();
+        _name = _address.getHostName();
         _port = _socket.getPort();
         _ip = _address.toString();
         createIO();
