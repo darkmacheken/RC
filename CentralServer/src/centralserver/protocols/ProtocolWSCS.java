@@ -49,12 +49,13 @@ public class ProtocolWSCS {
             
             //get PTC's and check each one if it has 3 chars
             List<String> ptcs =  new LinkedList<String>();
-            
+            String displayMessage = "+";
             for(int i = 1; i < splitedReceivedLength - 2; i++){
                 String ptc = splitedReceived[i];
                 if(ptc.length() != 3)
                     return "RAK ERR\n";
                 ptcs.add(ptc);
+                displayMessage+= ptc + " ";
             }
             
             //Transform list ptcs do array
@@ -65,6 +66,10 @@ public class ProtocolWSCS {
             
             //add addressWS and ptcsArray to the public list
             _list.addIP(ptcsArray, addressWS);
+            
+            displayMessage+= ipWS + " ";
+            displayMessage+= portWS;
+            System.out.println(displayMessage);
             
             return "RAK OK\n";
         }
@@ -88,7 +93,15 @@ public class ProtocolWSCS {
             ConnectAddress addressWS = new ConnectAddress(ipWS, portWS);
             
             //remove addressWS
-            _list.removeIP(addressWS);
+            List<String> ptcList = _list.removeIP(addressWS);
+            
+            String displayMessage = "-";
+            for(String ptc: ptcList){
+                displayMessage+= ptc + " ";
+            }
+            displayMessage+= ipWS + " ";
+            displayMessage+= portWS;
+            System.out.println(displayMessage);
             
             return "UAK OK\n";
         }

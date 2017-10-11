@@ -74,10 +74,14 @@ public class WSList {
      * @param ip
      * @return
      */
-    public synchronized void removeIP(ConnectAddress connectAddress){
+    public synchronized List<String> removeIP(ConnectAddress connectAddress){
+        List<String> ptcList = new ArrayList<String>();
         for(String ptc: _struct.keySet()){
-            _struct.get(ptc).remove(connectAddress);
+            boolean result = _struct.get(ptc).remove(connectAddress);
+            if(result)
+                ptcList.add(ptc);
         }
+        return ptcList;
     }
     
 }
