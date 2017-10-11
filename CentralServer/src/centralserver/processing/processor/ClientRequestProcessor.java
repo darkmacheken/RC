@@ -121,9 +121,17 @@ public class ClientRequestProcessor implements RequestProcessor {
         for (int i = 0; i < requests.length; i++) {
             try {
                 receivedReports[i] = (ReportOk) requests[i].processReceive();
+                PrintWriter out = new PrintWriter(
+                    new BufferedWriter(
+                            new FileWriter("output_files/" + requests[i].getFileName() + ".txt")));
+                out.print(file);
+                out.close();
             }
             catch (ClassCastException e) {
                 return reportError("REP EOF");
+            }
+            catch (IOException e) {
+                throw new ConnectionException(Constants.FILE_CNTWRT);
             }
         }
         
