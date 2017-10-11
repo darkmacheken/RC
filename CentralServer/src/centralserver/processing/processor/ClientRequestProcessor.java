@@ -59,6 +59,7 @@ public class ClientRequestProcessor implements RequestProcessor {
                     return new ReportOk(_request.getNameAdress(), _request.getIP(), _request.getPort(), _request.getCommand(), (String[]) pTCs.toArray());
         }
         else if (_request.getCommand().equals("REQ")) {
+            System.out.println(_request.getPTC() + " request: " + _request.getNameAdress() + " " + _request.getPort());
             return requestCmd();
         }
         else if (_request.getCommand().equals("ERR")) {
