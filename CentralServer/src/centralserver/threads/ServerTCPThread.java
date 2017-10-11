@@ -9,6 +9,9 @@ import centralserver.WSList;
 import centralserver.connection.ConnectionTCP;
 import centralserver.connection.ServerTCP;
 import centralserver.exceptions.ConnectionException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -39,6 +42,9 @@ public class ServerTCPThread extends Thread {
             }
             catch (ConnectionException e) {
                 System.err.println(e.getErrorDescription());
+            }
+            catch (IOException ex) {
+                Logger.getLogger(ServerTCPThread.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

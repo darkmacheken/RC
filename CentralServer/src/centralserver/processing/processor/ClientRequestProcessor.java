@@ -87,6 +87,7 @@ public class ClientRequestProcessor implements RequestProcessor {
             
         }
         catch (IOException e) {
+            System.out.println(fileName);
             throw new ConnectionException(Constants.FILE_CNTWRT);
         }
         
