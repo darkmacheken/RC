@@ -22,7 +22,7 @@ public class ServerTCPConnectionThread extends Thread {
      *
      * @param connection
      */
-    public ServerTCPConnectionThread(ConnectionTCP connection, Task[] tasks) {
+    public ServerTCPConnectionThread(ConnectionTCP connection) {
         _connection = connection;
     }
 
