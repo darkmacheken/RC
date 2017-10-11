@@ -6,8 +6,10 @@
 package workingserver.protocols;
 
 import static java.lang.Integer.max;
+import workingserver.processing.report.Report;
 import workingserver.processing.request.Request;
 import workingserver.processing.request.RequestError;
+import workingserver.processing.request.RequestOk;
 
 /**
  *
@@ -34,12 +36,19 @@ public class ProtocolCSWS {
             if (commandArguments.length != 4)
                 return new RequestError("ERR");
             
-            char type = commandArguments[0].charAt(0);
-            int size = Integer.parseInt(commandArguments[1]);
-            String file = commandArguments[2];
+            String pTC = commandArguments[0];
+            String fileName = commandArguments[1];
+            int size;
+            try {
+                size = Integer.parseInt(commandArguments[2]);
+            }
+            catch (NumberFormatException e) {
+                return new RequestError("ERR");
+            }
+            String file = commandArguments[3];
 
             if (size == file.length()) {
-                return new RequestOk(file, size, type);
+                return new RequestOk("WRQ", pTC, size, file, fileName);
             }
         }
         return new RequestError("ERR");
@@ -50,8 +59,7 @@ public class ProtocolCSWS {
      * @param request
      * @return
      */
-    public String send(RequestToWS request) {
-        int size = request.getFile().length();
-        return "REP" + request.getpTC() + request.getFileName() + size + request.getFile() + "\n";
+    public String send(Report report) {
+        return report.toString();
     }
 }

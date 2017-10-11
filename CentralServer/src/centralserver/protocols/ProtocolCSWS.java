@@ -64,7 +64,13 @@ public class ProtocolCSWS {
                 }
                 else {
                     char type = commandArguments[0].charAt(0);
-                    int size = Integer.parseInt(commandArguments[1]);
+                    int size;
+                    try {
+                        size = Integer.parseInt(commandArguments[1]);
+                    }
+                    catch (NumberFormatException e) {
+                        return new ReportError(_nameAdress, _iP, _port, "ERR");
+                    }
                     String file = commandArguments[2];
 
                     if (size == file.length()) {
