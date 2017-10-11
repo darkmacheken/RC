@@ -110,7 +110,7 @@ public class ClientRequestProcessor implements RequestProcessor {
             requests[i] = new RequestToWS(iPs[i].getIp(), iPs[i].getPort(),
                     fileName + intToString(i, 3) + ".txt",
                     _request.getPTC(),
-                    String.join("\n",wSFragment),
+                    String.join("\n", wSFragment),
                     new WorkingServerRequestProcessor());
             curLine += reqLines;
             requests[i].processSend();
@@ -161,13 +161,12 @@ public class ClientRequestProcessor implements RequestProcessor {
         return new ReportError(_request.getNameAdress(), _request.getIP(), _request.getPort(), error);
     }
     
-    private String intToString(int num, int digits) {
-        StringBuilder s = new StringBuilder(digits);
-        int zeroes = digits - (int) (Math.log(num) / Math.log(10)) - 1; 
-        for (int i = 0; i < zeroes; i++) {
-            s.append("0");
-        }
-        return s.append(num).toString();
+    private String intToString(Integer num, int digits) {
+        String res = num.toString();
+        int zeroes = digits - res.length();
+        for (int i = 0; i < zeroes; i++)
+            res = "0" + res;
+        return res;
     }
     
 }
