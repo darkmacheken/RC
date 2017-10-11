@@ -87,10 +87,10 @@ public class ClientRequestProcessor implements RequestProcessor {
             
         }
         catch (IOException e) {
-            System.out.println(fileName);
+            e.printStackTrace();
             throw new ConnectionException(Constants.FILE_CNTWRT);
         }
-        
+  
         // Get IPs from list
         ConnectAddress[] iPs = _list.getIPs(_request.getPTC());
         if (iPs == null || iPs.length == 0)
