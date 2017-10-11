@@ -47,7 +47,7 @@ public class ProtocolCSWS {
             return new ReportError(_nameAdress, _iP, _port, "ERR");
         }
         else if (splitedCommand[0].equals("REP")) {
-            String[] commandArguments = splitedCommand[1].split(" ");
+            String[] commandArguments = splitedCommand[1].split(" ", 3);
             if (commandArguments[0].equals("EOF")) {
                 return new ReportError(_nameAdress, _iP, _port, "REP EOF");
             }

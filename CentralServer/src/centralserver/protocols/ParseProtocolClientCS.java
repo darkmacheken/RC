@@ -26,7 +26,7 @@ public class ParseProtocolClientCS {
         
         line = _connection.receiveLine();
 
-        String[] lineSplit = line.split(" ");
+        String[] lineSplit = line.split(" ", 4);
         
         if (lineSplit[0].equals("LST"))
             return line;

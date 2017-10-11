@@ -31,7 +31,7 @@ public class ProtocolCSWS {
             return new RequestError("ERR");
         }
         else if (splitedCommand[0].equals("WRQ")) {
-            String[] commandArguments = splitedCommand[1].split(" ");
+            String[] commandArguments = splitedCommand[1].split(" ", 4);
             
             if (commandArguments.length != 4)
                 return new RequestError("ERR");

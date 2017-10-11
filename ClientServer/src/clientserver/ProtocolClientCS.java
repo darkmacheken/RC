@@ -79,7 +79,7 @@ public class ProtocolClientCS{
         //remove last char from sentence (it should be '\n' from protocol)
         sentence = sentence.substring(0, max(0,sentence.length()-1));
         
-        String[] splitedSentence = sentence.split(" ");
+        String[] splitedSentence = sentence.split(" ", 4);
 
         if(splitedSentence.length == 0)
             throw new ConnectionException(Constants.REQ_NULL);

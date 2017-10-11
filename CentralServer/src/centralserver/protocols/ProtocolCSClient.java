@@ -62,7 +62,7 @@ public class ProtocolCSClient {
             }
         }
         else if("REQ".equals(splitedCommand[0]) && splitedCommand.length == 2){
-            String[] commandArguments = splitedCommand[1].split(" ");
+            String[] commandArguments = splitedCommand[1].split(" ", 3);
             
             if(commandArguments.length != 3){
                 //different lenght
