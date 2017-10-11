@@ -1,6 +1,5 @@
-package clientserver.connection;
+package clientserver;
 
-import clientserver.Constants;
 import clientserver.exceptions.ConnectionException;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,8 +9,6 @@ import java.net.InetAddress;
 import static java.net.InetAddress.getByName;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
