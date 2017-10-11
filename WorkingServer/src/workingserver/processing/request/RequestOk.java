@@ -1,6 +1,6 @@
 package workingserver.processing.request;
 
-import workingserver.processing.processor.RequestProcessor;
+import workingserver.processing.processor.OkRequestProcessor;
 
 /**
  *
@@ -17,16 +17,14 @@ public class RequestOk extends Request{
 
     /**
      *
-     * @param processor
      * @param command
      * @param pTC
      * @param file
      * @param size
      * @param fileName
      */
-    public RequestOk(String command, String pTC, int size, String file, String fileName, 
-                   RequestProcessor processor) {
-        super(processor);
+    public RequestOk(String command, String pTC, int size, String file, String fileName) {
+        super(new OkRequestProcessor());
         
         _command = command;
         _pTC = pTC;
@@ -41,28 +39,24 @@ public class RequestOk extends Request{
      * @param pTC
      * @param size
      * @param file
-     * @param processor
      */
-    public RequestOk(String command, String pTC, int size, String file, 
-                   RequestProcessor processor) {
-        this(command, pTC, size, file, null, processor);
+    public RequestOk(String command, String pTC, int size, String file) {
+        this(command, pTC, size, file, null);
     }
     
     /**
      *
      * @param command
-     * @param processor
      */
-    public RequestOk(String command, RequestProcessor processor){
-        this(command, null, 0, null, null,processor);
+    public RequestOk(String command){
+        this(command, null, 0, null, null);
     }
     
     /**
      *
-     * @param processor
      */
-    public RequestOk(RequestProcessor processor){
-        this(null, null, 0, null, null,processor);
+    public RequestOk(){
+        this(null, null, 0, null, null);
     }
 
     /**

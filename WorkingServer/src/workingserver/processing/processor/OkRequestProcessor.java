@@ -19,7 +19,7 @@ import workingserver.tasks.Task;
 import workingserver.tasks.TaskRunner;
 
 
-public class FileRequestProcessor implements RequestProcessor {
+public class OkRequestProcessor implements RequestProcessor {
     private RequestOk _request;
     private Task[] _tasks;
 

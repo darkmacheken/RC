@@ -5,7 +5,7 @@
  */
 package workingserver.processing.request;
 
-import workingserver.processing.processor.RequestProcessor;
+import workingserver.processing.processor.ErrorRequestProcessor;
 
 /**
  *
@@ -17,10 +17,9 @@ public class RequestError extends Request {
     /**
      *
      * @param error
-     * @param processor
      */
-    public RequestError(String error, RequestProcessor processor) {
-        super(processor);
+    public RequestError(String error) {
+        super(new ErrorRequestProcessor());
         _error = error;
     }
     

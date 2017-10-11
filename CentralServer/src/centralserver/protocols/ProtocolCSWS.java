@@ -40,7 +40,7 @@ public class ProtocolCSWS {
         //split sentence by space into array
         String[] splitedCommand = sentence.split(" ", 2);
 
-        if (splitedCommand.length != 0) {
+        if (splitedCommand.length == 0) {
             return new ReportError(_nameAdress, _iP, _port, "ERR");
         }
         if (splitedCommand[0].equals("ERR")) {
