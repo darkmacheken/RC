@@ -5,6 +5,7 @@
  */
 package centralserver.protocols;
 
+import centralserver.WSList;
 import centralserver.processing.report.Report;
 import centralserver.processing.report.ReportError;
 import centralserver.processing.report.ReportOk;
@@ -16,20 +17,14 @@ import static java.lang.Integer.max;
  * @author duartegalvao
  */
 public class ProtocolWSCS {
-    private final String _nameAdress;
-    private final String _iP;
-    private final int _port;
+    private final WSList _list;
 
     /**
     *
-    * @param nameAdress
-    * @param iP
-    * @param port
+     * @param list
     */
-    public ProtocolWSCS(String nameAdress, String iP, int port) {
-        _nameAdress = nameAdress;
-        _iP = iP;
-        _port = port;
+    public ProtocolWSCS(WSList list) {
+        _list = list;
     }
 
     public Report receive(String sentence) {

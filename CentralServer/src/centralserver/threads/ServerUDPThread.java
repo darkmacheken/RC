@@ -9,6 +9,7 @@ import centralserver.WSList;
 import centralserver.connection.ConnectionUDP;
 import centralserver.connection.ServerUDP;
 import centralserver.exceptions.ConnectionException;
+import centralserver.protocols.ProtocolWSCS;
 
 /**
  *
@@ -17,6 +18,7 @@ import centralserver.exceptions.ConnectionException;
 public class ServerUDPThread extends Thread {
     WSList _list;
     ServerUDP _server;
+    ProtocolWSCS _protocol;
     
     /**
      *
@@ -26,14 +28,17 @@ public class ServerUDPThread extends Thread {
     public ServerUDPThread(WSList list, ServerUDP server) {
         _list = list;
         _server = server;
+        _protocol = new ProtocolWSCS(_list);
     }
     
     @Override
     public void run() {
         while (true) {
             try {
+                String recv = _server.receive();
+                String rproc = _protocol.process(s);
+                
                 ConnectionUDP connection = _server.acceptSocket();
-                ServerUDPConnectionThread connectionThread = new ServerUDPConnectionThread(connection, _list);
                 System.out.println("Connected to client: " + connection.getName() + ":" + connection.getPort());
                 connectionThread.start();
             }
