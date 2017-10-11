@@ -6,11 +6,15 @@
 package workingserver;
 
 import java.util.ArrayList;
+import workingserver.connection.ConnectionTCP;
+import workingserver.connection.ServerTCP;
+import workingserver.exceptions.ConnectionException;
 import workingserver.tasks.ConvertTextToLowerCaseTask;
 import workingserver.tasks.ConvertTextToUpperCaseTask;
 import workingserver.tasks.FindLongestWordTask;
 import workingserver.tasks.Task;
 import workingserver.tasks.WordCountTask;
+import workingserver.threads.ServerTCPConnectionThread;
 
 /**
  *
@@ -26,7 +30,7 @@ public class WorkingServer {
         String cSName = null;
         Integer cSPort = null;
         ArrayList<Task> tasks = new ArrayList<Task>();
-        
+
         Task[] allTasks = new Task[]{
             new WordCountTask(),
             new FindLongestWordTask(),
@@ -62,8 +66,24 @@ public class WorkingServer {
             System.out.println("Erro de parâmetros.\n");
             return;
         }
-        
-        // resto da implementacao
+
+        ConnectionUDP connectionUDP = new ConnectionUDP(csName, csPort);
+        String creationMessage = "REG ";
+        n_tasks = tasks.length;
+
+
+        while (true) {
+            try {
+                ServerTCP server = new ServerTCP(wSPort);
+                ConnectionTCP connectionTCP = server.acceptSocket();
+                ServerTCPConnectionThread connectionThread = new ServerTCPConnectionThread(connectionTCP);
+                connectionThread.start();
+            }
+            catch (ConnectionException e) {
+                System.err.println(e.getErrorDescription());
+            }
+        }
+
     }
-    
+
 }
