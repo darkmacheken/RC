@@ -5,6 +5,11 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import workingserver.Constants;
+import workingserver.exceptions.ConnectionException;
 
 public class ConnectionUDP {
     private String _nameToSend;
@@ -13,50 +18,54 @@ public class ConnectionUDP {
     private DatagramSocket _clientSocket;
 
     public ConnectionUDP(String nameToSend, Integer portToSend) throws ConnectionException {
-        if (port == null) {
+        if (portToSend == null) {
             _portToSend = Constants.DEFAULT_PORT;
         }
         else {
-            _portToSend = port;
+            _portToSend = portToSend;
         }
         if (nameToSend == null) {
             _nameToSend = Constants.DEFAULT_HOST;
         }
-        createServerSocket();
+        try {
+            _ipToSend = InetAddress.getByName(_nameToSend);
+        } 
+        catch (UnknownHostException ex) {
+            throw new ConnectionException(Constants.SOCK_UHOST + _nameToSend + "\n");
+        }
+        createSocket();
     }
 
-    private void createServerSocket() throws ConnectionException {
+    private void createSocket() throws ConnectionException {
         try {
-            _serverSocket = new DatagramSocket(_portLocal);
+            _clientSocket = new DatagramSocket();
         }
         catch (SocketException ex) {
-            throw new ConnectionException("[UDP] " + Constants.SERVER_IOERR + _portLocal + "\n");
+            throw new ConnectionException("[UDP] " + Constants.SERVER_IOERR + "\n");
         }
     }
 
     public String receive() throws ConnectionException {
-        byte[] buf = new byte[1024];
+        byte[] buf = new byte[20];
         DatagramPacket packet;
         packet = new DatagramPacket(buf, buf.length);
         try {
-            _serverSocket.receive(packet);
+            _clientSocket.receive(packet);
         }
         catch (IOException ex) {
             throw new ConnectionException("[UDP] " + Constants.SOCK_READERR);
         }
-        _ipToSend = packet.getAddress();
-        _portToSend = packet.getPort();
         String received = new String(packet.getData(), 0, packet.getLength());
         return received;
     }
 
     public void send(String message) throws ConnectionException {
-        byte[] buf = new byte[20];
+        byte[] buf = new byte[1024];
         buf = message.getBytes();
         DatagramPacket packet;
         packet = new DatagramPacket(buf, buf.length, _ipToSend, _portToSend);
         try {
-            _serverSocket.send(packet);
+            _clientSocket.send(packet);
         }
         catch (IOException ex) {
             throw new ConnectionException("[UDP] " + Constants.SOCKET_SENDERR);
@@ -64,6 +73,6 @@ public class ConnectionUDP {
     }
 
     public void close() {
-        _serverSocket.close();
+        _clientSocket.close();
     }
 }
