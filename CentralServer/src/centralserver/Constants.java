@@ -58,7 +58,7 @@ public final class Constants {
      *Message: File not found.
      */
     public static final String FILE_NFOUND = "File not found.\n";
-    
+
     /**
      *Message: Can't write to file.
      */
@@ -105,5 +105,10 @@ public final class Constants {
       *Message: Error closing server socket
       */
     public static final String SERVER_CLOSEERR = "Error closing server socket\n";
+
+    /**
+      *Message: Error closing server socket
+      */
+    public static final String SOCKET_SENDERR = "Error sending to socket\n";
 
 }
