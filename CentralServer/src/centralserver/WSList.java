@@ -15,7 +15,7 @@ import java.util.concurrent.LinkedBlockingDeque;
  * @author duartegalvao
  */
 public class WSList {
-    ConcurrentHashMap<String, LinkedBlockingDeque<ConnectAddress>> _struct;
+    private ConcurrentHashMap<String, LinkedBlockingDeque<ConnectAddress>> _struct;
 
     
     /**

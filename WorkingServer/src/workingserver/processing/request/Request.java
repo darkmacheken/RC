@@ -8,6 +8,7 @@ package workingserver.processing.request;
 import workingserver.processing.report.Report;
 import workingserver.exceptions.ConnectionException;
 import workingserver.processing.processor.RequestProcessor;
+import workingserver.tasks.Task;
 
 /**
  *
@@ -36,12 +37,12 @@ public abstract class Request {
     
     /**
      *
-     * @param list
+     * @param tasks
      * @return
-     * @throws centralserver.exceptions.ConnectionException
+     * @throws ConnectionException
      */
-    public Report process() throws ConnectionException {
-        return _processor.process(this);
+    public Report process(Task[] tasks) throws ConnectionException {
+        return _processor.process(this, tasks);
     }
      
 }

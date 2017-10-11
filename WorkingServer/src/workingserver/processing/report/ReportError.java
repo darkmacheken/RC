@@ -19,9 +19,7 @@ public class ReportError extends Report {
      * @param _iP
      * @param _port
      */
-    public ReportError(String _nameAdress, String _iP, int _port, String error) {
-        super(_nameAdress, _iP, _port);
-        
+    public ReportError(String error) {
         _error = error;
     }
 
