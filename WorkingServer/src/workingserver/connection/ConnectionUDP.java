@@ -39,7 +39,7 @@ public class ConnectionUDP {
             _clientSocket.setSoTimeout(Constants.TIMEOUT);
         }
         catch (SocketException e) {
-            throw new ConnectionException(Constants.SOCK_TIMEOUTERR);
+            throw new ConnectionException(Constants.SOCKET_TIMEOUTERR);
         }
     }
 

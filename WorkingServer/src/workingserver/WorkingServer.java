@@ -7,7 +7,10 @@ package workingserver;
 
 import java.net.InetAddress;
 import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import workingserver.connection.ConnectionTCP;
 import workingserver.connection.ConnectionUDP;
 import workingserver.connection.ServerTCP;
@@ -18,6 +21,7 @@ import workingserver.tasks.FindLongestWordTask;
 import workingserver.tasks.Task;
 import workingserver.tasks.WordCountTask;
 import workingserver.threads.ServerTCPConnectionThread;
+import workingserver.threads.ShutdownThread;
 
 /**
  *
@@ -40,25 +44,6 @@ public class WorkingServer {
             new ConvertTextToUpperCaseTask(),
             new ConvertTextToLowerCaseTask()
         };
-
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            public void run() {
-                String unregMessage = "UNR " + InetAddress.getLocalHost().getHostAddress() + " " + wsPort + "\n";
-                int counter = 0;
-                while(counter < 3){
-                    try{
-                        connectionUDP.send(unregMessage);
-                        String received = connectionUDP.receive();
-                        if(received.equals("UAK OK\n"))
-                            break;
-                        counter++;
-                    }
-                    catch(SocketTimeoutException e){
-                        counter++;
-                    }
-                }
-            }
-        });
 
         try {
             for (int i = 0; i < args.length; i++) {
@@ -89,13 +74,25 @@ public class WorkingServer {
             return;
         }
 
-        ConnectionUDP connectionUDP = new ConnectionUDP(csName, csPort);
+        ConnectionUDP connectionUDP;
+        try {
+            connectionUDP = new ConnectionUDP(cSName, cSPort);
+        } catch (ConnectionException e) {
+            System.err.println(e.getErrorDescription());
+            return;
+        }
+        
+        Runtime.getRuntime().addShutdownHook(new ShutdownThread(connectionUDP, wSPort));
 
         String registerMessage = "REG ";
         for (Task task : tasks) {
             registerMessage = registerMessage + task.getPTC() + " ";
         }
-        registerMessage = registerMessage + InetAddress.getLocalHost().getHostAddress() + " " + wsPort + "\n";
+        try {
+            registerMessage = registerMessage + InetAddress.getLocalHost().getHostAddress() + " " + wSPort + "\n";
+        } catch (UnknownHostException e) {
+            System.out.println("Error: Unknown host.\n");
+        }
 
         int counter = 0;
         while(counter < 3){
@@ -108,6 +105,9 @@ public class WorkingServer {
             }
             catch(SocketTimeoutException e){
                 counter++;
+            }
+            catch(ConnectionException e) {
+                System.err.println(e.getErrorDescription());
             }
         }
 
