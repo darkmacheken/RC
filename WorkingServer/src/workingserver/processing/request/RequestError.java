@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package centralserver.processing.request;
+package workingserver.processing.request;
 
-import centralserver.processing.processor.RequestProcessor;
+import workingserver.processing.processor.RequestProcessor;
 
 /**
  *
@@ -16,13 +16,11 @@ public class RequestError extends Request {
 
     /**
      *
-     * @param nameAdress
-     * @param iP
-     * @param port
+     * @param error
      * @param processor
      */
-    public RequestError(String nameAdress, String iP, int port, String error, RequestProcessor processor) {
-        super(nameAdress, iP, port, processor);
+    public RequestError(String error, RequestProcessor processor) {
+        super(processor);
         _error = error;
     }
     
