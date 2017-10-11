@@ -76,13 +76,14 @@ public class ClientRequestProcessor implements RequestProcessor {
         try {
             PrintWriter out = new PrintWriter(
                     new BufferedWriter(
-                            new FileWriter("input_files/" + fileName + ".txt")));
+                            new FileWriter("./input_files/" + fileName + ".txt")));
             out.print(file);
             out.close();
             _counter++;
             
         }
         catch (IOException e) {
+            System.out.println(fileName);
             throw new ConnectionException(Constants.FILE_CNTWRT);
         }
         
