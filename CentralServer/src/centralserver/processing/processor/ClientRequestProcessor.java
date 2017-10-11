@@ -20,6 +20,7 @@ import centralserver.processing.request.Request;
 import centralserver.processing.request.RequestOk;
 import centralserver.processing.request.RequestToWS;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -74,9 +75,12 @@ public class ClientRequestProcessor implements RequestProcessor {
         String fileName = intToString(_counter, 5); // nnnnn.txt
         String file = _request.getFile();
         try {
+            File filepath = new File("input_files/" + fileName + ".txt");
+            filepath.getParentFile().mkdirs();
+            
             PrintWriter out = new PrintWriter(
                     new BufferedWriter(
-                            new FileWriter("input_files/" + fileName + ".txt")));
+                            new FileWriter(filepath)));
             out.print(file);
             out.close();
             _counter++;
