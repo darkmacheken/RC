@@ -1,7 +1,7 @@
-package centralserver.connection;
+package clientserver.connection;
 
-import centralserver.Constants;
-import centralserver.exceptions.ConnectionException;
+import clientserver.Constants;
+import clientserver.exceptions.ConnectionException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,6 +19,7 @@ import java.util.logging.Logger;
  */
 public class ConnectionTCP {
     private String _name; //todo
+    private String _ip;
     private Integer _port;
     private InetAddress _address;
     private Socket _socket;
@@ -51,6 +52,7 @@ public class ConnectionTCP {
         catch (UnknownHostException ex) {
             throw new ConnectionException(Constants.SOCK_UHOST + _name + "\n");
         }
+        _ip = _address.toString();
         createSocket();
     }
 
@@ -63,6 +65,7 @@ public class ConnectionTCP {
         _socket = socket;
         _address = _socket.getInetAddress();
         _port = _socket.getPort();
+        _ip = _address.toString();
         createIO();
     }
 
@@ -153,6 +156,18 @@ public class ConnectionTCP {
         catch(IOException e) {
             throw new ConnectionException(Constants.SOCK_CLOSEERR);
         }
+    }
+
+    public String getName() {
+        return _name;
+    }
+
+    public String getIp() {
+        return _ip;
+    }
+
+    public Integer getPort() {
+        return _port;
     }
 
 }
