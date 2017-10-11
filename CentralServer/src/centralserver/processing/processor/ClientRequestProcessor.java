@@ -6,7 +6,7 @@
 package centralserver.processing.processor;
 
 import centralserver.ConnectAddress;
-import centralserver.Constants;
+import centralserver.GlobalFunctions;
 import centralserver.WSList;
 import centralserver.exceptions.ConnectionException;
 import centralserver.processing.processor.outputbuild.AddClientOutputBuilder;
@@ -19,11 +19,6 @@ import centralserver.processing.report.ReportOk;
 import centralserver.processing.request.Request;
 import centralserver.processing.request.RequestOk;
 import centralserver.processing.request.RequestToWS;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -74,6 +69,7 @@ public class ClientRequestProcessor implements RequestProcessor {
     private Report requestCmd() throws ConnectionException {
         String fileName = intToString(_counter, 5); // nnnnn.txt
         String file = _request.getFile();
+<<<<<<< Updated upstream
         try {
             File filepath = new File("input_files/" + fileName + ".txt");
             filepath.getParentFile().mkdirs();
@@ -91,6 +87,11 @@ public class ClientRequestProcessor implements RequestProcessor {
             throw new ConnectionException(Constants.FILE_CNTWRT);
         }
   
+=======
+        GlobalFunctions.writeToFile("input_files/" + fileName + ".txt", file);
+        _counter++;
+        
+>>>>>>> Stashed changes
         // Get IPs from list
         ConnectAddress[] iPs = _list.getIPs(_request.getPTC());
         if (iPs == null || iPs.length == 0)
@@ -126,17 +127,10 @@ public class ClientRequestProcessor implements RequestProcessor {
         for (int i = 0; i < requests.length; i++) {
             try {
                 receivedReports[i] = (ReportOk) requests[i].processReceive();
-                PrintWriter out = new PrintWriter(
-                    new BufferedWriter(
-                            new FileWriter("output_files/" + requests[i].getFileName() + ".txt")));
-                out.print(file);
-                out.close();
+                GlobalFunctions.writeToFile("output_files/" + requests[i].getFileName() + ".txt", file);
             }
             catch (ClassCastException e) {
                 return reportError("REP EOF");
-            }
-            catch (IOException e) {
-                throw new ConnectionException(Constants.FILE_CNTWRT);
             }
         }
         

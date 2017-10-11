@@ -5,13 +5,9 @@
  */
 package centralserver.processing.processor.outputbuild;
 
-import centralserver.Constants;
+import centralserver.GlobalFunctions;
 import centralserver.exceptions.ConnectionException;
 import centralserver.processing.report.ReportOk;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  *
@@ -32,17 +28,7 @@ public abstract class ClientOutputBuilder {
     public abstract void build();
     
     public void saveFile() throws ConnectionException {
-        try {
-            PrintWriter out = new PrintWriter(
-                        new BufferedWriter(
-                                new FileWriter("output_files/" + _fileName + ".txt")));
-
-            out.print(_file);
-            out.close();
-        }
-        catch (IOException ex) {
-            throw new ConnectionException(Constants.FILE_CNTWRT); // TODO mensagem
-        }
+        GlobalFunctions.writeToFile("output_files/" + _fileName + ".txt", _file);
     }
     
     public Boolean checkRT() {

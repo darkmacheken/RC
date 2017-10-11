@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import workingserver.Constants;
+import workingserver.GlobalFunctions;
 import workingserver.exceptions.ConnectionException;
 import workingserver.processing.report.Report;
 import workingserver.processing.report.ReportError;
@@ -41,17 +42,7 @@ public class OkRequestProcessor implements RequestProcessor {
         String fileName = _request.getFileName();
         String file = _request.getFile();
         
-        // Save file
-        try {
-            PrintWriter out = new PrintWriter(
-                    new BufferedWriter(
-                            new FileWriter("input_files/" + fileName)));
-            out.print(file);
-            out.close();
-        }
-        catch (IOException e) {
-            throw new ConnectionException(Constants.FILE_CNTWRT);
-        }
+        GlobalFunctions.writeToFile("input_files/" + fileName, file);
         
         if (_request.getCommand().equals("WRQ")) {
             // Process request from Central Server
