@@ -7,7 +7,6 @@ package centralserver.protocols;
 
 import centralserver.ConnectAddress;
 import centralserver.WSList;
-import static java.lang.Integer.max;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class ProtocolWSCS {
         
     public String process(String received){
         //remove last char from sentence (it should be '\n' from protocol)
-        received = received.substring(0, max(0,received.length()-1));
+        received = received.substring(0, Integer.max(0,received.length()-1));
         
         String[] splitedReceived = received.split(" ");
         int splitedReceivedLength = splitedReceived.length;

@@ -13,7 +13,6 @@ import centralserver.processing.report.ReportOk;
 import centralserver.processing.request.Request;
 import centralserver.processing.request.RequestError;
 import centralserver.processing.request.RequestOk;
-import static java.lang.Integer.max;
 
 /**
  * Protocol beteween CS-Client, creates de messages to be sent and
@@ -47,7 +46,7 @@ public class ProtocolCSClient {
      */
     public Request receive(String sentence){
         //remove last char from sentence (it should be '\n' from protocol)
-        sentence = sentence.substring(0, max(0,sentence.length()-1));
+        sentence = sentence.substring(0, Integer.max(0,sentence.length()-1));
         //split sentence by space into array
         String[] splitedCommand = sentence.split(" ",2);
 

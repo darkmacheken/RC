@@ -5,7 +5,6 @@
  */
 package workingserver.protocols;
 
-import static java.lang.Integer.max;
 import workingserver.processing.report.Report;
 import workingserver.processing.request.Request;
 import workingserver.processing.request.RequestError;
@@ -19,7 +18,7 @@ public class ProtocolCSWS {
 
     public Request receive(String sentence) {
         //remove last char from sentence (it should be '\n' from protocol)
-        sentence = sentence.substring(0, max(0, sentence.length() - 1));
+        sentence = sentence.substring(0, Integer.max(0, sentence.length() - 1));
 
         //split sentence by space into array
         String[] splitedCommand = sentence.split(" ", 2);

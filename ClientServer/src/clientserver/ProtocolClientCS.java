@@ -15,7 +15,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.Integer.max;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -75,7 +74,7 @@ public class ProtocolClientCS{
      */
     public void receiveProtocol(String sentence) throws ConnectionException {
         //remove last char from sentence (it should be '\n' from protocol)
-        sentence = sentence.substring(0, max(0,sentence.length()-1));
+        sentence = sentence.substring(0, Integer.max(0,sentence.length()-1));
         
         String[] splitedSentence = sentence.split(" ", 2);
 

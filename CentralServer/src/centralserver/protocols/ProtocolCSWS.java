@@ -9,7 +9,6 @@ import centralserver.processing.report.Report;
 import centralserver.processing.report.ReportError;
 import centralserver.processing.report.ReportOk;
 import centralserver.processing.request.RequestToWS;
-import static java.lang.Integer.max;
 
 /**
  *
@@ -35,7 +34,7 @@ public class ProtocolCSWS {
 
     public Report receive(String sentence) {
         //remove last char from sentence (it should be '\n' from protocol)
-        sentence = sentence.substring(0, max(0, sentence.length() - 1));
+        sentence = sentence.substring(0, Integer.max(0, sentence.length() - 1));
 
         //split sentence by space into array
         String[] splitedCommand = sentence.split(" ", 2);
