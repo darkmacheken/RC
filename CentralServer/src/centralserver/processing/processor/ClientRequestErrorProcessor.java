@@ -38,7 +38,7 @@ public class ClientRequestErrorProcessor implements RequestProcessor {
             //should never happen
             e.printStackTrace();
             return null;
-        }       
+        }
     }
     
 }
