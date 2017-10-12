@@ -116,7 +116,7 @@ public class ProtocolClientCS{
                 break;
 
             case "REP":
-                arguments = splitedSentence[1].split(" ");
+                arguments = splitedSentence[1].split(" ",3);
                 if(arguments.length < 2)
                      throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
 
@@ -126,8 +126,23 @@ public class ProtocolClientCS{
                     case "ERR":       
                         throw new ConnectionException(Constants.REQ_ERR);
                     case "R": //report of performed task
-                        int size = Integer.parseInt(arguments[1]);
-                        String data = arguments[2].substring(0, size);
+                        try{
+                            int size = Integer.parseInt(arguments[1]);
+                            String data = arguments[2].substring(0, size);
+
+                            if(_ptc.equals("WCT")){
+                                int numberWords = Integer.parseInt(data);
+                                System.out.println("Number of words: " + numberWords);
+                            }
+                            else if(_ptc.equals("FLW")){
+                                System.out.println("Longest words: " + data);
+                            }
+                            else
+                                throw new ConnectionException(Constants.REQ_ERR);
+                        }
+                        catch(NumberFormatException e){
+                            throw new ConnectionException(Constants.REQ_ERR);
+                        }
                         break;
 
                     case "F": //processed text file

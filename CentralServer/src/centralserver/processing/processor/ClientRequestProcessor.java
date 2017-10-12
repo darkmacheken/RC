@@ -131,6 +131,7 @@ public class ClientRequestProcessor implements RequestProcessor {
         else
             return reportError("ERR"); // should not happen
         
+        cob.build();
         cob.saveFile();
         if (!cob.checkRT())
             return reportError("ERR");

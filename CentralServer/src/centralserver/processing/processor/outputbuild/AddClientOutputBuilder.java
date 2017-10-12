@@ -22,7 +22,7 @@ public class AddClientOutputBuilder extends ClientOutputBuilder {
                 value += Integer.parseInt(report.getFile());
         }
         catch (NumberFormatException e) {
-            // should not happen
+            e.printStackTrace();
         }
         
         setFile(value.toString());
