@@ -106,18 +106,43 @@ public class ClientRequestProcessor implements RequestProcessor {
                     new WorkingServerRequestProcessor());
             curLine += reqLines;
             
-            requests[i].processSend();
+            try {
+                requests[i].processSend();
+            }
+            catch (ConnectionException e) {
+                // ups
+            }
         }
         
         ReportOk[] receivedReports = new ReportOk[numRequests];
+        LinkedList<ConnectAddress> workingWSs = new LinkedList<>(Arrays.asList(iPs));
         
         for (int i = 0; i < requests.length; i++) {
             try {
                 receivedReports[i] = (ReportOk) requests[i].processReceive();
                 GlobalFunctions.writeToFile("output_files/" + requests[i].getFileName() + ".txt", file);
             }
-            catch (ClassCastException e) {
-                return reportError("REP EOF");
+            catch (ClassCastException | NullPointerException | ConnectionException e) {
+                workingWSs.remove(iPs[i]);
+                while (!workingWSs.isEmpty()) {
+                    ConnectAddress newWS = workingWSs.getFirst();
+                    RequestToWS newRequest = new RequestToWS(iPs[i].getIp(), iPs[i].getPort(),
+                                    requests[i].getFileName(),
+                                    _request.getPTC(),
+                                    requests[i].getFile(),
+                                    new WorkingServerRequestProcessor());
+                    try {
+                        newRequest.processSend();
+                        receivedReports[i] = (ReportOk) requests[i].processReceive();
+                        GlobalFunctions.writeToFile("output_files/" + requests[i].getFileName() + ".txt", file);
+                        break;
+                    }
+                    catch (ClassCastException | NullPointerException | ConnectionException e1) {
+                        workingWSs.removeFirst();
+                    }
+                }
+                if (workingWSs.isEmpty())
+                    return reportError("REP EOF");
             }
         }
         

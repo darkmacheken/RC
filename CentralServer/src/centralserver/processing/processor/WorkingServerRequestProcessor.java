@@ -30,7 +30,7 @@ public class WorkingServerRequestProcessor implements RequestProcessor {
     /**
      * Process and send only
      */
-    public void processSend(RequestToWS request) throws ConnectionException{
+    public void processSend(RequestToWS request) throws ConnectionException {
         _request = request;
         _protocol = new ProtocolCSWS(_request.getNameAdress(), _request.getIP(), _request.getPort());
         _connection = new ConnectionTCP(_request.getIP(), _request.getPort());
@@ -42,7 +42,7 @@ public class WorkingServerRequestProcessor implements RequestProcessor {
      *  Process received. BLOCKING FUNCTION
      * @return
      */
-    public Report processReceive() throws ConnectionException{
+    public Report processReceive() throws ConnectionException {
        String received = _connection.receive();
        Report report = _protocol.receive(received);
        
