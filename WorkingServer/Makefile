@@ -1,5 +1,5 @@
 JAVADIR=
-JARNAME=cs
+JARNAME=ws
 
 all:
 	(cd src; javac -encoding UTF-8 `find . -name \*.java`)

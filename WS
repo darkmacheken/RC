@@ -1,0 +1,5 @@
+cd WorkingServer
+make &> /dev/null
+java -classpath ./ws.jar workingserver.WS "$@"
+make clean &> /dev/null
+

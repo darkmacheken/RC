@@ -28,7 +28,7 @@ import workingserver.threads.ShutdownThread;
  *
  * @author Pedro Daniel
  */
-public class WorkingServer {
+public class WS {
 
     /**
      * @param args the command line arguments
@@ -141,7 +141,7 @@ public class WorkingServer {
                 System.err.println(e.getErrorDescription());
             }
             catch (IOException ex) {
-                Logger.getLogger(WorkingServer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(WS.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
