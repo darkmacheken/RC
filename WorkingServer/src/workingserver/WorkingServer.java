@@ -5,10 +5,13 @@
  */
 package workingserver;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import workingserver.connection.ConnectionTCP;
 import workingserver.connection.ConnectionUDP;
 import workingserver.connection.ServerTCP;
@@ -136,6 +139,9 @@ public class WorkingServer {
             }
             catch (ConnectionException e) {
                 System.err.println(e.getErrorDescription());
+            }
+            catch (IOException ex) {
+                Logger.getLogger(WorkingServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 

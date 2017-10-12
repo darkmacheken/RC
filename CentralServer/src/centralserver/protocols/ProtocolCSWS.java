@@ -56,7 +56,23 @@ public class ProtocolCSWS {
                 return new ReportError(_nameAdress, _iP, _port, "REP ERR");
             }
             else if (commandArguments[0].equals("F")) {
-
+                 if (commandArguments.length != 3) {
+                    return new ReportError(_nameAdress, _iP, _port, "ERR");
+                }
+                 else {
+                    char type = commandArguments[0].charAt(0);
+                    int size;
+                    try {
+                        size = Integer.parseInt(commandArguments[1]);
+                    }
+                    catch (NumberFormatException e) {
+                        return new ReportError(_nameAdress, _iP, _port, "ERR");
+                    }
+                    String file = commandArguments[2];
+                    if (size == file.length()) {
+                        return new ReportOk(_nameAdress, _iP, _port, file, size, type);
+                    }
+                }
             }
             else if (commandArguments[0].equals("R")) {
                 if (commandArguments.length != 3) {
@@ -79,6 +95,7 @@ public class ProtocolCSWS {
                 }
             }
             else {
+                System.out.println("here4");
                 return new ReportError(_nameAdress, _iP, _port, "ERR");
             }
         }

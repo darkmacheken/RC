@@ -1,10 +1,10 @@
 package workingserver.connection;
 
-import workingserver.Constants;
-import workingserver.exceptions.ConnectionException;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import workingserver.Constants;
+import workingserver.exceptions.ConnectionException;
 
 /**
  *
@@ -43,7 +43,7 @@ public class ServerTCP {
      * @return
      * @throws ConnectionException
      */
-    public ConnectionTCP acceptSocket() throws ConnectionException {
+    public ConnectionTCP acceptSocket() throws ConnectionException, IOException {
         Socket clientSocket;
         try {
             clientSocket = _serverSocket.accept();

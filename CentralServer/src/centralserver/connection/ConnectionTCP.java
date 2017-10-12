@@ -111,19 +111,20 @@ public class ConnectionTCP {
      * @throws ConnectionException
      */
     public String receive() throws ConnectionException {
+        String receivedStr="";
         try {
-            String receivedStr = "";
-            String line = _in.readLine();
-
-            while (line != null) {
-                receivedStr += line + "\n";
-                line = _in.readLine();
+            int byteRead = _socketInput.read();
+            char charRead;
+            while(byteRead >= 0){
+                charRead = (char) byteRead;
+                receivedStr += Character.toString(charRead);
+                byteRead = _socketInput.read();
             }
-            close();
-            createSocket();
+            
             return receivedStr;
         }
         catch(IOException e) {
+            //e.printStackTrace();
             throw new ConnectionException(Constants.SOCK_READERR);
         }
     }

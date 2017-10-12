@@ -44,6 +44,7 @@ public class ServerTCPConnectionThread extends Thread {
             Report report = request.process(_list);
             String toSend = protocol.send(report);
             _connection.send(toSend);
+            System.out.print("Sent to client: " + toSend);
             _connection.close();
         } catch (ConnectionException e) {
             System.err.println(e.getErrorDescription());

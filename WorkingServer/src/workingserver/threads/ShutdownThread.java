@@ -25,6 +25,7 @@ public class ShutdownThread extends Thread {
         _connection = connection;
     }
     
+    @Override
     public void run() {
         String unregMessage = "UNR ";
         try {
@@ -48,6 +49,7 @@ public class ShutdownThread extends Thread {
                         System.err.println(e.getErrorDescription());
                     }
                 }
+                System.out.println("Server registered succesfully in CS: " + _connection.getNameToSend() + " " + _connection.getPortToSend());
             }
     
 }

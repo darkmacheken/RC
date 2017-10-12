@@ -81,9 +81,10 @@ public class ClientRequestProcessor implements RequestProcessor {
         ConnectAddress[] iPs = _list.getIPs(_request.getPTC());
         if (iPs == null || iPs.length == 0)
             return reportError("REP EOF");
-
+        
         String[] fileLines = splitIntoLines(file);
         int numLines = fileLines.length;
+        
         int numRequests = iPs.length < numLines ? iPs.length : numLines;
         RequestToWS[] requests = new RequestToWS[numRequests];
         int curLine = 0;
@@ -97,13 +98,14 @@ public class ClientRequestProcessor implements RequestProcessor {
                 reqLines += numLines % iPs.length;
             
             String[] wSFragment = Arrays.copyOfRange(fileLines, curLine, curLine + reqLines);
-            
+
             requests[i] = new RequestToWS(iPs[i].getIp(), iPs[i].getPort(),
                     fileName + intToString(i, 3) + ".txt",
                     _request.getPTC(),
                     String.join("", wSFragment),
                     new WorkingServerRequestProcessor());
             curLine += reqLines;
+            
             requests[i].processSend();
         }
         
@@ -162,11 +164,11 @@ public class ClientRequestProcessor implements RequestProcessor {
         int i;
         for (i = 0; i < file.length(); i++) {
             if (file.charAt(i) == '\n') {
-                lines.add(file.substring(startLine, i));
+                lines.add(file.substring(startLine, i+1));
                 startLine = i + 1;
             }
         }
-        lines.add(file.substring(startLine, i));
+        lines.add(file.substring(startLine));
         String[] res = new String[lines.size()];
         return lines.toArray(res);
     }

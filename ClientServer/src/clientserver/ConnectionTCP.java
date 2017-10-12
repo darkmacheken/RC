@@ -3,6 +3,7 @@ package clientserver;
 import clientserver.exceptions.ConnectionException;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetAddress;
@@ -22,6 +23,7 @@ public class ConnectionTCP {
     private Socket _socket;
     private PrintWriter _out;
     private BufferedReader _in;
+    private InputStream _socketInput;
 
     /**
      *
@@ -58,18 +60,20 @@ public class ConnectionTCP {
      * @param socket
      * @throws ConnectionException
      */
-    public ConnectionTCP(Socket socket) throws ConnectionException {
+    public ConnectionTCP(Socket socket) throws ConnectionException, IOException {
         _socket = socket;
         _address = _socket.getInetAddress();
         _name = _address.getHostName();
         _port = _socket.getPort();
         _ip = _address.toString();
+        _socketInput = socket.getInputStream();
         createIO();
     }
 
     private void createSocket() throws ConnectionException {
         try {
             _socket = new Socket(_address, _port);
+            _socketInput = _socket.getInputStream();
             createIO();
         }
         catch (UnknownHostException e) {
@@ -106,19 +110,20 @@ public class ConnectionTCP {
      * @throws ConnectionException
      */
     public String receive() throws ConnectionException {
+        String receivedStr="";
         try {
-            String receivedStr = "";
-            String line = _in.readLine();
-
-            while (line != null) {
-                receivedStr += line + "\n";
-                line = _in.readLine();
+            int byteRead = _socketInput.read();
+            char charRead;
+            while(byteRead >= 0){
+                charRead = (char) byteRead;
+                receivedStr += Character.toString(charRead);
+                byteRead = _socketInput.read();
             }
-            close();
-            createSocket();
+            
             return receivedStr;
         }
         catch(IOException e) {
+            //e.printStackTrace();
             throw new ConnectionException(Constants.SOCK_READERR);
         }
     }
@@ -129,9 +134,18 @@ public class ConnectionTCP {
      * @throws ConnectionException
      */
     public String receiveLine() throws ConnectionException {
-        String receivedStr;
+        String receivedStr="";
         try {
-            receivedStr = _in.readLine() + "\n";
+            int byteRead = _socketInput.read();
+            char charRead = (char) byteRead;
+            receivedStr += Character.toString(charRead);
+            
+            while(charRead != '\n'){
+                byteRead = _socketInput.read();
+                charRead = (char) byteRead;
+                receivedStr += Character.toString(charRead);
+            }
+            
             return receivedStr;
         }
         catch(IOException e) {

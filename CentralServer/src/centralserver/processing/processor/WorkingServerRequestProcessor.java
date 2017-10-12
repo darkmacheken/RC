@@ -34,8 +34,9 @@ public class WorkingServerRequestProcessor implements RequestProcessor {
         _request = request;
         _protocol = new ProtocolCSWS(_request.getNameAdress(), _request.getIP(), _request.getPort());
         _connection = new ConnectionTCP(_request.getIP(), _request.getPort());
-        String toSend = _protocol.send(_request);
+        String toSend = _protocol.send(_request);       
         _connection.send(toSend);
+        System.out.print("Sent WS: " + toSend);
     }
     
     /**
@@ -45,6 +46,7 @@ public class WorkingServerRequestProcessor implements RequestProcessor {
     public Report processReceive() throws ConnectionException{
        String received = _connection.receive();
        System.out.println("Received from WS: " + received);
+       System.out.println(received.length());
        Report report = _protocol.receive(received);
        
        _connection.close();
