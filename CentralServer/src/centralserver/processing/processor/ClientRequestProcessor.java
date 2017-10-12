@@ -102,7 +102,7 @@ public class ClientRequestProcessor implements RequestProcessor {
             requests[i] = new RequestToWS(iPs[i].getIp(), iPs[i].getPort(),
                     fileName + intToString(i, 3) + ".txt",
                     _request.getPTC(),
-                    String.join("", wSFragment),
+                    GlobalFunctions.stringJoin(wSFragment),
                     new WorkingServerRequestProcessor());
             curLine += reqLines;
             

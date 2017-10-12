@@ -34,4 +34,13 @@ public final class GlobalFunctions {
             throw new ConnectionException(Constants.FILE_CNTWRT);
         }
     }
+    
+    public static String stringJoin(String[] fragments) {
+        String res = "";
+        
+        for (String fragment : fragments)
+            res += fragment;
+        
+        return res;
+    }
 }
