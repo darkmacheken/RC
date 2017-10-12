@@ -58,16 +58,14 @@ public class ProtocolClientCS{
         if(splitedSentence.length==0)
             throw new UnknownCommandException("");
 
-        switch (splitedSentence[0]){
-            case "exit":
-                throw new ExitCommandException();
-            case "list":
-                return "LST\n";
-            case "request":
-                return this.requestSendProtocol(splitedSentence);
-            default:
-                throw new UnknownCommandException(splitedSentence[0]);
-        }
+        if (splitedSentence[0].equals("exit"))
+            throw new ExitCommandException();
+        else if (splitedSentence[0].equals("list"))
+            return "LST\n";
+        else if (splitedSentence[0].equals("request"))
+            return this.requestSendProtocol(splitedSentence);
+        else
+            throw new UnknownCommandException(splitedSentence[0]);
     }
 
     /**
@@ -87,10 +85,9 @@ public class ProtocolClientCS{
         if(splitedSentence.length == 1)
             throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
        
-            
-        switch (splitedSentence[0]){
-            case "FPT":
-                String[] arguments = splitedSentence[1].split(" ");
+        String[] arguments;
+        if (splitedSentence[0].equals("FPT")) {
+                arguments = splitedSentence[1].split(" ");
                 switch (arguments[0]) {
                     case "EOF":
                         throw new ConnectionException(Constants.REQ_EOF);
@@ -113,9 +110,8 @@ public class ProtocolClientCS{
                         }
                         break;
                 }
-                break;
-
-            case "REP":
+        }
+        else if (splitedSentence[0].equals("REP")) {
                 arguments = splitedSentence[1].split(" ",3);
                 if(arguments.length < 2)
                      throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
@@ -167,11 +163,11 @@ public class ProtocolClientCS{
                     default:
                         throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
                 }
-                break;
-            case "ERR":
+        }
+        else if (splitedSentence[0].equals("ERR")) {
                 throw new ConnectionException(Constants.REQ_ERR);
-                
-            default:
+        }
+        else {
                 throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
         }
         _fileName=null;

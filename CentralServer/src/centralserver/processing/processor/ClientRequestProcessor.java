@@ -20,6 +20,7 @@ import centralserver.processing.request.Request;
 import centralserver.processing.request.RequestOk;
 import centralserver.processing.request.RequestToWS;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -81,7 +82,7 @@ public class ClientRequestProcessor implements RequestProcessor {
         if (iPs == null || iPs.length == 0)
             return reportError("REP EOF");
 
-        String[] fileLines = file.split("\r\n|\r|\n");
+        String[] fileLines = splitIntoLines(file);
         int numLines = fileLines.length;
         int numRequests = iPs.length < numLines ? iPs.length : numLines;
         RequestToWS[] requests = new RequestToWS[numRequests];
@@ -100,7 +101,7 @@ public class ClientRequestProcessor implements RequestProcessor {
             requests[i] = new RequestToWS(iPs[i].getIp(), iPs[i].getPort(),
                     fileName + intToString(i, 3) + ".txt",
                     _request.getPTC(),
-                    String.join("\n", wSFragment),
+                    String.join("", wSFragment),
                     new WorkingServerRequestProcessor());
             curLine += reqLines;
             requests[i].processSend();
@@ -153,6 +154,21 @@ public class ClientRequestProcessor implements RequestProcessor {
         for (int i = 0; i < zeroes; i++)
             res = "0" + res;
         return res;
+    }
+
+    private String[] splitIntoLines(String file) {
+        LinkedList<String> lines = new LinkedList<>();
+        int startLine = 0;
+        int i;
+        for (i = 0; i < file.length(); i++) {
+            if (file.charAt(i) == '\n') {
+                lines.add(file.substring(startLine, i));
+                startLine = i + 1;
+            }
+        }
+        lines.add(file.substring(startLine, i));
+        String[] res = new String[lines.size()];
+        return lines.toArray(res);
     }
     
 }
