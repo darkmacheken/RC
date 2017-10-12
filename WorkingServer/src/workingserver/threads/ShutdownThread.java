@@ -49,7 +49,7 @@ public class ShutdownThread extends Thread {
                         System.err.println(e.getErrorDescription());
                     }
                 }
-                System.out.println("Server registered succesfully in CS: " + _connection.getNameToSend() + " " + _connection.getPortToSend());
+                System.out.println("Server unregistered succesfully in CS: " + _connection.getNameToSend() + " " + _connection.getPortToSend());
             }
     
 }

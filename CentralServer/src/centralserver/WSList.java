@@ -33,7 +33,8 @@ public class WSList {
         ArrayList<String> pTCs = new ArrayList<String>();
                
         for(String ptc: _struct.keySet()){
-            pTCs.add(ptc);
+            if(!_struct.get(ptc).isEmpty())
+                pTCs.add(ptc);
         }
         return pTCs;
     }
