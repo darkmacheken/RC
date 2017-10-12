@@ -75,7 +75,7 @@ public class User {
                         return;
                     }
                     catch (ConnectionException ce) {
-                        showText(ce.getErrorDescription());
+                        showText(ce.getErrorDescription());                        
                         return;
                     }
                 }

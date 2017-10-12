@@ -75,7 +75,7 @@ public class ProtocolClientCS{
     public void receiveProtocol(String sentence) throws ConnectionException {
         //remove last char from sentence (it should be '\n' from protocol)
         sentence = sentence.substring(0, 0 > sentence.length()-1 ? 0 : sentence.length()-1);
-        
+
         String[] splitedSentence = sentence.split(" ", 2);
 
         if(splitedSentence.length == 0)
@@ -112,7 +112,7 @@ public class ProtocolClientCS{
         }
         else if (splitedSentence[0].equals("REP")) {
                 arguments = splitedSentence[1].split(" ",3);
-                if(arguments.length < 2)
+                if(arguments.length == 0)
                      throw new ProtocolErrorException(Constants.PT_NFOLLOW,sentence);
 
                 switch (arguments[0]){
