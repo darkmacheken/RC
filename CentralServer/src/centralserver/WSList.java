@@ -5,24 +5,23 @@
  */
 package centralserver;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  *
  * @author duartegalvao
  */
 public class WSList {
-    private ConcurrentHashMap<String, LinkedBlockingDeque<ConnectAddress>> _struct;
+    private ConcurrentHashMap<String, ConcurrentHashMap<ConnectAddress, String>> _struct;
 
     
     /**
      * Create class
      */
     public WSList() {
-        _struct = new ConcurrentHashMap<String, LinkedBlockingDeque<ConnectAddress>>();
+        _struct = new ConcurrentHashMap<String, ConcurrentHashMap<ConnectAddress, String>>();
     }
 
     /**
@@ -30,7 +29,7 @@ public class WSList {
      * @return
      */
     public synchronized List<String> getPTCs() {
-        ArrayList<String> pTCs = new ArrayList<String>();
+        LinkedList<String> pTCs = new LinkedList<String>();
                
         for(String ptc: _struct.keySet()){
             if(!_struct.get(ptc).isEmpty())
@@ -45,14 +44,18 @@ public class WSList {
      * @return
      */
     public synchronized ConnectAddress[] getIPs(String pTC){  
-        LinkedBlockingDeque<ConnectAddress> ips = _struct.get(pTC);
-        
+        ConcurrentHashMap<ConnectAddress, String> ips = _struct.get(pTC);
+        List<ConnectAddress> addresses = new LinkedList<ConnectAddress>();
+                
         if(ips == null)
             return null;
         else{
-            ConnectAddress[] servers = new ConnectAddress[ips.size()];
-            ips.toArray(servers);
-            return servers;
+            for(ConnectAddress ip: ips.keySet())
+                addresses.add(ip);
+            
+            ConnectAddress[] res = new ConnectAddress[addresses.size()];
+            addresses.toArray(res);
+            return res;
         }
     }
     
@@ -64,12 +67,9 @@ public class WSList {
      */
     public synchronized void addIP(String[] pTCs, ConnectAddress connectAddress){
         for (String ptc : pTCs) {
-            if (!_struct.contains(ptc)) {
-                _struct.put(ptc, new LinkedBlockingDeque<ConnectAddress>());
-            }
-            LinkedBlockingDeque<ConnectAddress> deque = _struct.get(ptc);
-            if(!deque.contains(connectAddress))
-                deque.add(connectAddress);
+            _struct.putIfAbsent(ptc, new ConcurrentHashMap<ConnectAddress, String>());
+            ConcurrentHashMap<ConnectAddress, String> map = _struct.get(ptc);
+            map.putIfAbsent(connectAddress, "");
         }
     }
     
@@ -79,11 +79,11 @@ public class WSList {
      * @return
      */
     public synchronized List<String> removeIP(ConnectAddress connectAddress){
-        List<String> ptcList = new ArrayList<String>();
+        List<String> ptcList = new LinkedList<String>();
         for(String ptc: _struct.keySet()){
-            boolean result = _struct.get(ptc).remove(connectAddress);
-            if(result)
-                ptcList.add(ptc);
+            ConcurrentHashMap<ConnectAddress, String> map = _struct.get(ptc);
+            if(map.containsKey(connectAddress))
+                map.remove(connectAddress, "");
         }
         return ptcList;
     }
