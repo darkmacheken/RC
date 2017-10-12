@@ -16,7 +16,7 @@ public class WordCountTask extends Task {
 
     @Override
     public Report run(String file) {
-        String[] words = file.split(" |\n");
+        String[] words = file.split(" |\n|\r");
         Integer wordCount = 0;
         
         for (String word : words) {
