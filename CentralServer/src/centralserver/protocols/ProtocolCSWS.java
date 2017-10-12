@@ -95,7 +95,6 @@ public class ProtocolCSWS {
                 }
             }
             else {
-                System.out.println("here4");
                 return new ReportError(_nameAdress, _iP, _port, "ERR");
             }
         }

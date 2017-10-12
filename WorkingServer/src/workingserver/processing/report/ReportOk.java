@@ -47,6 +47,7 @@ public class ReportOk extends Report {
 
     @Override
     public String toString() {
+        System.out.println("Request WRQ: " + _size + " bytes to transmit.");
         return "REP " + _rT + " " + _size + " " + _file + "\n";
     }
 

@@ -101,16 +101,26 @@ public class ProtocolCSClient {
         if(report instanceof ReportError){
             ReportError reportError = (ReportError) report;
      
-            if (reportError.getError().equals("FPT EOF"))
+            if (reportError.getError().equals("FPT EOF")){
+                System.out.println("List request error: FPT EOF for client " + reportError.getNameAdress() + " " + reportError.getPort());
                 return "FPT EOF\n";
-            else if (reportError.getError().equals("FPT ERR"))
+            }
+            else if (reportError.getError().equals("FPT ERR")){
+                System.out.println("List request error: FPT ERR for client " + reportError.getNameAdress() + " " + reportError.getPort());
                 return "FPT ERR\n";
-            else if (reportError.getError().equals("REP EOF"))
+            }
+            else if (reportError.getError().equals("REP EOF")){
+                System.out.println("Request error: REP EOF for client " + reportError.getNameAdress() + " " + reportError.getPort());
                 return "REP EOF\n";
-            else if (reportError.getError().equals("REP ERR"))
+            }
+            else if (reportError.getError().equals("REP ERR")){
+                System.out.println("Request error: REP ERR for client " + reportError.getNameAdress() + " " + reportError.getPort());
                 return "REP ERR\n";
-            else if (reportError.getError().equals("ERR"))
+            }
+            else if (reportError.getError().equals("ERR")){
+                System.out.println("Unexpected protocol error: ERR for client " + reportError.getNameAdress() + " " + reportError.getPort());
                 return "ERR\n";
+            }
             // else should not happen
         }
         else if(report instanceof ReportOk){

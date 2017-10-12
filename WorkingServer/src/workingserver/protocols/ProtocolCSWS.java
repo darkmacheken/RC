@@ -51,6 +51,7 @@ public class ProtocolCSWS {
             String file = commandArguments[3];
 
             if (size == file.length()) {
+                System.out.println("WRQ request: " + size + " bytes to transmit. File name: " + fileName);
                 return new RequestOk("WRQ", pTC, size, file, fileName);
             }
         }

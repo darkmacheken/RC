@@ -62,3 +62,4 @@ Temporary Items
 *.properties
 *.class
 /WorkingServer/build/
+*.txt

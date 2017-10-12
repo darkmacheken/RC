@@ -33,6 +33,7 @@ public class ReportError extends Report {
     
     @Override
     public String toString() {
+        System.out.println("Error: " + _error);
         return _error + "\n";
     }
     

@@ -52,14 +52,12 @@ public class User {
                 try {
                     //create protocol message
                     String commandP = protocol.sendProtocol(command);     
-                    System.out.print("Sent: " + commandP);
                     //create connection tcp
                     client = new ConnectionTCP(cSName, cSPort);
                     //send command to server
                     client.send(commandP);
                     //receive message and apply protocol
                     String responseP = client.receive();
-                    System.out.print("Received: " + responseP);
                     protocol.receiveProtocol(responseP);
                     //close connection tcp
                     client.close();
