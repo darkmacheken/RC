@@ -23,7 +23,7 @@ public class ProtocolWSCS {
         
     public String process(String received){
         //remove last char from sentence (it should be '\n' from protocol)
-        received = received.substring(0, Integer.max(0,received.length()-1));
+        received = received.substring(0, 0 > received.length()-1 ? 0 : received.length()-1);
         
         String[] splitedReceived = received.split(" ");
         int splitedReceivedLength = splitedReceived.length;

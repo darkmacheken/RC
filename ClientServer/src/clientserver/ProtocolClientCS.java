@@ -74,7 +74,7 @@ public class ProtocolClientCS{
      */
     public void receiveProtocol(String sentence) throws ConnectionException {
         //remove last char from sentence (it should be '\n' from protocol)
-        sentence = sentence.substring(0, Integer.max(0,sentence.length()-1));
+        sentence = sentence.substring(0, 0 > sentence.length()-1 ? 0 : sentence.length()-1);
         
         String[] splitedSentence = sentence.split(" ", 2);
 
