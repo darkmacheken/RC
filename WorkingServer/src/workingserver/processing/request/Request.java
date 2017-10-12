@@ -5,9 +5,9 @@
  */
 package workingserver.processing.request;
 
-import workingserver.processing.report.Report;
 import workingserver.exceptions.ConnectionException;
 import workingserver.processing.processor.RequestProcessor;
+import workingserver.processing.report.Report;
 import workingserver.tasks.Task;
 
 /**

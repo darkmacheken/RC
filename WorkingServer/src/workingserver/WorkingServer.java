@@ -131,6 +131,7 @@ public class WorkingServer {
             try {
                 ConnectionTCP connectionTCP = server.acceptSocket();
                 ServerTCPConnectionThread connectionThread = new ServerTCPConnectionThread(connectionTCP, allTasks);
+                System.out.println("Connected to client: " + connectionTCP.getName() + ":" + connectionTCP.getPort());
                 connectionThread.start();
             }
             catch (ConnectionException e) {

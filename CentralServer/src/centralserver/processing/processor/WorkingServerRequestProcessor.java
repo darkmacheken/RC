@@ -44,6 +44,7 @@ public class WorkingServerRequestProcessor implements RequestProcessor {
      */
     public Report processReceive() throws ConnectionException{
        String received = _connection.receive();
+       System.out.println(received);
        Report report = _protocol.receive(received);
        
        _connection.close();

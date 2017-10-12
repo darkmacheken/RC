@@ -92,6 +92,6 @@ public class ProtocolCSWS {
      */
     public String send(RequestToWS request) {
         int size = request.getFile().length();
-        return "WRQ" + request.getpTC() + request.getFileName() + size + request.getFile() + "\n";
+        return "WRQ" + " " + request.getpTC() + " " + request.getFileName() + " " + size + " " + request.getFile() + "\n";
     }
 }

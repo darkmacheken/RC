@@ -32,9 +32,11 @@ public class ProtocolCSWS {
         }
         else if (splitedCommand[0].equals("WRQ")) {
             String[] commandArguments = splitedCommand[1].split(" ", 4);
-            
-            if (commandArguments.length != 4)
+
+            if (commandArguments.length != 4){
+                System.out.println("Arguments of WRQ different of 4.");
                 return new RequestError("ERR");
+            }
             
             String pTC = commandArguments[0];
             String fileName = commandArguments[1];
@@ -43,6 +45,7 @@ public class ProtocolCSWS {
                 size = Integer.parseInt(commandArguments[2]);
             }
             catch (NumberFormatException e) {
+                System.out.println("WRQ size is not a number.");
                 return new RequestError("ERR");
             }
             String file = commandArguments[3];

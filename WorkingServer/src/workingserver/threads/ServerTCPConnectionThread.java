@@ -9,6 +9,7 @@ import workingserver.connection.ConnectionTCP;
 import workingserver.exceptions.ConnectionException;
 import workingserver.processing.report.Report;
 import workingserver.processing.request.Request;
+import workingserver.processing.request.RequestOk;
 import workingserver.protocols.ParseProtocolCSWS;
 import workingserver.protocols.ProtocolCSWS;
 import workingserver.tasks.Task;
@@ -36,10 +37,12 @@ public class ServerTCPConnectionThread extends Thread {
         try {
             ParseProtocolCSWS parser = new ParseProtocolCSWS(_connection);
             String received = parser.parse();
-            System.out.println(received);
+            System.out.println("Received: " + received);
             Request request = protocol.receive(received);
+            System.out.println(request instanceof RequestOk);
             Report report = request.process(_tasks);
             String toSend = protocol.send(report);
+            System.out.println("Sent: " + toSend);
             _connection.send(toSend);
             _connection.close();
         } catch (ConnectionException e) {

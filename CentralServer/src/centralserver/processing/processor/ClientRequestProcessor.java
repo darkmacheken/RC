@@ -137,7 +137,9 @@ public class ClientRequestProcessor implements RequestProcessor {
         
         return new ReportOk(_request.getNameAdress(), _request.getIP(), _request.getPort(),
                 _request.getCommand(), new String[]{_request.getPTC()},
-                cob.getFile(), cob.getFile().length(), cob.getRT());
+                cob.getFile(), 
+                cob.getFile().length(), 
+                cob.getRT());
     }
     
     private ReportError reportError(String error) {
