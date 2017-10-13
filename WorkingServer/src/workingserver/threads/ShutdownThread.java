@@ -6,7 +6,6 @@
 package workingserver.threads;
 
 import java.net.InetAddress;
-import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import workingserver.connection.ConnectionUDP;
 import workingserver.exceptions.ConnectionException;
@@ -42,11 +41,18 @@ public class ShutdownThread extends Thread {
                             break;
                         counter++;
                     }
-                    catch(SocketTimeoutException e){
-                        counter++;
-                    }
                     catch(ConnectionException e) {
-                        System.err.println(e.getErrorDescription());
+                        counter++;
+                         if(counter < 3){                    
+                             System.err.println(e.getErrorDescription());
+                         }
+                         else{
+                            System.err.println(e.getErrorDescription());
+                            System.out.println("Couldn't connect to CS: " + _connection.getNameToSend() + " " + _connection.getPortToSend());
+                            _connection.close();
+                            System.out.println("Server unregistered unsuccesfully in CS: " + _connection.getNameToSend() + " " + _connection.getPortToSend());
+                            System.exit(0);
+                         }                
                     }
                 }
                 System.out.println("Server unregistered succesfully in CS: " + _connection.getNameToSend() + " " + _connection.getPortToSend());
