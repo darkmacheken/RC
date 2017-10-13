@@ -106,16 +106,20 @@ public class WS {
             }
             catch(SocketTimeoutException e){
                 counter++;
-                if(counter == 3)               
+                if(counter >= 3){
+                    System.out.println("Couldn't connect to CS: " + connectionUDP.getNameToSend() + " " + connectionUDP.getPortToSend());
                     return;
+                }
             }
             catch(ConnectionException e) {
                 counter++;
                  if(counter < 3){     
                      System.err.println(e.getErrorDescription());
                  }
-                else
-                    return;     
+                 else{
+                    System.out.println("Couldn't connect to CS: " + connectionUDP.getNameToSend() + " " + connectionUDP.getPortToSend());
+                    return;   
+                 }
             }
         }
         
