@@ -112,17 +112,17 @@ public class WS {
                 }
             }
             catch(ConnectionException e) {
-                counter++;
-                 if(counter < 3){     
+                 counter++;
+                 if(counter < 3){
                      System.err.println(e.getErrorDescription());
                  }
                  else{
                     System.out.println("Couldn't connect to CS: " + connectionUDP.getNameToSend() + " " + connectionUDP.getPortToSend());
-                    return;   
+                    return;
                  }
             }
         }
-        
+
         System.out.println("Server registered succesfully in CS: " + connectionUDP.getNameToSend() + " " + connectionUDP.getPortToSend());
 
         ServerTCP server;
