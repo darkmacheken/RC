@@ -26,6 +26,9 @@ public class ConnectionUDP {
         if (nameToSend == null) {
             _nameToSend = Constants.DEFAULT_HOST;
         }
+        else {
+            _nameToSend = nameToSend;
+        }
         try {
             _ipToSend = InetAddress.getByName(_nameToSend);
         }
@@ -96,6 +99,6 @@ public class ConnectionUDP {
     public DatagramSocket getClientSocket() {
         return _clientSocket;
     }
-    
-    
+
+
 }

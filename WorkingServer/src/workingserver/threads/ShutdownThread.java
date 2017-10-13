@@ -19,12 +19,12 @@ public class ShutdownThread extends Thread {
 
     private ConnectionUDP _connection;
     private Integer _wsPort;
-    
+
     public ShutdownThread(ConnectionUDP connection, Integer wsPort) {
         _wsPort = wsPort;
         _connection = connection;
     }
-    
+
     @Override
     public void run() {
         String unregMessage = "UNR ";
@@ -51,5 +51,5 @@ public class ShutdownThread extends Thread {
                 }
                 System.out.println("Server unregistered succesfully in CS: " + _connection.getNameToSend() + " " + _connection.getPortToSend());
             }
-    
+
 }
