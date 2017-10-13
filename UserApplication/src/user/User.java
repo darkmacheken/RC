@@ -1,21 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package user;
 
-import user.protocols.ParseProtocolClientCS;
-import user.protocols.ProtocolClientCS;
+import java.util.Scanner;
 import user.exceptions.ConnectionException;
 import user.exceptions.ExitCommandException;
 import user.exceptions.ProtocolErrorException;
 import user.exceptions.UnknownCommandException;
-import java.util.Scanner;
+import user.protocols.ParseProtocolClientCS;
+import user.protocols.ProtocolClientCS;
 
 /**
- *
- *  
+ * Main thread for user application
  */
 public class User {
     private static Scanner _in = new Scanner(System.in);

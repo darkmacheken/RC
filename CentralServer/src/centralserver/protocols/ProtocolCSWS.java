@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package centralserver.protocols;
 
 import centralserver.processing.report.Report;
@@ -11,8 +6,8 @@ import centralserver.processing.report.ReportOk;
 import centralserver.processing.request.RequestToWS;
 
 /**
- *
- *  
+ * Protocol beteween CS-WS, creates de messages to be sent and
+ * confirms the protocol via TCP.
  */
 public class ProtocolCSWS {
 

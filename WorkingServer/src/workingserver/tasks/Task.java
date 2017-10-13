@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package workingserver.tasks;
 
 import workingserver.processing.report.Report;
 import workingserver.processing.report.ReportOk;
 
 /**
- *
- *  
+ * Abstract class of Task
  */
 public abstract class Task {
     private final String _pTC;

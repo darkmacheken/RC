@@ -3,8 +3,7 @@ package centralserver.processing.request;
 import centralserver.processing.processor.RequestProcessor;
 
 /**
- *
- *  
+ * Requests that follow the protocol
  */
 public class RequestOk extends Request{      
     //Request arguments

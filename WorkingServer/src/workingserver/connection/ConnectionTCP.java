@@ -13,8 +13,7 @@ import workingserver.Constants;
 import workingserver.exceptions.ConnectionException;
 
 /**
- *
- *  
+ * Interface that encapsulates the sockets for connecetion via TCP
  */
 public class ConnectionTCP {
     private String _name; //todo

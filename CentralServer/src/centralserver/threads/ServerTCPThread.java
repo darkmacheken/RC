@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package centralserver.threads;
 
 import centralserver.WSList;
@@ -14,12 +9,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- *  
+ * Thread exclusive for Server TCP (just accepts connections and lauch
+ * ServerTCPConnectionThread)
  */
 public class ServerTCPThread extends Thread {
-    WSList _list;
-    ServerTCP _server;
+    private WSList _list;
+    private ServerTCP _server;
     
     /**
      *

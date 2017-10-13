@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package workingserver;
 
 import java.io.IOException;
@@ -24,8 +19,8 @@ import workingserver.threads.ServerTCPConnectionThread;
 import workingserver.threads.ShutdownThread;
 
 /**
- *
- *  
+ * Main Thread WS, here the connection via UDP is made here.
+ * Accepts connections and lauch ServerTCPConnectionThread
  */
 public class WS {
 

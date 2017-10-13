@@ -1,15 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package user.protocols;
 
-import user.Constants;
-import user.exceptions.ConnectionException;
-import user.exceptions.ExitCommandException;
-import user.exceptions.ProtocolErrorException;
-import user.exceptions.UnknownCommandException;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,6 +11,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import user.Constants;
+import user.exceptions.ConnectionException;
+import user.exceptions.ExitCommandException;
+import user.exceptions.ProtocolErrorException;
+import user.exceptions.UnknownCommandException;
 
 /**
  * Class Protocol Client-Cs

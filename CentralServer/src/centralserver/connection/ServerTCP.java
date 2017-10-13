@@ -7,8 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- *
- *  
+ * Interface that encapsulates the sockets for connecetion via TCP (Server)
  */
 public class ServerTCP {
     private Integer _port;

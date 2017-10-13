@@ -1,13 +1,12 @@
 package workingserver.processing.processor;
 
-import workingserver.processing.request.Request;
-import workingserver.processing.report.Report;
 import workingserver.exceptions.ConnectionException;
+import workingserver.processing.report.Report;
+import workingserver.processing.request.Request;
 import workingserver.tasks.Task;
 
 /**
- *
- *  
+ * Interface for the Processors
  */
 public interface RequestProcessor {
 

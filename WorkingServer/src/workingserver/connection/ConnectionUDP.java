@@ -11,8 +11,7 @@ import workingserver.Constants;
 import workingserver.exceptions.ConnectionException;
 
 /**
- *
- *  
+ * Interface that encapsulates the sockets for connecetion via UDP
  */
 public class ConnectionUDP {
     private String _nameToSend;

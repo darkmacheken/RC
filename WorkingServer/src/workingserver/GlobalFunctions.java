@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package workingserver;
 
 import java.io.BufferedWriter;
@@ -13,8 +8,7 @@ import java.io.PrintWriter;
 import workingserver.exceptions.ConnectionException;
 
 /**
- *
- *  
+ * Global static functions 
  */
 public final class GlobalFunctions {
 

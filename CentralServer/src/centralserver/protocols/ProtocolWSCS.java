@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package centralserver.protocols;
 
 import centralserver.ConnectAddress;
@@ -11,8 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- *
- *  
+ * Protocol beteween WS-CS, creates de messages to be sent and
+ * confirms the protocol via UDP.
  */
 public class ProtocolWSCS {
     private WSList _list;

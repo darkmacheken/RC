@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package workingserver.threads;
 
 import java.net.InetAddress;
@@ -11,8 +6,8 @@ import workingserver.connection.ConnectionUDP;
 import workingserver.exceptions.ConnectionException;
 
 /**
- *
- * @author Leo
+ * Thread that is executed when the program is shutdown
+ * It performs the unregist of the WS
  */
 public class ShutdownThread extends Thread {
 

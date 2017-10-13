@@ -1,8 +1,7 @@
 package workingserver.processing.report;
 
 /**
- *
- *  
+ * Reports that follow the protocol and all went sucessfully 
  */
 public class ReportOk extends Report {
     private final String _file;

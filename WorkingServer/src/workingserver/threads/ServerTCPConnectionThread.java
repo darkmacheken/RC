@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package workingserver.threads;
 
 import workingserver.connection.ConnectionTCP;
@@ -14,8 +9,7 @@ import workingserver.protocols.ProtocolCSWS;
 import workingserver.tasks.Task;
 
 /**
- *
- * @author leonardinho
+ * Thread to handle a client request
  */
 public class ServerTCPConnectionThread extends Thread {
     private ConnectionTCP _connection;

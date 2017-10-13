@@ -13,8 +13,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 /**
- *
- *  
+ * Interface that encapsulates the sockets for connecetion via TCP
  */
 public class ConnectionTCP {
     private String _name; //todo

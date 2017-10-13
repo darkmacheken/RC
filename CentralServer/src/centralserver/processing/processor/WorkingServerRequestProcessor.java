@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package centralserver.processing.processor;
 
 import centralserver.WSList;
@@ -15,8 +10,7 @@ import centralserver.protocols.ParseProtocolCSWS;
 import centralserver.protocols.ProtocolCSWS;
 
 /**
- *
- *  
+ * Processor that processes the requests for the Working Server
  */
 public class WorkingServerRequestProcessor implements RequestProcessor {
    private ConnectionTCP _connection;

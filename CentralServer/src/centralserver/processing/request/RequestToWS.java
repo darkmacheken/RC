@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package centralserver.processing.request;
 
 import centralserver.exceptions.ConnectionException;
@@ -10,8 +5,7 @@ import centralserver.processing.processor.WorkingServerRequestProcessor;
 import centralserver.processing.report.Report;
 
 /**
- *
- *  
+ * Requests for the Working Server
  */
 public class RequestToWS extends Request {
     private final String _fileName;

@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package user.protocols;
 
 import user.ConnectionTCP;
 import user.exceptions.ConnectionException;
 
 /**
- *
- *  
+ * Reads the quantity of bytes according to the protocol (from CS to Client)
  */
 public class ParseProtocolClientCS {
     ConnectionTCP _connection;

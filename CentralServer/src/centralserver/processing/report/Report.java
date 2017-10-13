@@ -1,8 +1,7 @@
 package centralserver.processing.report;
 
 /**
- *
- *  
+ * Abstract class for Report
  */
 public abstract class Report {
      //Client Request identifier

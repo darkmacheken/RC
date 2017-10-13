@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package workingserver.processing.processor;
 
 import workingserver.GlobalFunctions;
@@ -15,8 +10,7 @@ import workingserver.tasks.Task;
 import workingserver.tasks.TaskRunner;
 
 /**
- *
- *  
+ * Processor that process requests that follow the protocol
  */
 public class OkRequestProcessor implements RequestProcessor {
     private RequestOk _request;

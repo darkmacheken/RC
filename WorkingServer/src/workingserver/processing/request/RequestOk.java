@@ -3,8 +3,7 @@ package workingserver.processing.request;
 import workingserver.processing.processor.OkRequestProcessor;
 
 /**
- *
- *  
+ * Requests that follow the protocol 
  */
 public class RequestOk extends Request{      
     //Request arguments

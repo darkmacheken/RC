@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package centralserver.threads;
 
 import centralserver.WSList;
@@ -11,13 +6,13 @@ import centralserver.exceptions.ConnectionException;
 import centralserver.protocols.ProtocolWSCS;
 
 /**
- *
- *  
+ * Thread exclusive for Server TCP. The regists and unregists from WS occurs 
+ * here
  */
 public class ServerUDPThread extends Thread {
-    WSList _list;
-    ServerUDP _server;
-    ProtocolWSCS _protocol;
+    private WSList _list;
+    private ServerUDP _server;
+    private ProtocolWSCS _protocol;
     
     /**
      *

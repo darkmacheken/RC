@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package centralserver.processing.processor;
 
 import centralserver.WSList;
@@ -13,8 +8,7 @@ import centralserver.processing.request.Request;
 import centralserver.processing.request.RequestError;
 
 /**
- *
- *  
+ * Processor that processes the Error Request
  */
 public class ClientRequestErrorProcessor implements RequestProcessor {
 

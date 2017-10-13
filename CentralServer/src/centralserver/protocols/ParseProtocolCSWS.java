@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package centralserver.protocols;
 
 import centralserver.connection.ConnectionTCP;
 import centralserver.exceptions.ConnectionException;
 
 /**
- *
- *  
+ * Reads the quantity of bytes according to the protocol (from WS to CS)
  */
 public class ParseProtocolCSWS {
     ConnectionTCP _connection;

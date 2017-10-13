@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package workingserver.protocols;
 
 import workingserver.processing.report.Report;
@@ -11,8 +6,8 @@ import workingserver.processing.request.RequestError;
 import workingserver.processing.request.RequestOk;
 
 /**
- *
- *  
+ * Protocol beteween CS-WS, creates de messages to be sent and
+ * confirms the protocol via TCP.
  */
 public class ProtocolCSWS {
 

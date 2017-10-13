@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- *
- *  
+ * Structure to save the IP's and ports's (ConnectAddress) of the Working Servers
  */
 public class WSList {
     private ConcurrentHashMap<String, ConcurrentHashMap<ConnectAddress, String>> _struct;

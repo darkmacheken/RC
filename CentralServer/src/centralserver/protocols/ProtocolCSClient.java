@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package centralserver.protocols;
 
 import centralserver.processing.processor.ClientRequestErrorProcessor;
@@ -16,7 +11,7 @@ import centralserver.processing.request.RequestOk;
 
 /**
  * Protocol beteween CS-Client, creates de messages to be sent and
- * confirms the protocol.
+ * confirms the protocol via TCP.
  *  
  */
 public class ProtocolCSClient {

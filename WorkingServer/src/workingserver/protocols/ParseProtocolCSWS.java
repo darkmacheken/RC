@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package workingserver.protocols;
 
 import workingserver.connection.ConnectionTCP;
 import workingserver.exceptions.ConnectionException;
 
 /**
- *
- *  
+ * Reads the quantity of bytes according to the protocol (from CS to WS)
  */
 public class ParseProtocolCSWS {
     private ConnectionTCP _connection;

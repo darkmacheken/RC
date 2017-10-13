@@ -1,8 +1,7 @@
 package centralserver.processing.report;
 
 /**
- *
- *  
+ * Reports that follow the protocol
  */
 public class ReportOk extends Report {
     private String _command;

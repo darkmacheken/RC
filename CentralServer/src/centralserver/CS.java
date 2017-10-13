@@ -7,8 +7,7 @@ import centralserver.threads.ServerTCPThread;
 import centralserver.threads.ServerUDPThread;
 
 /**
- *
- * 
+ * Central server main thread
  */
 public class CS {
 

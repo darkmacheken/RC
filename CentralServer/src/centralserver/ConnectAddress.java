@@ -3,8 +3,7 @@ package centralserver;
 import java.util.Objects;
 
 /**
- *
- *  
+ * Connect Address IP and port together
  */
 public class ConnectAddress {
     private final String _ip;

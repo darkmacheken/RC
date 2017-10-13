@@ -9,8 +9,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 
 /**
- *
- *  
+ * Interface that encapsulates the sockets for connecetion via UDP (Server)
  */
 public class ServerUDP {
     private InetAddress _ipToSend;
@@ -82,7 +81,7 @@ public class ServerUDP {
     }
 
     /**
-     *
+     * Close the socket
      */
     public void close() {
         _serverSocket.close();

@@ -1,13 +1,12 @@
 package centralserver.processing.processor;
 
-import centralserver.processing.request.Request;
-import centralserver.processing.report.Report;
 import centralserver.WSList;
 import centralserver.exceptions.ConnectionException;
+import centralserver.processing.report.Report;
+import centralserver.processing.request.Request;
 
 /**
- *
- *  
+ * Interface for the Processors
  */
 public interface RequestProcessor {
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package workingserver;
 
 /**
@@ -124,6 +119,6 @@ public final class Constants {
     /**
      *
      */
-    public static String SOCK_TIMEOUT = "Socket timeout";
+    public static final String SOCK_TIMEOUT = "Socket timeout";
 
 }

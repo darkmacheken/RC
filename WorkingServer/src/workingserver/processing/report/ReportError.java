@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package workingserver.processing.report;
 
 /**
- *
- *  
+ * Reports that don't follow the protocol or errors occured
  */
 public class ReportError extends Report {
     //Error

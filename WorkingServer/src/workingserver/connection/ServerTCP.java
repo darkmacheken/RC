@@ -7,8 +7,7 @@ import workingserver.Constants;
 import workingserver.exceptions.ConnectionException;
 
 /**
- *
- *  
+ * Interface that encapsulates the sockets for connecetion via TCP (Server)
  */
 public class ServerTCP {
     private Integer _port;
