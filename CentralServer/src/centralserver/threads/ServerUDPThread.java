@@ -12,7 +12,7 @@ import centralserver.protocols.ProtocolWSCS;
 
 /**
  *
- * @author Pedro Daniel
+ *  
  */
 public class ServerUDPThread extends Thread {
     WSList _list;

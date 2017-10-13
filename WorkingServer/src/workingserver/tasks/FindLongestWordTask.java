@@ -7,13 +7,24 @@ package workingserver.tasks;
 
 import workingserver.processing.report.Report;
 
-
+/**
+ *
+ *  
+ */
 public class FindLongestWordTask extends Task {
 
+    /**
+     *
+     */
     public FindLongestWordTask() {
         super("FLW", 'R');
     }
 
+    /**
+     *
+     * @param file
+     * @return
+     */
     @Override
     public Report run(String file) {
         String[] words = file.split(" |\n");

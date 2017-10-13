@@ -7,7 +7,7 @@ package workingserver.processing.report;
 
 /**
  *
- * @author Asus
+ *  
  */
 public class ReportError extends Report {
     //Error
@@ -16,7 +16,6 @@ public class ReportError extends Report {
     /**
      *
      * @param _nameAdress
-     * @param _iP
      * @param _port
      */
     public ReportError(String error) {

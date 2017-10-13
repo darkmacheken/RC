@@ -7,7 +7,7 @@ package user.exceptions;
 
 /**
  *
- * @author Asus
+ *  
  */
 public class ProtocolErrorException extends ConnectionException {
 

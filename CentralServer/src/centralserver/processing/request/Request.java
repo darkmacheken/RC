@@ -12,7 +12,7 @@ import centralserver.processing.processor.RequestProcessor;
 
 /**
  *
- * @author Pedro Daniel
+ *  
  */
 public abstract class Request {
     //Client Request identifier

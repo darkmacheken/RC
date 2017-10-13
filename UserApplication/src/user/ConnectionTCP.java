@@ -1,6 +1,5 @@
 package user;
 
-import user.exceptions.ConnectionException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,10 +9,11 @@ import java.net.InetAddress;
 import static java.net.InetAddress.getByName;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import user.exceptions.ConnectionException;
 
 /**
  *
- * @author Asus
+ *  
  */
 public class ConnectionTCP {
     private String _name; //todo
@@ -59,6 +59,7 @@ public class ConnectionTCP {
      *
      * @param socket
      * @throws ConnectionException
+     * @throws java.io.IOException
      */
     public ConnectionTCP(Socket socket) throws ConnectionException, IOException {
         _socket = socket;
@@ -169,14 +170,26 @@ public class ConnectionTCP {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return _name;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getIp() {
         return _ip;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getPort() {
         return _port;
     }

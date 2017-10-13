@@ -14,7 +14,7 @@ import centralserver.processing.request.RequestError;
 
 /**
  *
- * @author Asus
+ *  
  */
 public class ClientRequestErrorProcessor implements RequestProcessor {
 

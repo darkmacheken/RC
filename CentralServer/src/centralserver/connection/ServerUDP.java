@@ -8,12 +8,21 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 
+/**
+ *
+ *  
+ */
 public class ServerUDP {
     private InetAddress _ipToSend;
     private Integer _portToSend;
     private final Integer _portLocal;
     private DatagramSocket _serverSocket;
 
+    /**
+     *
+     * @param portLocal
+     * @throws ConnectionException
+     */
     public ServerUDP(Integer portLocal) throws ConnectionException {
         if (portLocal == null) {
             _portLocal = Constants.DEFAULT_PORT;
@@ -33,6 +42,11 @@ public class ServerUDP {
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws ConnectionException
+     */
     public String receive() throws ConnectionException {
         byte[] buf = new byte[1024];
         DatagramPacket packet;
@@ -49,6 +63,11 @@ public class ServerUDP {
         return received;
     }
 
+    /**
+     *
+     * @param message
+     * @throws ConnectionException
+     */
     public void send(String message) throws ConnectionException {
         byte[] buf = new byte[20];
         buf = message.getBytes();
@@ -62,6 +81,9 @@ public class ServerUDP {
         }
     }
 
+    /**
+     *
+     */
     public void close() {
         _serverSocket.close();
     }

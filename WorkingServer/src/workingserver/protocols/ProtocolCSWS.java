@@ -12,10 +12,15 @@ import workingserver.processing.request.RequestOk;
 
 /**
  *
- * @author duartegalvao
+ *  
  */
 public class ProtocolCSWS {
 
+    /**
+     *
+     * @param sentence
+     * @return
+     */
     public Request receive(String sentence) {
         //remove last char from sentence (it should be '\n' from protocol)
         sentence = sentence.substring(0, 0 > sentence.length()-1 ? 0 : sentence.length()-1);

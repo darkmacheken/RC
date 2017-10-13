@@ -9,7 +9,7 @@ import workingserver.processing.processor.ErrorRequestProcessor;
 
 /**
  *
- * @author Asus
+ *  
  */
 public class RequestError extends Request {
     private final String _error;

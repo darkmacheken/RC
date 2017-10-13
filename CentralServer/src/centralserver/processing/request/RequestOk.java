@@ -4,7 +4,7 @@ import centralserver.processing.processor.RequestProcessor;
 
 /**
  *
- * @author Asus
+ *  
  */
 public class RequestOk extends Request{      
     //Request arguments
@@ -74,7 +74,6 @@ public class RequestOk extends Request{
      * @param nameAdress
      * @param iP
      * @param port
-     * @param command
      * @param processor
      */
     public RequestOk(String nameAdress, String iP, int port, 

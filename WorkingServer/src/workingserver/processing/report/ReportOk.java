@@ -2,7 +2,7 @@ package workingserver.processing.report;
 
 /**
  *
- * @author Asus
+ *  
  */
 public class ReportOk extends Report {
     private final String _file;

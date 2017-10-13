@@ -12,15 +12,24 @@ import java.util.List;
 
 /**
  *
- * @author Pedro Daniel
+ *  
  */
 public class ProtocolWSCS {
     private WSList _list;
 
+    /**
+     *
+     * @param _list
+     */
     public ProtocolWSCS(WSList _list) {
         this._list = _list;
     }
         
+    /**
+     *
+     * @param received
+     * @return
+     */
     public String process(String received){
         //remove last char from sentence (it should be '\n' from protocol)
         received = received.substring(0, 0 > received.length()-1 ? 0 : received.length()-1);

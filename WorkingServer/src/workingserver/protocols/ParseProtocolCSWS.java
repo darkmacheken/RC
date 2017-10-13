@@ -10,16 +10,24 @@ import workingserver.exceptions.ConnectionException;
 
 /**
  *
- * @author Pedro Daniel
+ *  
  */
 public class ParseProtocolCSWS {
     private ConnectionTCP _connection;
 
+    /**
+     *
+     * @param _connection
+     */
     public ParseProtocolCSWS(ConnectionTCP _connection) {
         this._connection = _connection;
     }          
     
-
+    /**
+     *
+     * @return
+     * @throws ConnectionException
+     */
     public String parse() throws ConnectionException {
         String received = "";
         String line;

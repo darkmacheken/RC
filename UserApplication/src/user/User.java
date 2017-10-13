@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Asus
+ *  
  */
 public class User {
     private static Scanner _in = new Scanner(System.in);

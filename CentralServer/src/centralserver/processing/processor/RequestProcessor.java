@@ -7,7 +7,7 @@ import centralserver.exceptions.ConnectionException;
 
 /**
  *
- * @author Asus
+ *  
  */
 public interface RequestProcessor {
 

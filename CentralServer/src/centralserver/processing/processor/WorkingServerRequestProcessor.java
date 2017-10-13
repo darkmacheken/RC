@@ -16,7 +16,7 @@ import centralserver.protocols.ProtocolCSWS;
 
 /**
  *
- * @author Asus
+ *  
  */
 public class WorkingServerRequestProcessor implements RequestProcessor {
    private ConnectionTCP _connection;
@@ -30,6 +30,8 @@ public class WorkingServerRequestProcessor implements RequestProcessor {
 
     /**
      * Process and send only
+     * @param request
+     * @throws centralserver.exceptions.ConnectionException
      */
     public void processSend(RequestToWS request) throws ConnectionException {
         _request = request;
@@ -44,6 +46,7 @@ public class WorkingServerRequestProcessor implements RequestProcessor {
     /**
      *  Process received. BLOCKING FUNCTION
      * @return
+     * @throws centralserver.exceptions.ConnectionException
      */
     public Report processReceive() throws ConnectionException {
       ParseProtocolCSWS parser= new ParseProtocolCSWS(_connection);

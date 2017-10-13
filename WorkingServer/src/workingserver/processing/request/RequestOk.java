@@ -4,7 +4,7 @@ import workingserver.processing.processor.OkRequestProcessor;
 
 /**
  *
- * @author Asus
+ *  
  */
 public class RequestOk extends Request{      
     //Request arguments

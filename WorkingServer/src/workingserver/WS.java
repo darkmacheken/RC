@@ -25,7 +25,7 @@ import workingserver.threads.ShutdownThread;
 
 /**
  *
- * @author Pedro Daniel
+ *  
  */
 public class WS {
 

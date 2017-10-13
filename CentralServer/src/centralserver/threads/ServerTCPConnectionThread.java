@@ -15,7 +15,7 @@ import centralserver.protocols.ProtocolCSClient;
 
 /**
  *
- * @author duartegalvao
+ *  
  */
 public class ServerTCPConnectionThread extends Thread {
     ConnectionTCP _connection;

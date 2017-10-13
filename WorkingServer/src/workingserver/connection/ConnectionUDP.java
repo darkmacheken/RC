@@ -10,12 +10,22 @@ import java.net.UnknownHostException;
 import workingserver.Constants;
 import workingserver.exceptions.ConnectionException;
 
+/**
+ *
+ *  
+ */
 public class ConnectionUDP {
     private String _nameToSend;
     private InetAddress _ipToSend;
     private Integer _portToSend;
     private DatagramSocket _clientSocket;
 
+    /**
+     *
+     * @param nameToSend
+     * @param portToSend
+     * @throws ConnectionException
+     */
     public ConnectionUDP(String nameToSend, Integer portToSend) throws ConnectionException {
         if (portToSend == null) {
             _portToSend = Constants.DEFAULT_PORT;
@@ -53,6 +63,11 @@ public class ConnectionUDP {
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws ConnectionException
+     */
     public String receive() throws ConnectionException {
         byte[] buf = new byte[20];
         DatagramPacket packet;
@@ -70,6 +85,11 @@ public class ConnectionUDP {
         return received;
     }
 
+    /**
+     *
+     * @param message
+     * @throws ConnectionException
+     */
     public void send(String message) throws ConnectionException {
         byte[] buf = new byte[1024];
         buf = message.getBytes();
@@ -83,22 +103,41 @@ public class ConnectionUDP {
         }
     }
 
+    /**
+     *
+     */
     public void close() {
         _clientSocket.close();
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNameToSend() {
         return _nameToSend;
     }
 
+    /**
+     *
+     * @return
+     */
     public InetAddress getIpToSend() {
         return _ipToSend;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getPortToSend() {
         return _portToSend;
     }
 
+    /**
+     *
+     * @return
+     */
     public DatagramSocket getClientSocket() {
         return _clientSocket;
     }

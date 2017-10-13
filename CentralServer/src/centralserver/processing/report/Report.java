@@ -2,7 +2,7 @@ package centralserver.processing.report;
 
 /**
  *
- * @author Asus
+ *  
  */
 public abstract class Report {
      //Client Request identifier

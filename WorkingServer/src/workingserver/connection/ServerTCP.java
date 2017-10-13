@@ -8,7 +8,7 @@ import workingserver.exceptions.ConnectionException;
 
 /**
  *
- * @author Asus
+ *  
  */
 public class ServerTCP {
     private Integer _port;
@@ -42,6 +42,7 @@ public class ServerTCP {
      *
      * @return
      * @throws ConnectionException
+     * @throws java.io.IOException
      */
     public ConnectionTCP acceptSocket() throws ConnectionException, IOException {
         Socket clientSocket;

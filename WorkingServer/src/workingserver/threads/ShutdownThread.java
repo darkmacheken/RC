@@ -19,6 +19,11 @@ public class ShutdownThread extends Thread {
     private ConnectionUDP _connection;
     private Integer _wsPort;
 
+    /**
+     *
+     * @param connection
+     * @param wsPort
+     */
     public ShutdownThread(ConnectionUDP connection, Integer wsPort) {
         _wsPort = wsPort;
         _connection = connection;

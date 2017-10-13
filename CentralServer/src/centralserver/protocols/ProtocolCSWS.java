@@ -12,7 +12,7 @@ import centralserver.processing.request.RequestToWS;
 
 /**
  *
- * @author duartegalvao
+ *  
  */
 public class ProtocolCSWS {
 
@@ -32,6 +32,11 @@ public class ProtocolCSWS {
         _port = port;
     }
 
+    /**
+     *
+     * @param sentence
+     * @return
+     */
     public Report receive(String sentence) {
         //remove last char from sentence (it should be '\n' from protocol)
         sentence = sentence.substring(0, 0 > sentence.length()-1 ? 0 : sentence.length()-1);

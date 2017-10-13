@@ -17,7 +17,7 @@ import centralserver.processing.request.RequestOk;
 /**
  * Protocol beteween CS-Client, creates de messages to be sent and
  * confirms the protocol.
- * @author Pedro Daniel
+ *  
  */
 public class ProtocolCSClient {
     //Client RequestOk identifier

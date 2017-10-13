@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package centralserver;
 
 import java.util.LinkedList;
@@ -11,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
- * @author duartegalvao
+ *  
  */
 public class WSList {
     private ConcurrentHashMap<String, ConcurrentHashMap<ConnectAddress, String>> _struct;
@@ -61,9 +56,8 @@ public class WSList {
     
     /**
      *
-     * @param pTC
-     * @param ip
-     * @return
+     * @param pTCs
+     * @param connectAddress
      */
     public synchronized void addIP(String[] pTCs, ConnectAddress connectAddress){
         for (String ptc : pTCs) {
@@ -75,7 +69,7 @@ public class WSList {
     
     /**
      *
-     * @param ip
+     * @param connectAddress
      * @return
      */
     public synchronized List<String> removeIP(ConnectAddress connectAddress){

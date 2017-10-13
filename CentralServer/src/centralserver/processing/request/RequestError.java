@@ -9,7 +9,7 @@ import centralserver.processing.processor.RequestProcessor;
 
 /**
  *
- * @author Asus
+ *  
  */
 public class RequestError extends Request {
     private final String _error;
@@ -19,6 +19,7 @@ public class RequestError extends Request {
      * @param nameAdress
      * @param iP
      * @param port
+     * @param error
      * @param processor
      */
     public RequestError(String nameAdress, String iP, int port, String error, RequestProcessor processor) {

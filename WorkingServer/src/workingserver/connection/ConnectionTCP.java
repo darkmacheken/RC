@@ -14,7 +14,7 @@ import workingserver.exceptions.ConnectionException;
 
 /**
  *
- * @author Asus
+ *  
  */
 public class ConnectionTCP {
     private String _name; //todo
@@ -60,6 +60,7 @@ public class ConnectionTCP {
      *
      * @param socket
      * @throws ConnectionException
+     * @throws java.io.IOException
      */
     public ConnectionTCP(Socket socket) throws ConnectionException, IOException {
         _socket = socket;
@@ -170,14 +171,26 @@ public class ConnectionTCP {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return _name;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getIp() {
         return _ip;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getPort() {
         return _port;
     }

@@ -12,7 +12,10 @@ import workingserver.processing.request.Request;
 import workingserver.processing.request.RequestError;
 import workingserver.tasks.Task;
 
-
+/**
+ *
+ *  
+ */
 public class ErrorRequestProcessor implements RequestProcessor {
 
     @Override

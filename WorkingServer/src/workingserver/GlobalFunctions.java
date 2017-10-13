@@ -14,9 +14,16 @@ import workingserver.exceptions.ConnectionException;
 
 /**
  *
- * @author duartegalvao
+ *  
  */
 public final class GlobalFunctions {
+
+    /**
+     *
+     * @param path
+     * @param file
+     * @throws ConnectionException
+     */
     public static void writeToFile(String path, String file) throws ConnectionException {
         try {
             File filepath = new File(path);

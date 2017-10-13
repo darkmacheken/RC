@@ -5,11 +5,6 @@
  */
 package workingserver.processing.processor;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import workingserver.Constants;
 import workingserver.GlobalFunctions;
 import workingserver.exceptions.ConnectionException;
 import workingserver.processing.report.Report;
@@ -19,7 +14,10 @@ import workingserver.processing.request.RequestOk;
 import workingserver.tasks.Task;
 import workingserver.tasks.TaskRunner;
 
-
+/**
+ *
+ *  
+ */
 public class OkRequestProcessor implements RequestProcessor {
     private RequestOk _request;
     private Task[] _tasks;

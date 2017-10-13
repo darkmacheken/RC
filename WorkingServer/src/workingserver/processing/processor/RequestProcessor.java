@@ -7,7 +7,7 @@ import workingserver.tasks.Task;
 
 /**
  *
- * @author Asus
+ *  
  */
 public interface RequestProcessor {
 

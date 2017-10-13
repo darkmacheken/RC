@@ -7,7 +7,7 @@ package centralserver.processing.report;
 
 /**
  *
- * @author Asus
+ *  
  */
 public class ReportError extends Report {
     //Error
@@ -18,6 +18,7 @@ public class ReportError extends Report {
      * @param _nameAdress
      * @param _iP
      * @param _port
+     * @param error
      */
     public ReportError(String _nameAdress, String _iP, int _port, String error) {
         super(_nameAdress, _iP, _port);

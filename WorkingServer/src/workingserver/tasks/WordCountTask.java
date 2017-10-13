@@ -7,13 +7,24 @@ package workingserver.tasks;
 
 import workingserver.processing.report.Report;
 
-
+/**
+ *
+ *  
+ */
 public class WordCountTask extends Task {
 
+    /**
+     *
+     */
     public WordCountTask() {
         super("WCT", 'R');
     }
 
+    /**
+     *
+     * @param file
+     * @return
+     */
     @Override
     public Report run(String file) {
         String[] words = file.split(" |\n|\r");

@@ -12,7 +12,7 @@ import workingserver.tasks.Task;
 
 /**
  *
- * @author Pedro Daniel
+ *  
  */
 public abstract class Request {
     

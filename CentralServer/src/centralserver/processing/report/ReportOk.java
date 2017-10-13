@@ -2,7 +2,7 @@ package centralserver.processing.report;
 
 /**
  *
- * @author Asus
+ *  
  */
 public class ReportOk extends Report {
     private String _command;
@@ -32,6 +32,15 @@ public class ReportOk extends Report {
         _rT = rT;
     }
 
+    /**
+     *
+     * @param nameAdress
+     * @param iP
+     * @param port
+     * @param file
+     * @param size
+     * @param rT
+     */
     public ReportOk(String nameAdress, String iP, int port, String file, int size, char rT) {
         super(nameAdress, iP, port);
         _file = file;

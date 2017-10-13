@@ -8,14 +8,26 @@ package centralserver.protocols;
 import centralserver.connection.ConnectionTCP;
 import centralserver.exceptions.ConnectionException;
 
-
+/**
+ *
+ *  
+ */
 public class ParseProtocolCSWS {
     ConnectionTCP _connection;
 
+    /**
+     *
+     * @param connection
+     */
     public ParseProtocolCSWS(ConnectionTCP connection) {
         _connection = connection;
     }
 
+    /**
+     *
+     * @return
+     * @throws ConnectionException
+     */
     public String parse() throws ConnectionException {
         String received = "";
         String line;

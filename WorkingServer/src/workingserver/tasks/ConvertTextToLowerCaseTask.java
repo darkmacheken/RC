@@ -7,13 +7,24 @@ package workingserver.tasks;
 
 import workingserver.processing.report.Report;
 
-
+/**
+ *
+ *  
+ */
 public class ConvertTextToLowerCaseTask extends Task {
 
+    /**
+     *
+     */
     public ConvertTextToLowerCaseTask() {
         super("LOW", 'F');
     }
 
+    /**
+     *
+     * @param file
+     * @return
+     */
     @Override
     public Report run(String file) {
         return createReportOk(file.toLowerCase());

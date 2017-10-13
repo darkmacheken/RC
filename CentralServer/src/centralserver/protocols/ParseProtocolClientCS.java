@@ -10,15 +10,24 @@ import centralserver.exceptions.ConnectionException;
 
 /**
  *
- * @author Pedro Daniel
+ *  
  */
 public class ParseProtocolClientCS {
     ConnectionTCP _connection;
     
+    /**
+     *
+     * @param connection
+     */
     public ParseProtocolClientCS(ConnectionTCP connection) {
         _connection = connection;
     }
     
+    /**
+     *
+     * @return
+     * @throws ConnectionException
+     */
     public String parse() throws ConnectionException {
         String received = "";
         String line;

@@ -11,7 +11,7 @@ import centralserver.processing.report.Report;
 
 /**
  *
- * @author Asus
+ *  
  */
 public class RequestToWS extends Request {
     private final String _fileName;
@@ -21,11 +21,11 @@ public class RequestToWS extends Request {
       
     /**
      *
-     * @param nameAdress
      * @param iP
      * @param port
      * @param fileName
      * @param pTC
+     * @param file
      * @param processor
      */
     public RequestToWS(String iP, int port,
@@ -39,6 +39,7 @@ public class RequestToWS extends Request {
     
     /**
      * Process request and send only the message
+     * @throws centralserver.exceptions.ConnectionException
      */
     public void processSend() throws ConnectionException{
         _workingProcessor.processSend(this);
@@ -46,6 +47,8 @@ public class RequestToWS extends Request {
     
     /**
      * Receive from WS and process
+     * @return 
+     * @throws centralserver.exceptions.ConnectionException 
      */
     public Report processReceive() throws ConnectionException{
         return _workingProcessor.processReceive();

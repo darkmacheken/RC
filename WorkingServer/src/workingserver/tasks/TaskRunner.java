@@ -10,19 +10,29 @@ import workingserver.processing.report.ReportError;
 
 /**
  *
- * @author duartegalvao
+ *  
  */
 public class TaskRunner {
     private final Task[] _tasks;
     private final String _pTC;
     private final String _file;
     
+    /**
+     *
+     * @param tasks
+     * @param pTC
+     * @param file
+     */
     public TaskRunner(Task[] tasks, String pTC, String file) {
         _tasks = tasks;
         _pTC = pTC;
         _file = file;
     }
     
+    /**
+     *
+     * @return
+     */
     public Report run() {
         for (Task task : _tasks) {
             if (task.isPTC(_pTC)) {

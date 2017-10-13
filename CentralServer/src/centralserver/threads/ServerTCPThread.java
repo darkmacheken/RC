@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Pedro Daniel
+ *  
  */
 public class ServerTCPThread extends Thread {
     WSList _list;
