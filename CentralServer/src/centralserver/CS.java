@@ -52,7 +52,7 @@ public class CS {
             threadTCP.join();
         }
         catch (ConnectionException e) {
-            System.out.println(e.getErrorDescription());
+            System.err.println(e.getErrorDescription());
         }
         catch (InterruptedException e) {
             ;

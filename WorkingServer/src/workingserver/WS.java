@@ -71,7 +71,12 @@ public class WS {
             }
         }
         catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-            System.out.println("Erro de parâmetros.\n");
+            System.out.print("Parameter error.\n");
+            return;
+        }
+        
+        if (tasks.isEmpty()) {
+            System.out.print(Constants.ARG_LESS);
             return;
         }
 

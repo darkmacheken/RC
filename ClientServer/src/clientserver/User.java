@@ -43,7 +43,7 @@ public class User {
             }
         }
         catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-            showText("Erro de parâmetros.\n");
+            showText("Parameter error.\n");
             return;
         }
 
