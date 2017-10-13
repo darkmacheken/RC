@@ -117,5 +117,7 @@ public final class Constants {
     public static final String SOCKET_SENDERR = "Error sending to socket\n";
 
     public static final String SOCKET_TIMEOUTERR = "Error setting timeout of socket\n";
+    
+    public static String SOCK_TIMEOUT = "Socket timeout";
 
 }

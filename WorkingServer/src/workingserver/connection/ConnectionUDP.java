@@ -53,12 +53,15 @@ public class ConnectionUDP {
         }
     }
 
-    public String receive() throws ConnectionException, SocketTimeoutException {
+    public String receive() throws ConnectionException {
         byte[] buf = new byte[20];
         DatagramPacket packet;
         packet = new DatagramPacket(buf, buf.length);
         try {
             _clientSocket.receive(packet);
+        }
+        catch (SocketTimeoutException ex){
+            throw new ConnectionException("[UDP] " + Constants.SOCK_TIMEOUT);
         }
         catch (IOException ex) {
             throw new ConnectionException("[UDP] " + Constants.SOCK_READERR);

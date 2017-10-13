@@ -7,7 +7,6 @@ package workingserver;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -86,9 +85,7 @@ public class WS {
         } catch (ConnectionException e) {
             System.err.println(e.getErrorDescription());
             return;
-        }
-
-        Runtime.getRuntime().addShutdownHook(new ShutdownThread(connectionUDP, wSPort));
+        }     
 
         String registerMessage = "REG ";
         for (Task task : tasks) {
@@ -109,30 +106,29 @@ public class WS {
                     break;
                 counter++;
             }
-            catch(SocketTimeoutException e){
-                counter++;
-                if(counter >= 3){
-                    System.out.println("Couldn't connect to CS: " + connectionUDP.getNameToSend() + " " + connectionUDP.getPortToSend());
-                    return;
-                }
-            }
             catch(ConnectionException e) {
-                 counter++;
-                 if(counter < 3){
+                counter++;
+                 if(counter < 3){                    
                      System.err.println(e.getErrorDescription());
                  }
                  else{
+                    System.err.println(e.getErrorDescription());
                     System.out.println("Couldn't connect to CS: " + connectionUDP.getNameToSend() + " " + connectionUDP.getPortToSend());
-                    return;
-                 }
+                    connectionUDP.close();
+                    System.exit(0);
+                 }                
             }
         }
 
         System.out.println("Server registered succesfully in CS: " + connectionUDP.getNameToSend() + " " + connectionUDP.getPortToSend());
-
+        
+        //Thread to run when program is shutdown
+        Runtime.getRuntime().addShutdownHook(new ShutdownThread(connectionUDP, wSPort));
+        
         ServerTCP server;
         try {
             server = new ServerTCP(wSPort);
+            System.out.println("Server TCP created.");
         }
         catch (ConnectionException ex) {
             System.out.println(ex.getErrorDescription());
