@@ -36,6 +36,8 @@ public class WorkingServerRequestProcessor implements RequestProcessor {
         _protocol = new ProtocolCSWS(_request.getNameAdress(), _request.getIP(), _request.getPort());
         _connection = new ConnectionTCP(_request.getIP(), _request.getPort());
         String toSend = _protocol.send(_request);
+        System.out.println("Making " + _request.getpTC() + " request to WS " + _request.getNameAdress() + " " + _request.getPort() + ": " +
+                           "\n\tFile Name: " + _request.getFileName() + "\n\t" + _request.getFile().length() + " bytes to transmit.");
         _connection.send(toSend);
     }
 
