@@ -105,14 +105,13 @@ public class WS {
                 counter++;
             }
             catch(SocketTimeoutException e){
-                if(counter < 3)
-                    counter++;
-                else
+                counter++;
+                if(counter == 3)               
                     return;
             }
             catch(ConnectionException e) {
-                 if(counter < 3){
-                     counter++;
+                counter++;
+                 if(counter < 3){     
                      System.err.println(e.getErrorDescription());
                  }
                 else
