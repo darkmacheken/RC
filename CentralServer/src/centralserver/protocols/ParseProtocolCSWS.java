@@ -39,12 +39,13 @@ public class ParseProtocolCSWS {
                     received+= line;
                     sizeCount+= line.length();
                 }
+                return received;
             }
             catch(NumberFormatException e){
                 return line;
             }
         }
-
-        return received;
+        else
+          return line;
     }
 }
