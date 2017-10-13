@@ -1,4 +1,4 @@
-(cd WorkingServer; make &> /dev/null)
-java -classpath ./WorkingServer/ws.jar workingserver.WS "$@"
-(cd WorkingServer; make clean &> /dev/null)
-
+cd WorkingServer
+make &> /dev/null
+java -classpath ./ws.jar workingserver.WS "$@"
+make clean &> /dev/null

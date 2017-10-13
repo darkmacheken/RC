@@ -16,3 +16,6 @@ Additionally, it might be required to set the premissions of the scripts with th
 
 	chmod u+x user CS WS
 
+All input and output files in each application are located inside their respective folders.
+This means that input files for the user application should be placed inside the ClientServer folder.
+

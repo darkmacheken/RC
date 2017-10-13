@@ -1,4 +1,5 @@
-(cd CentralServer; make &> /dev/null)
-java -classpath ./CentralServer/cs.jar centralserver.CS "$@"
-(cd CentralServer; make clean &> /dev/null)
+cd CentralServer
+make &> /dev/null
+java -classpath ./cs.jar centralserver.CS "$@"
+make clean &> /dev/null
 
