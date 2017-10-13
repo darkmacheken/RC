@@ -5,6 +5,8 @@
  */
 package clientserver;
 
+import clientserver.protocols.ParseProtocolClientCS;
+import clientserver.protocols.ProtocolClientCS;
 import clientserver.exceptions.ConnectionException;
 import clientserver.exceptions.ExitCommandException;
 import clientserver.exceptions.ProtocolErrorException;
@@ -25,6 +27,7 @@ public class User {
         Integer cSPort = null;
         ConnectionTCP client = null;
         ProtocolClientCS protocol;
+        ParseProtocolClientCS parser;
 
 
         try {
@@ -54,10 +57,12 @@ public class User {
                     String commandP = protocol.sendProtocol(command);     
                     //create connection tcp
                     client = new ConnectionTCP(cSName, cSPort);
+                    //create connection parser
+                    parser = new ParseProtocolClientCS(client);
                     //send command to server
                     client.send(commandP);
                     //receive message and apply protocol
-                    String responseP = client.receive();
+                    String responseP = parser.parse();
                     protocol.receiveProtocol(responseP);
                     //close connection tcp
                     client.close();

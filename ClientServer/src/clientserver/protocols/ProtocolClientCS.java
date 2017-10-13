@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clientserver;
+package clientserver.protocols;
 
+import clientserver.Constants;
 import clientserver.exceptions.ConnectionException;
 import clientserver.exceptions.ExitCommandException;
 import clientserver.exceptions.ProtocolErrorException;
