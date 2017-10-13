@@ -24,7 +24,7 @@ public class ParseProtocolCSWS {
         line = _connection.receiveLine();
         String[] lineSplit = line.split(" ", 4);
 
-        if (lineSplit[0].equals("REP\n")) {
+        if (lineSplit[0].equals("REP")) {
             if(lineSplit.length != 4)
                 return line;
 
