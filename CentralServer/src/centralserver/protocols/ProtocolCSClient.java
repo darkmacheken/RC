@@ -120,7 +120,10 @@ public class ProtocolCSClient {
                 System.out.println("Unexpected protocol error: ERR for client " + reportError.getNameAdress() + " " + reportError.getPort());
                 return "ERR\n";
             }
-            // else should not happen
+            else{
+                // else should not happen
+                System.out.println("Error sent is strange: " + reportError.getError());
+            }
         }
         else if(report instanceof ReportOk){
             ReportOk reportOk = (ReportOk) report;
