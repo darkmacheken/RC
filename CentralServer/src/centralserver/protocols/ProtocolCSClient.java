@@ -138,10 +138,13 @@ public class ProtocolCSClient {
                     
                 for(int i=0; i < numberPTC; i++)
                     messageReturn += " " + pTCs[i];
-                    
+                
+                System.out.println("List request processed: " + reportOk.getNameAdress() + " " + reportOk.getPort());
                 return messageReturn += "\n";
             }
             else if (reportOk.getCommand().equals("REQ")) {
+                System.out.println("Request processed " + reportOk.getNameAdress() + " " + reportOk.getPort() +
+                                   "\n\t" + reportOk.getSize() + " bytes to transmit.");
                 return "REP " + reportOk.getRT() + " " + 
                            reportOk.getSize() + " " + 
                            reportOk.getFile() + "\n";
