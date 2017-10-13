@@ -17,10 +17,8 @@ public class ConcatClientOutputBuilder extends ClientOutputBuilder {
     @Override
     public void build() {
         String outFile = "";
-        for (int i = 0; i < getReports().length; i++) {
-            if (i > 0)
-                outFile += '\n';
-            outFile += getReports()[i].getFile();
+        for (ReportOk report : getReports()) {
+            outFile += report.getFile();
         }
         
         setFile(outFile);

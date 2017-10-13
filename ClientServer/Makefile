@@ -1,5 +1,5 @@
 JAVADIR=
-JARNAME=client
+JARNAME=user
 
 all:
 	(cd src; javac -encoding UTF-8 `find . -name \*.java`)

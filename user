@@ -1,5 +1,5 @@
-cd ClientServer
+cd UserApplication
 make &> /dev/null
-java -classpath ./client.jar clientserver.User "$@"
+java -classpath ./user.jar user.User "$@"
 make clean &> /dev/null
 

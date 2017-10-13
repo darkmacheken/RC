@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clientserver.protocols;
+package user.protocols;
 
-import clientserver.ConnectionTCP;
-import clientserver.exceptions.ConnectionException;
+import user.ConnectionTCP;
+import user.exceptions.ConnectionException;
 
 /**
  *

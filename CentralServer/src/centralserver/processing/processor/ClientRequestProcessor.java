@@ -120,7 +120,7 @@ public class ClientRequestProcessor implements RequestProcessor {
         for (int i = 0; i < requests.length; i++) {
             try {
                 receivedReports[i] = (ReportOk) requests[i].processReceive();
-                GlobalFunctions.writeToFile("output_files/" + requests[i].getFileName(), file);
+                GlobalFunctions.writeToFile("output_files/" + requests[i].getFileName(), receivedReports[i].getFile());
             }
             catch (ClassCastException | NullPointerException | ConnectionException e) {
                 workingWSs.remove(iPs[i]);
@@ -134,7 +134,7 @@ public class ClientRequestProcessor implements RequestProcessor {
                     try {
                         newRequest.processSend();
                         receivedReports[i] = (ReportOk) requests[i].processReceive();
-                        GlobalFunctions.writeToFile("output_files/" + requests[i].getFileName(), file);
+                        GlobalFunctions.writeToFile("output_files/" + requests[i].getFileName(), receivedReports[i].getFile());
                         break;
                     }
                     catch (ClassCastException | NullPointerException | ConnectionException e1) {
