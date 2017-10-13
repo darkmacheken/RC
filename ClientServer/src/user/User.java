@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clientserver;
+package user;
 
-import clientserver.protocols.ParseProtocolClientCS;
-import clientserver.protocols.ProtocolClientCS;
-import clientserver.exceptions.ConnectionException;
-import clientserver.exceptions.ExitCommandException;
-import clientserver.exceptions.ProtocolErrorException;
-import clientserver.exceptions.UnknownCommandException;
+import user.protocols.ParseProtocolClientCS;
+import user.protocols.ProtocolClientCS;
+import user.exceptions.ConnectionException;
+import user.exceptions.ExitCommandException;
+import user.exceptions.ProtocolErrorException;
+import user.exceptions.UnknownCommandException;
 import java.util.Scanner;
 
 /**

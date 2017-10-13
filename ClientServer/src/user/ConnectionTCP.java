@@ -1,6 +1,6 @@
-package clientserver;
+package user;
 
-import clientserver.exceptions.ConnectionException;
+import user.exceptions.ConnectionException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
