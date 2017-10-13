@@ -145,7 +145,7 @@ public class ProtocolClientCS{
                         int size2 = Integer.parseInt(arguments[1]);
                         String data2 = arguments[2].substring(0, size2);
 
-                        String[] fileName = _fileName.split("\\.");
+                        String[] fileName = _fileName.split("(\\.)(?!.*\\.)");
 
                         String finalNameFile = fileName[0] + "_" + _ptc + "." + fileName[1];
                         try {
