@@ -1,9 +1,0 @@
-<#if licenseFirst??>
-${licenseFirst}
-</#if>
-${licensePrefix}Instituto Superior Tecnico - Redes de Computadores
-${licensePrefix}Ano Letivo 2017/18 - RC Distributed Programming
-${licensePrefix}Group 63 - Working Server
-<#if licenseLast??>
-${licenseLast}
-</#if>
