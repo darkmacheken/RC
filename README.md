@@ -4,6 +4,7 @@ Computer Networks Project
 ## Requirements
 You must have installed the following tool:
 - Java Development Kit 7+ (JDK 7+)
+
 The code was written in Java and is compatible with JVM 1.7.
 
 ## How to run
